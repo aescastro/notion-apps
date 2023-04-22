@@ -1,0 +1,82 @@
+
+* {
+    font-family: "Segoe UI";
+    color: #37352F;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+#content {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    user-select: none;
+}
+
+#content h1 {
+    font-size: min(37vmin, 91px);
+    grid-row: 1 / span 1;
+    margin: 0;
+}
+
+#mins {
+    text-align: right;
+}
+
+#col {
+    text-align: center;
+    position: relative;
+    bottom: 5%;
+}
+
+#secs {
+    text-align: left;
+}
+
+#ico {
+    height: min(17.5vmin, 43px);
+    grid-row: 1/span 1;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#ico:hover {
+    filter: brightness(1.4);
+}
+
+
+#session-display {
+    grid-row: 2 /span 1;
+    grid-column: 3/span 1;
+    font-weight: bold;
+    font-size: min(12vmin, 29.5px);
+    text-align: center;
+    margin-bottom: min(5vmin, 17.5px);
+}
+
+#start {
+    grid-column-end: 3;
+}
+
+#cancel {
+    grid-column-start: 4 ;
+}
+
+.access-buttons {
+    font-size: min(6vmin, 15px);
+    grid-row: 3 / span 1;
+    background-color: white;
+    border-radius: 4px;
+    border-width: 1px;
+    padding: min(3vmin, 7.38px) 0vmin;
+    cursor: pointer;
+    box-shadow: 0.5px 0.5px;
+}
