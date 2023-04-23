@@ -38,7 +38,7 @@ function Timer(props) {
                 }
                 
                 if (timeleft <= 0) {
-                    changeBreak(); 
+                    timerDone(); 
                     setMinutes(0);
                     setSeconds(0);     
                     clearInterval(nextRet);              
@@ -74,7 +74,7 @@ function Timer(props) {
         }
     }, [state]);
 
-    const changeBreak = () => {
+    const timerDone = () => {
         notif.play();
 
         if (state == TimerState.work) {
@@ -83,12 +83,10 @@ function Timer(props) {
             if (nextSessions % 4 == 0) {
                 setState(TimerState.longBreak);
             } else {
-                
                 setState(TimerState.shortBreak)
             }
             setSessions(nextSessions);
         } else {
-            
             setState(TimerState.work);
         } 
         

@@ -19,6 +19,8 @@ body {
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
     user-select: none;
+    position: relative;
+    right: min(9.0vmin, 22px);
 }
 
 #content h1 {
