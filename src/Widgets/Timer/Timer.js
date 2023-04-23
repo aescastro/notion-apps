@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Timer.css'
-import clickSound from './sounds/Click_Sound.wav'
-import notifSound from './sounds/Notification_Sound.wav'
+import './Timer.css';
+import clickSound from './sounds/Click_Sound.wav';
+import notifSound from './sounds/Notification_Sound.wav';
+import { ReactComponent as WorkingIcon } from './icons/pen-fill.svg';
+import { ReactComponent as BreakIcon } from './icons/cup-hot-fill.svg';
+
 
 const TimerState = {
     work: "working",
@@ -16,12 +19,11 @@ function Timer(props) {
     const [state, setState] = useState(props.state ?? TimerState.work);
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
+    const [countDownDate, setCountDownDate] = useState(null);
 
     const notif = new Audio(notifSound);
     const click = new Audio(clickSound);
-    const [countDownDate, setCountDownDate] = useState(null);
-
-
+    
     useEffect(() => {
         if (running) {
             var nextRet = (setInterval(() => {
@@ -102,7 +104,10 @@ function Timer(props) {
         setCountDownDate(null);
         clearInterval(ret);
         setRunning(false);
-        
+        setTime();
+    }
+
+    const setTime = () => {
         switch (state) {
             case TimerState.shortBreak:
                 setMinutes(5);
@@ -118,13 +123,40 @@ function Timer(props) {
             break;
         }
     }
+
+    const changeState = () => {  
+        click.play();
+        clearInterval(ret);
+
+        if (running) {
+            setState(state);
+            setTime();
+        } else {
+            switch (state) {
+                case TimerState.work:
+                    setState(TimerState.shortBreak);
+                    setMinutes(5);
+                    setSeconds(0);
+                    break;
+                case TimerState.shortBreak:
+                    setState(TimerState.longBreak);
+                    setMinutes(15);
+                    setSeconds(0);
+                    break;
+                case TimerState.longBreak:
+                    setState(TimerState.work);
+                    setMinutes(25);
+                    setSeconds(0);  
+                    break;
+            }
+        }
+
+        setRunning(false);
+    }
     
     return (
-        <>
         <div id="content">
-            <svg xmlns="http://www.w3.org/2000/svg" id="ico" fill="currentColor" viewBox="0 0 16 16">
-                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-            </svg>
+            {state == TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
                 
             <h1 id="mins">{minutes < 10 ? "0" + minutes.toString() : minutes}</h1>
             <h1 id="col">:</h1>
@@ -135,7 +167,6 @@ function Timer(props) {
             <button className="access-buttons" id="start" onClick={runTimer}> {running ? "Pause" : "Start"} </button>
             <button className="access-buttons" id="cancel" onClick={cancelTimer}> Cancel </button>
         </div>
-        </>
         
     );
 }
