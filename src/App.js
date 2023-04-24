@@ -26,8 +26,11 @@ function App() {
   }
 
   document.head.innerHTML = document.head.innerHTML + "<style type='text/css'>*{ " + styleString + "}</style>"
+  
   return (
-    <Timer minutes={25} seconds={0} sessions={0}></Timer>
+    <>
+    <Timer/>
+    </>
   );
 }
 

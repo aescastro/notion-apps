@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import './Timer.css';
 import clickSound from './sounds/Click_Sound.wav';
 import notifSound from './sounds/Notification_Sound.wav';
@@ -12,17 +12,35 @@ const TimerState = {
     longBreak: "longBreak"
 };
 
-function Timer(props) {
-    const [minutes, setMinutes] = useState(props.minutes ?? 25);
-    const [seconds, setSeconds] = useState(props.seconds ?? 0);
-    const [sessions, setSessions] = useState(props.sessions ?? 0);
-    const [state, setState] = useState(props.state ?? TimerState.work);
+function Timer() {
+    const [minutes, setMinutes] = useState();
+    const [seconds, setSeconds] = useState();
+    const [sessions, setSessions] = useState();
+    const [state, setState] = useState();
+    const [created, setCreated] = useState(new Date());
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
     const [countDownDate, setCountDownDate] = useState(null);
 
     const notif = new Audio(notifSound);
     const click = new Audio(clickSound);
+
+    useEffect(() => {
+        var stored = new Date(parseInt(window.localStorage.getItem("created")));
+        if (stored && stored.getDate() == created.getDate() && stored.getMonth() == created.getMonth() && stored.getFullYear() == created.getFullYear()) {
+            setMinutes(parseInt(window.localStorage.getItem("minutes")));
+            setSeconds(parseInt(window.localStorage.getItem("seconds")));
+            setSessions(parseInt(window.localStorage.getItem("sessions")));
+            setState(window.localStorage.getItem("state"));
+        } else {
+            window.localStorage.setItem("created", created.valueOf());
+            setMinutes(25);
+            setSeconds(0);
+            setSessions(0);
+            setState(TimerState.work);
+        }
+       
+    }, [created]);
     
     useEffect(() => {
         if (running) {
@@ -152,6 +170,13 @@ function Timer(props) {
         setRunning(false);
     }
     
+    window.addEventListener("beforeunload", ()=> {
+        window.localStorage.setItem("minutes", minutes);
+        window.localStorage.setItem("seconds", seconds);
+        window.localStorage.setItem("sessions", sessions);
+        window.localStorage.setItem("state", state);
+    })
+
     return (
         <div id="content">
             {state == TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
