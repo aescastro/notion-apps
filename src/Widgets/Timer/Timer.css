@@ -35,6 +35,9 @@ body {
 
 #col {
     text-align: center;
+}
+
+#col, #session-display {
     position: relative;
     bottom: 5%;
 }
