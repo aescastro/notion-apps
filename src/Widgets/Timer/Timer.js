@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Timer.css';
 import clickSound from './sounds/Click_Sound.wav';
 import notifSound from './sounds/Notification_Sound.wav';
