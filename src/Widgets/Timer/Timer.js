@@ -20,10 +20,14 @@ function Timer() {
     const [created, setCreated] = useState(new Date());
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
+    const notifRef = useRef();
+    const clickRef = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
 
-    const notif = new Audio(notifSound);
-    const click = new Audio(clickSound);
+    useEffect(() => {
+        notifRef.current = new Audio(notifSound);
+        clickRef.current = new Audio(clickSound);
+    }, []);
 
     useEffect(() => {
         var stored = new Date(parseInt(window.localStorage.getItem("created")));
@@ -93,7 +97,7 @@ function Timer() {
     }, [state]);
 
     const timerDone = () => {
-        notif.play();
+        notif.current.play();
 
         if (state == TimerState.work) {
             var nextSessions = sessions + 1;
@@ -111,12 +115,12 @@ function Timer() {
     }
     
     const runTimer = () => {
-        click.play();
+        click.current.play();
         setRunning(!running);
     }
 
     const cancelTimer = () => {
-        click.play();
+        click.current.play();
         setCountDownDate(null);
         clearInterval(ret);
         setRunning(false);
@@ -141,7 +145,7 @@ function Timer() {
     }
 
     const changeState = () => {  
-        click.play();
+        click.current.play();
         clearInterval(ret);
 
         if (running) {
