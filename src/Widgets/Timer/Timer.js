@@ -20,13 +20,13 @@ function Timer() {
     const [created, setCreated] = useState(new Date());
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
-    const notifRef = useRef();
+    const notif = useRef();
     const clickRef = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
 
     useEffect(() => {
-        notifRef.current = new Audio(notifSound);
-        clickRef.current = new Audio(clickSound);
+        notif.current = new Audio(notifSound);
+        click.current = new Audio(clickSound);
     }, []);
 
     useEffect(() => {
