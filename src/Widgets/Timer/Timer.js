@@ -21,7 +21,7 @@ function Timer() {
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
     const notif = useRef();
-    const clickRef = useRef();
+    const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
 
     useEffect(() => {
