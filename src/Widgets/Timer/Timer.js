@@ -27,9 +27,7 @@ function Timer() {
     useEffect(() => {
         notif.current = new Audio(notifSound);
         click.current = new Audio(clickSound);
-    }, []);
 
-    useEffect(() => {
         var stored = new Date(parseInt(window.localStorage.getItem("created")));
         if (stored && stored.getDate() == created.getDate() && stored.getMonth() == created.getMonth() && stored.getFullYear() == created.getFullYear()) {
             setMinutes(parseInt(window.localStorage.getItem("minutes")));
@@ -44,7 +42,7 @@ function Timer() {
             setState(TimerState.work);
         }
        
-    }, [created]);
+    }, []);
     
     useEffect(() => {
         if (running) {
