@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/notionApps/static/css/main.b85b21f4.css",
-    "main.js": "/notionApps/static/js/main.d4b3b4c0.js",
-    "static/js/787.6f1943c0.chunk.js": "/notionApps/static/js/787.6f1943c0.chunk.js",
-    "static/media/Notification_Sound.wav": "/notionApps/static/media/Notification_Sound.b84b0afb77bce206e971.wav",
-    "static/media/Click_Sound.wav": "/notionApps/static/media/Click_Sound.dea565afae1db70941ed.wav",
-    "static/media/cup-hot-fill.svg": "/notionApps/static/media/cup-hot-fill.0f18853652a9e2a3bb8a0b3ae5e0f62f.svg",
-    "index.html": "/notionApps/index.html",
-    "static/media/pen-fill.svg": "/notionApps/static/media/pen-fill.efdf7d839f232701a73f9d038fe4eb19.svg",
-    "main.b85b21f4.css.map": "/notionApps/static/css/main.b85b21f4.css.map",
-    "main.d4b3b4c0.js.map": "/notionApps/static/js/main.d4b3b4c0.js.map",
-    "787.6f1943c0.chunk.js.map": "/notionApps/static/js/787.6f1943c0.chunk.js.map"
+    "main.css": "/notion-apps/static/css/main.c4c7739e.css",
+    "main.js": "/notion-apps/static/js/main.1db9c137.js",
+    "static/js/787.6f1943c0.chunk.js": "/notion-apps/static/js/787.6f1943c0.chunk.js",
+    "static/media/Notification_Sound.wav": "/notion-apps/static/media/Notification_Sound.b84b0afb77bce206e971.wav",
+    "static/media/Click_Sound.wav": "/notion-apps/static/media/Click_Sound.dea565afae1db70941ed.wav",
+    "static/media/cup-hot-fill.svg": "/notion-apps/static/media/cup-hot-fill.0f18853652a9e2a3bb8a0b3ae5e0f62f.svg",
+    "index.html": "/notion-apps/index.html",
+    "static/media/pen-fill.svg": "/notion-apps/static/media/pen-fill.efdf7d839f232701a73f9d038fe4eb19.svg",
+    "main.c4c7739e.css.map": "/notion-apps/static/css/main.c4c7739e.css.map",
+    "main.1db9c137.js.map": "/notion-apps/static/js/main.1db9c137.js.map",
+    "787.6f1943c0.chunk.js.map": "/notion-apps/static/js/787.6f1943c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b85b21f4.css",
-    "static/js/main.d4b3b4c0.js"
+    "static/css/main.c4c7739e.css",
+    "static/js/main.1db9c137.js"
   ]
 }
