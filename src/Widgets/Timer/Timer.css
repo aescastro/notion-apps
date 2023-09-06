@@ -21,6 +21,7 @@ body {
     user-select: none;
     position: relative;
     right: min(9.0vmin, 22px);
+    margin-bottom: 12px;
 }
 
 #content h1 {
