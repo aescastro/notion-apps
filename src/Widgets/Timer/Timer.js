@@ -17,7 +17,7 @@ function Timer() {
     const [seconds, setSeconds] = useState();
     const [sessions, setSessions] = useState();
     const [state, setState] = useState();
-    const [created, setCreated] = useState(new Date());
+    const [created] = useState(new Date());
     const [running, setRunning] = useState(false);
     const [ret, setRet] = useState(0);
     const notif = useRef();
@@ -29,7 +29,7 @@ function Timer() {
         click.current = new Audio(clickSound);
 
         var stored = new Date(parseInt(window.localStorage.getItem("created")));
-        if (stored && stored.getDate() == created.getDate() && stored.getMonth() == created.getMonth() && stored.getFullYear() == created.getFullYear()) {
+        if (stored && stored.getDate() === created.getDate() && stored.getMonth() === created.getMonth() && stored.getFullYear() === created.getFullYear()) {
             setMinutes(parseInt(window.localStorage.getItem("minutes")));
             setSeconds(parseInt(window.localStorage.getItem("seconds")));
             setSessions(parseInt(window.localStorage.getItem("sessions")));
@@ -52,7 +52,7 @@ function Timer() {
                 var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.round((timeleft % (1000 * 60)) / 1000);
                 
-                if (seconds == 60) {
+                if (seconds === 60) {
                     seconds = 0;
                     minutes++;
                 }
@@ -91,16 +91,18 @@ function Timer() {
             case TimerState.longBreak:
                 setCountDownDate(new Date().getTime() + (1000*60*15));
             break;
+            default:
+                break;
         }
     }, [state]);
 
     const timerDone = () => {
         notif.current.play();
 
-        if (state == TimerState.work) {
+        if (state === TimerState.work) {
             var nextSessions = sessions + 1;
             
-            if (nextSessions % 4 == 0) {
+            if (nextSessions % 4 === 0) {
                 setState(TimerState.longBreak);
             } else {
                 setState(TimerState.shortBreak)
@@ -139,6 +141,8 @@ function Timer() {
                 setMinutes(25);
                 setSeconds(0);
             break;
+            default:
+                break;
         }
     }
 
@@ -166,6 +170,8 @@ function Timer() {
                     setMinutes(25);
                     setSeconds(0);  
                     break;
+                default:
+                    break;
             }
         }
 
@@ -181,7 +187,7 @@ function Timer() {
 
     return (
         <div id="content">
-            {state == TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
+            {state === TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
                 
             <h1 id="mins">{minutes < 10 ? "0" + minutes.toString() : minutes}</h1>
             <h1 id="col">:</h1>
