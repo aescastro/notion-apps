@@ -25,7 +25,7 @@ body {
 }
 
 #content h1 {
-    font-size: min(37vmin, 91px);
+    font-size: min(32vmin, 91px);
     grid-row: 1 / span 1;
     margin: 0;
 }
