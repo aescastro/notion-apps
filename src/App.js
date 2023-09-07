@@ -1,9 +1,10 @@
-import { useEffect,  } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import { Timer } from './Widgets';
+import { useDarkLightSwitcher } from './utils';
 
 function App() {
-
+  useDarkLightSwitcher(document.body);
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -13,9 +14,8 @@ function App() {
     }
   
     if (urlParams.has("bg")) {
-      let root = document.getElementById("root");
-      root.style.backgroundColor = urlParams.get("bg");
-      document.body.style.backgroundColor = urlParams.get("bg");
+      let content = document.getElementById("widget");
+      content.style.backgroundColor = urlParams.get("bg");
     }
   
     if (urlParams.has("fontColour")) {
@@ -40,6 +40,7 @@ function App() {
     });
   
     document.head.innerHTML = document.head.innerHTML + "<style type='text/css'>*{ " + styleString + "}</style>"
+    
   }, []);
   
   return (

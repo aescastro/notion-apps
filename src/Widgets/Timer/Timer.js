@@ -186,19 +186,20 @@ function Timer() {
     })
 
     return (
-        <div id="content">
-            {state === TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
+        <div id="widget">
+            <div id="content">
+                {state === TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
+                    
+                <h1 id="mins">{minutes < 10 ? "0" + minutes.toString() : minutes}</h1>
+                <h1 id="col">:</h1>
+                <h1 id="secs">{seconds < 10 ? "0" + seconds.toString() : seconds}</h1>
                 
-            <h1 id="mins">{minutes < 10 ? "0" + minutes.toString() : minutes}</h1>
-            <h1 id="col">:</h1>
-            <h1 id="secs">{seconds < 10 ? "0" + seconds.toString() : seconds}</h1>
+                <span id="session-display">{sessions}</span>
             
-            <span id="session-display">{sessions}</span>
-        
-            <button className="access-buttons" id="start" onClick={runTimer}> {running ? "Pause" : "Start"} </button>
-            <button className="access-buttons" id="cancel" onClick={cancelTimer}> Cancel </button>
+                <button className="access-buttons" id="start" onClick={runTimer}> {running ? "Pause" : "Start"} </button>
+                <button className="access-buttons" id="cancel" onClick={cancelTimer}> Cancel </button>
+            </div>    
         </div>
-        
     );
 }
 
