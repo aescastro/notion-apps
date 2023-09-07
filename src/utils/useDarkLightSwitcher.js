@@ -1,19 +1,18 @@
-
+import { useState, useEffect } from "react"
 export const useDarkLightSwitcher = (element) => {
-    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const [isDarkMode, setIsDarkMode] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
     
-    const setBgColor = (isDarkMode) => {
+    useEffect(() => {
         if (isDarkMode) {
-            element.style.backgroundColor = '#2F3438 ';
+            element.style.backgroundColor = '#191919';
         } else {
             element.style.backgroundColor = '#ffffff';
         }
-    }
+    }, [isDarkMode, element.style]);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({matches}) => {
-        setBgColor(matches);
+        setIsDarkMode(matches);
     });
 
-    setBgColor(isDarkMode);
-    return;
+    return isDarkMode;
 }

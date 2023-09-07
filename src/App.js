@@ -4,22 +4,27 @@ import { Timer } from './Widgets';
 import { useDarkLightSwitcher } from './utils';
 
 function App() {
-  useDarkLightSwitcher(document.body);
+  var isDarkMode = useDarkLightSwitcher(document.body, window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+
     var styleString = "";
     if (urlParams.has("font")) {
       styleString += "font-family: " + urlParams.get("font") + "!important;"
     }
-  
+
+    var content = document.getElementById("widget");
     if (urlParams.has("bg")) {
-      let content = document.getElementById("widget");
       content.style.backgroundColor = urlParams.get("bg");
     }
   
     if (urlParams.has("fontColour")) {
-        styleString += "color: " + urlParams.get("fontColour");
+      styleString += "color: " + urlParams.get("fontColour");
+    } else if (isDarkMode) {
+      styleString += "color: #ffffff";
+    } else {
+      styleString += "color: #37352F";
     }
   
     var buttons = Array.from(document.getElementsByClassName("access-buttons"));
@@ -29,11 +34,16 @@ function App() {
       });
     }
   
+    var buttonFontColour = "";
     if (urlParams.has("buttonFontColour")) {
-      buttons.forEach(button => {
-        button.style.color = urlParams.get("buttonFontColour");
-      });
+      buttonFontColour = urlParams.get("buttonFontColour");
+    } else {
+      buttonFontColour = "#37352F"
     }
+
+    buttons.forEach(button => {
+      button.style.color = buttonFontColour;
+    });
 
     buttons.forEach(button => {
       button.style.borderColor = button.style.color;
@@ -41,7 +51,7 @@ function App() {
   
     document.head.innerHTML = document.head.innerHTML + "<style type='text/css'>*{ " + styleString + "}</style>"
     
-  }, []);
+  }, [isDarkMode]);
   
   return (
     <>
