@@ -96,6 +96,13 @@ function Timer() {
         }
     }, [state]);
 
+    useEffect(() => {
+        window.localStorage.setItem("minutes", minutes);
+        window.localStorage.setItem("seconds", seconds);
+        window.localStorage.setItem("sessions", sessions);
+        window.localStorage.setItem("state", state);
+    }, [minutes, seconds, sessions, state]);
+
     const timerDone = () => {
         notif.current.play();
 
@@ -177,13 +184,6 @@ function Timer() {
 
         setRunning(false);
     }
-    
-    window.addEventListener("beforeunload", ()=> {
-        window.localStorage.setItem("minutes", minutes);
-        window.localStorage.setItem("seconds", seconds);
-        window.localStorage.setItem("sessions", sessions);
-        window.localStorage.setItem("state", state);
-    })
 
     return (
         <div id="widget">
