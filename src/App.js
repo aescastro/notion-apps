@@ -4,7 +4,9 @@ import { Timer } from './Widgets';
 import { useDarkLightSwitcher } from './utils';
 
 function App() {
-  var isDarkMode = useDarkLightSwitcher(document.body, window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var isDarkMode = true;
+  // useDarkLightSwitcher(document.body, window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
