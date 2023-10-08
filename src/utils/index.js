@@ -1,2 +1,3 @@
 import {useDarkLightSwitcher} from "./useDarkLightSwitcher";
-export { useDarkLightSwitcher };
+import {setBackgroundColour} from "./useDarkLightSwitcher";
+export { useDarkLightSwitcher, setBackgroundColour };

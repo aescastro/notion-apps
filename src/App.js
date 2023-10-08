@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import './App.css';
 import { Timer } from './Widgets';
-import { useDarkLightSwitcher } from './utils';
+import { useDarkLightSwitcher, setBackgroundColour } from './utils';
 
 function App() {
-  var isDarkMode = true;
-  // useDarkLightSwitcher(document.body, window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var isDarkMode = setBackgroundColour(document.body, true);
   
   useEffect(() => {
     const queryString = window.location.search;
