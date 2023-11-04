@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import './App.css';
 import { Timer } from './Widgets';
-import { useDarkLightSwitcher, setBackgroundColour } from './utils';
+import { Home } from './Pages';
+import { useDarkLightSwitcher } from './utils';
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-  var isDarkMode = setBackgroundColour(document.body, true);
+  var isDarkMode = useDarkLightSwitcher(document.body);
   
   useEffect(() => {
     const queryString = window.location.search;
@@ -55,9 +57,10 @@ function App() {
   }, [isDarkMode]);
   
   return (
-    <>
-    <Timer/>
-    </>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/Pomodoro-Timer" element={<Timer />} />
+      </Routes>
   );
 }
 

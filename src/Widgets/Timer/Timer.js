@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Timer.css';
-import clickSound from './sounds/Click_Sound.wav';
-import notifSound from './sounds/Notification_Sound.wav';
-import { ReactComponent as WorkingIcon } from './icons/pen-fill.svg';
-import { ReactComponent as BreakIcon } from './icons/cup-hot-fill.svg';
+import clickSound from '../../assets/sounds/Click_Sound.wav';
+import notifSound from '../../assets/sounds/Notification_Sound.wav';
+import { ReactComponent as WorkingIcon } from '../../assets/icons/pen-fill.svg';
+import { ReactComponent as BreakIcon } from '../../assets/icons/cup-hot-fill.svg';
 
 
 const TimerState = {
@@ -23,103 +23,6 @@ function Timer() {
     const notif = useRef();
     const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
-
-    useEffect(() => {
-        notif.current = new Audio(notifSound);
-        click.current = new Audio(clickSound);
-
-        var stored = new Date(parseInt(window.localStorage.getItem("created")));
-        if (stored && stored.getDate() === created.getDate() && stored.getMonth() === created.getMonth() && stored.getFullYear() === created.getFullYear()) {
-            setMinutes(parseInt(window.localStorage.getItem("minutes")));
-            setSeconds(parseInt(window.localStorage.getItem("seconds")));
-            setSessions(parseInt(window.localStorage.getItem("sessions")));
-            setState(window.localStorage.getItem("state"));
-        } else {
-            window.localStorage.setItem("created", created.valueOf());
-            setMinutes(25);
-            setSeconds(0);
-            setSessions(0);
-            setState(TimerState.work);
-        }
-       
-    }, []);
-    
-    useEffect(() => {
-        if (running) {
-            var nextRet = (setInterval(() => {
-                var now = new Date().getTime();
-                var timeleft = countDownDate - now;
-                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.round((timeleft % (1000 * 60)) / 1000);
-                
-                if (seconds === 60) {
-                    seconds = 0;
-                    minutes++;
-                }
-                
-                if (timeleft <= 0) {
-                    timerDone(); 
-                    setMinutes(0);
-                    setSeconds(0);     
-                    clearInterval(nextRet);              
-                } else {
-                    setMinutes(minutes);
-                    setSeconds(seconds);
-                }
-
-            }, 1000));
-            setRet(nextRet);
-        }
-    }, [countDownDate]);
-
-    useEffect(() => {
-        if (running) {
-            setCountDownDate(new Date().getTime() + (1000*60*minutes) + (1000*seconds));
-        } else {
-            clearInterval(ret);
-        }
-    }, [running]);
-
-    useEffect(()=> {
-        switch(state) {
-            case TimerState.work:
-                setCountDownDate(new Date().getTime() + (1000*60*25));
-            break;
-            case TimerState.shortBreak:
-                setCountDownDate(new Date().getTime() + (1000*60*5));
-            break;
-            case TimerState.longBreak:
-                setCountDownDate(new Date().getTime() + (1000*60*15));
-            break;
-            default:
-                break;
-        }
-    }, [state]);
-
-    useEffect(() => {
-        window.localStorage.setItem("minutes", minutes);
-        window.localStorage.setItem("seconds", seconds);
-        window.localStorage.setItem("sessions", sessions);
-        window.localStorage.setItem("state", state);
-    }, [minutes, seconds, sessions, state]);
-
-    const timerDone = () => {
-        notif.current.play();
-
-        if (state === TimerState.work) {
-            var nextSessions = sessions + 1;
-            
-            if (nextSessions % 4 === 0) {
-                setState(TimerState.longBreak);
-            } else {
-                setState(TimerState.shortBreak)
-            }
-            setSessions(nextSessions);
-        } else {
-            setState(TimerState.work);
-        } 
-        
-    }
     
     const runTimer = () => {
         click.current.play();
@@ -184,6 +87,110 @@ function Timer() {
 
         setRunning(false);
     }
+
+    useEffect(() => {
+        notif.current = new Audio(notifSound);
+        click.current = new Audio(clickSound);
+
+        var stored = new Date(parseInt(window.localStorage.getItem("created")));
+        var storedToday = stored && stored.getDate() === created.getDate() && stored.getMonth() === created.getMonth() && stored.getFullYear() === created.getFullYear();
+        if (storedToday) {
+            let minutes = parseInt(window.localStorage.getItem("minutes"));
+            let seconds = parseInt(window.localStorage.getItem("seconds"));
+            let sessions = parseInt(window.localStorage.getItem("sessions"));
+            let state = window.localStorage.getItem("state");
+            setMinutes(minutes ? minutes : 25);
+            setSeconds(seconds ? seconds : 0);
+            setSessions(sessions ? sessions : 0);
+            setState(TimerState[state] ? TimerState[state] : TimerState.work);
+        } else {
+            window.localStorage.setItem("created", created.valueOf());
+            setMinutes(25);
+            setSeconds(0);
+            setSessions(0);
+            setState(TimerState.work);
+        }
+       
+    }, []);
+    
+    useEffect(() => {
+        const timerDone = () => {
+            notif.current.play();
+    
+            if (state === TimerState.work) {
+                var nextSessions = sessions + 1;
+                
+                if (nextSessions % 4 === 0) {
+                    setState(TimerState.longBreak);
+                } else {
+                    setState(TimerState.shortBreak)
+                }
+                setSessions(nextSessions);
+            } else {
+                setState(TimerState.work);
+            } 
+            
+        }
+
+        if (running) {
+            var nextRet = (setInterval(() => {
+                var now = new Date().getTime();
+                var timeleft = countDownDate - now;
+                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.round((timeleft % (1000 * 60)) / 1000);
+                
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+                
+                if (timeleft <= 0) {
+                    timerDone(); 
+                    setMinutes(0);
+                    setSeconds(0);     
+                    clearInterval(nextRet);              
+                } else {
+                    setMinutes(minutes);
+                    setSeconds(seconds);
+                }
+
+            }, 1000));
+            setRet(nextRet);
+        }
+    }, [countDownDate]);
+
+    useEffect(() => {
+        if (running) {
+            setCountDownDate(new Date().getTime() + (1000*60*minutes) + (1000*seconds));
+        } else {
+            clearInterval(ret);
+        }
+    }, [running]);
+
+    useEffect(()=> {
+        switch(state) {
+            case TimerState.work:
+                setCountDownDate(new Date().getTime() + (1000*60*25));
+            break;
+            case TimerState.shortBreak:
+                setCountDownDate(new Date().getTime() + (1000*60*5));
+            break;
+            case TimerState.longBreak:
+                setCountDownDate(new Date().getTime() + (1000*60*15));
+            break;
+            default:
+                break;
+        }
+    }, [state]);
+
+    useEffect(() => {
+        if (minutes != null && seconds != null && sessions != null && state) {
+            window.localStorage.setItem("minutes", minutes);
+            window.localStorage.setItem("seconds", seconds);
+            window.localStorage.setItem("sessions", sessions);
+            window.localStorage.setItem("state", state);
+        }
+    }, [minutes, seconds, sessions, state]);
 
     return (
         <div id="widget">

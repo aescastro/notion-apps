@@ -1,3 +1,7 @@
 
-import { Timer } from "./Timer/Timer";
-export {Timer};
+import { Timer } from "./Timer";
+import ReadingTracker from "./ReadingTracker";
+export { 
+    Timer,
+    ReadingTracker,
+};
