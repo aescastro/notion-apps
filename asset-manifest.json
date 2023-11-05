@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/notion-apps/static/css/main.80620709.css",
-    "main.js": "/notion-apps/static/js/main.e1ded2da.js",
+    "main.js": "/notion-apps/static/js/main.6a4e3d11.js",
     "static/js/787.6f1943c0.chunk.js": "/notion-apps/static/js/787.6f1943c0.chunk.js",
     "static/media/Notification_Sound.wav": "/notion-apps/static/media/Notification_Sound.b84b0afb77bce206e971.wav",
     "static/media/Click_Sound.wav": "/notion-apps/static/media/Click_Sound.dea565afae1db70941ed.wav",
@@ -9,11 +9,11 @@
     "index.html": "/notion-apps/index.html",
     "static/media/pen-fill.svg": "/notion-apps/static/media/pen-fill.efdf7d839f232701a73f9d038fe4eb19.svg",
     "main.80620709.css.map": "/notion-apps/static/css/main.80620709.css.map",
-    "main.e1ded2da.js.map": "/notion-apps/static/js/main.e1ded2da.js.map",
+    "main.6a4e3d11.js.map": "/notion-apps/static/js/main.6a4e3d11.js.map",
     "787.6f1943c0.chunk.js.map": "/notion-apps/static/js/787.6f1943c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.80620709.css",
-    "static/js/main.e1ded2da.js"
+    "static/js/main.6a4e3d11.js"
   ]
 }
