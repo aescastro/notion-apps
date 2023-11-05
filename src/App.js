@@ -2,28 +2,27 @@ import { useEffect } from 'react';
 import './App.css';
 import { Timer } from './Widgets';
 import { Home } from './Pages';
-import { useDarkLightSwitcher } from './utils';
+import { useDarkLightSwitcher, useQuery } from './utils';
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   var isDarkMode = useDarkLightSwitcher(document.body);
+  var query = useQuery();
   
   useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
 
     var styleString = "";
-    if (urlParams.has("font")) {
-      styleString += "font-family: " + urlParams.get("font") + "!important;"
+    if (query.has("font")) {
+      styleString += "font-family: " + query.get("font") + "!important;"
     }
 
     var content = document.getElementById("widget");
-    if (urlParams.has("bg")) {
-      content.style.backgroundColor = urlParams.get("bg");
+    if (query.has("bg")) {
+      content.style.backgroundColor = query.get("bg");
     }
   
-    if (urlParams.has("fontColour")) {
-      styleString += "color: " + urlParams.get("fontColour");
+    if (query.has("fontColour")) {
+      styleString += "color: " + query.get("fontColour");
     } else if (isDarkMode) {
       styleString += "color: #ffffff";
     } else {
@@ -31,15 +30,15 @@ function App() {
     }
   
     var buttons = Array.from(document.getElementsByClassName("access-buttons"));
-    if (urlParams.has("buttonBg")) {
+    if (query.has("buttonBg")) {
       buttons.forEach(button => {
-        button.style.backgroundColor = urlParams.get("buttonBg");
+        button.style.backgroundColor = query.get("buttonBg");
       });
     }
   
     var buttonFontColour = "";
-    if (urlParams.has("buttonFontColour")) {
-      buttonFontColour = urlParams.get("buttonFontColour");
+    if (query.has("buttonFontColour")) {
+      buttonFontColour = query.get("buttonFontColour");
     } else {
       buttonFontColour = "#37352F"
     }
@@ -54,7 +53,7 @@ function App() {
   
     document.head.innerHTML = document.head.innerHTML + "<style type='text/css'>*{ " + styleString + "}</style>"
     
-  }, [isDarkMode]);
+  }, [query, isDarkMode]);
   
   return (
       <Routes>

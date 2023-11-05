@@ -1,3 +1,3 @@
-import {useDarkLightSwitcher} from "./useDarkLightSwitcher";
-import {setBackgroundColour} from "./useDarkLightSwitcher";
-export { useDarkLightSwitcher, setBackgroundColour };
+import {useDarkLightSwitcher, setBackgroundColour} from "./useDarkLightSwitcher";
+import { useQuery } from "./useQuery";
+export { useDarkLightSwitcher, setBackgroundColour, useQuery };
