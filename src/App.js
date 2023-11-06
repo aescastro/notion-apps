@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import './App.css';
-import { Timer } from './Widgets';
-import { Home } from './Pages';
+import { ReadingTracker, Timer } from './widgets';
+import { Home } from './pages';
 import { useDarkLightSwitcher, useQuery } from './utils';
 import { Routes, Route } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   var isDarkMode = useDarkLightSwitcher(document.body);
@@ -59,6 +60,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/Pomodoro-Timer" element={<Timer />} />
+        <Route path="/Reading-Tracker" element={<ReadingTracker/>} />
       </Routes>
   );
 }

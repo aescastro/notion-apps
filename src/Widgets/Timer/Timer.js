@@ -4,6 +4,7 @@ import clickSound from '../../assets/sounds/Click_Sound.wav';
 import notifSound from '../../assets/sounds/Notification_Sound.wav';
 import { ReactComponent as WorkingIcon } from '../../assets/icons/pen-fill.svg';
 import { ReactComponent as BreakIcon } from '../../assets/icons/cup-hot-fill.svg';
+import { Widget } from '../Widget';
 
 
 const TimerState = {
@@ -193,7 +194,7 @@ function Timer() {
     }, [minutes, seconds, sessions, state]);
 
     return (
-        <div id="widget">
+        <Widget>
             <div id="content">
                 {state === TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
                     
@@ -206,7 +207,7 @@ function Timer() {
                 <button className="access-buttons" id="start" onClick={runTimer}> {running ? "Pause" : "Start"} </button>
                 <button className="access-buttons" id="cancel" onClick={cancelTimer}> Cancel </button>
             </div>    
-        </div>
+        </Widget>
     );
 }
 
