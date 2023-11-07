@@ -99,13 +99,13 @@ const ReadingTracker = () => {
                                     }}
                                 >
                                     <div>
-                                        <h5
+                                        <h6
                                             style={{
                                                 color: isDarkMode ? "#ffffff" : "#000000",                                           
                                             }}
                                         >   
                                             Currently Reading
-                                        </h5>
+                                        </h6>
                                         <FormControl 
                                             plaintext={isView}
                                             readOnly={isView}
@@ -141,6 +141,7 @@ const ReadingTracker = () => {
                                                 borderRadius: "4px",
                                                 border: "0.5px solid #000",
                                                 color: "#000000",
+                                                fontSize: "13px",
                                             }}
                                         >
                                             {isView ? "Edit" : "Save"}
