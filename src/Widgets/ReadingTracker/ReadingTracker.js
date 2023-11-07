@@ -91,14 +91,17 @@ const ReadingTracker = () => {
                                 }}
                             >
                                 <Stack 
-                                    gap={isView ? 3 : 4}
                                     style={{
                                         justifyContent: "center",
                                         padding: "0px 30px",
                                         boxSizing: "border-box",
                                     }}
                                 >
-                                    <div>
+                                    <div
+                                        style={{
+                                            marginBottom: isView ? "1rem" : "1.5rem"
+                                        }}
+                                    >
                                         <h6
                                             style={{
                                                 color: isDarkMode ? "#ffffff" : "#000000",
@@ -156,11 +159,13 @@ const ReadingTracker = () => {
                                                 style={{
                                                     justifyContent: "center",
                                                     gap: "5px",
-                                                    alignItems: "center"
+                                                    alignItems: "center",
+                                                    marginTop: "6px"
                                                 }}
                                             >
                                                 <span
                                                     style={{
+                                                        fontSize: "13.5px",
                                                         color: isDarkMode ? "#ffffff" : "#000000",
                                                     }}
                                                 >
@@ -174,11 +179,13 @@ const ReadingTracker = () => {
                                                     isInvalid={formik.errors.currentPage && formik.touched.currentPage}
                                                     size="sm"
                                                     style={{
+                                                        fontSize: "13.5px",
                                                         width: "5em",
                                                     }}
                                                 />
                                                 <span
                                                     style={{
+                                                        fontSize: "13.5px",
                                                         color: isDarkMode ? "#ffffff" : "#000000",
                                                     }}  
                                                 >
@@ -192,6 +199,7 @@ const ReadingTracker = () => {
                                                     as={Field}
                                                     size="sm"
                                                     style={{
+                                                        fontSize: "13.5px",
                                                         width: "5em",
                                                     }}
                                                 />
