@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import './App.css';
 import { ReadingTracker, Timer } from './widgets';
 import { Home } from './pages';
-import { useDarkLightSwitcher, useQuery } from './utils';
+import { useDarkLightSwitcher, setBackgroundColour, useQuery } from './utils';
 import { Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  var isDarkMode = useDarkLightSwitcher(document.body);
+  var isDarkMode = useDarkLightSwitcher();
   var query = useQuery();
   
   useEffect(() => {
-
+    setBackgroundColour(document.body, isDarkMode);
     var styleString = "";
     if (query.has("font")) {
       styleString += "font-family: " + query.get("font") + "!important;"
@@ -29,28 +29,6 @@ function App() {
     } else {
       styleString += "color: #37352F";
     }
-  
-    var buttons = Array.from(document.getElementsByClassName("access-buttons"));
-    if (query.has("buttonBg")) {
-      buttons.forEach(button => {
-        button.style.backgroundColor = query.get("buttonBg");
-      });
-    }
-  
-    var buttonFontColour = "";
-    if (query.has("buttonFontColour")) {
-      buttonFontColour = query.get("buttonFontColour");
-    } else {
-      buttonFontColour = "#37352F"
-    }
-
-    buttons.forEach(button => {
-      button.style.color = buttonFontColour;
-    });
-
-    buttons.forEach(button => {
-      button.style.borderColor = button.style.color;
-    });
   
     document.head.innerHTML = document.head.innerHTML + "<style type='text/css'>*{ " + styleString + "}</style>"
     

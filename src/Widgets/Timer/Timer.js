@@ -5,6 +5,10 @@ import notifSound from '../../assets/sounds/Notification_Sound.wav';
 import { ReactComponent as WorkingIcon } from '../../assets/icons/pen-fill.svg';
 import { ReactComponent as BreakIcon } from '../../assets/icons/cup-hot-fill.svg';
 import { Widget } from '../Widget';
+import {
+    useDarkLightSwitcher,
+    useQuery,
+} from '../../utils';
 
 
 const TimerState = {
@@ -24,6 +28,8 @@ function Timer() {
     const notif = useRef();
     const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
+    const isDarkMode = useDarkLightSwitcher();
+    const query = useQuery();
     
     const runTimer = () => {
         click.current.play();
@@ -204,8 +210,30 @@ function Timer() {
                 
                 <span id="session-display">{sessions}</span>
             
-                <button className="access-buttons" id="start" onClick={runTimer}> {running ? "Pause" : "Start"} </button>
-                <button className="access-buttons" id="cancel" onClick={cancelTimer}> Cancel </button>
+                <button 
+                    className="access-buttons" 
+                    id="start" 
+                    onClick={runTimer}
+                    style={{
+                        backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
+                        color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+                        borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+                    }}
+                > 
+                    {running ? "Pause" : "Start"} 
+                </button>
+                <button 
+                    className="access-buttons" 
+                    id="cancel" 
+                    onClick={cancelTimer}
+                    style={{
+                        backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
+                        color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+                        borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+                    }}
+                > 
+                    Cancel 
+                </button>
             </div>    
         </Widget>
     );

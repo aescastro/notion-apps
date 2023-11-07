@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export const setBackgroundColour = (element, isDarkMode) => {
     if (isDarkMode) {
@@ -8,12 +8,8 @@ export const setBackgroundColour = (element, isDarkMode) => {
     }
 }
 
-export const useDarkLightSwitcher = (element) => {
+export const useDarkLightSwitcher = () => {
     const [isDarkMode, setIsDarkMode] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    
-    useEffect(() => {
-        setBackgroundColour(element, isDarkMode);
-    }, [isDarkMode, element.style, element]);
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({matches}) => {
         setIsDarkMode(matches);
