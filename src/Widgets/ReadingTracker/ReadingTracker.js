@@ -91,10 +91,10 @@ const ReadingTracker = () => {
                                 }}
                             >
                                 <Stack 
-                                    gap={3}
+                                    gap={isView ? 3 : 4}
                                     style={{
                                         justifyContent: "center",
-                                        padding: "30px",
+                                        padding: "0px 30px",
                                         boxSizing: "border-box",
                                     }}
                                 >
