@@ -101,7 +101,8 @@ const ReadingTracker = () => {
                                     <div>
                                         <h6
                                             style={{
-                                                color: isDarkMode ? "#ffffff" : "#000000",                                           
+                                                color: isDarkMode ? "#ffffff" : "#000000",
+                                                marginBottom: isView ? "0px" : "0.5rem",                                           
                                             }}
                                         >   
                                             Currently Reading
