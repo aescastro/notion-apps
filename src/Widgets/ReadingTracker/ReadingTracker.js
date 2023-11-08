@@ -144,6 +144,7 @@ const ReadingTracker = () => {
                                             style={{
                                                 borderRadius: "4px",
                                                 border: "0.5px solid #000",
+                                                background: "#FFFFFF",
                                                 color: "#000000",
                                                 fontSize: "13px",
                                             }}
