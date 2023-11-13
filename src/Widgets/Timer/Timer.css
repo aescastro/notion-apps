@@ -33,7 +33,7 @@ body {
 
 #mins {
     text-align: right;
-    width: 1em;
+    width: 1.2em;
 }
 
 #col {
@@ -47,7 +47,7 @@ body {
 
 #secs {
     text-align: left;
-    width: 1em;
+    width: 1.2em;
 }
 
 #ico {
