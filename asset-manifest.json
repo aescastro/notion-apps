@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/notion-apps/static/css/main.0b004fa3.css",
+    "main.css": "/notion-apps/static/css/main.24082a8d.css",
     "main.js": "/notion-apps/static/js/main.c3c86d39.js",
     "static/js/787.6f1943c0.chunk.js": "/notion-apps/static/js/787.6f1943c0.chunk.js",
     "static/media/Inter-VariableFont_slnt,wght.ttf": "/notion-apps/static/media/Inter-VariableFont_slnt,wght.853e01975d2783d9fa29.ttf",
@@ -9,12 +9,12 @@
     "static/media/cup-hot-fill.svg": "/notion-apps/static/media/cup-hot-fill.0f18853652a9e2a3bb8a0b3ae5e0f62f.svg",
     "index.html": "/notion-apps/index.html",
     "static/media/pen-fill.svg": "/notion-apps/static/media/pen-fill.efdf7d839f232701a73f9d038fe4eb19.svg",
-    "main.0b004fa3.css.map": "/notion-apps/static/css/main.0b004fa3.css.map",
+    "main.24082a8d.css.map": "/notion-apps/static/css/main.24082a8d.css.map",
     "main.c3c86d39.js.map": "/notion-apps/static/js/main.c3c86d39.js.map",
     "787.6f1943c0.chunk.js.map": "/notion-apps/static/js/787.6f1943c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b004fa3.css",
+    "static/css/main.24082a8d.css",
     "static/js/main.c3c86d39.js"
   ]
 }
