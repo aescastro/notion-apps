@@ -71,10 +71,6 @@ const ReadingTracker = () => {
                     .progress-bar {
                         background-color: ${query.get("progressColour") || "#000000"}
                     }
-
-                    * {
-                        font-family: "Segoe-UI",
-                    }
                 `}
             </style>
             <Widget>
@@ -94,7 +90,8 @@ const ReadingTracker = () => {
                                     style={{
                                         justifyContent: "center",
                                         padding: "0px 30px",
-                                        boxSizing: "border-box",
+                                        boxSizing: "border-box",                                           
+                                        fontFamily: "ia-writer-mono",
                                     }}
                                 >
                                     <div
@@ -105,7 +102,8 @@ const ReadingTracker = () => {
                                         <h6
                                             style={{
                                                 color: isDarkMode ? "#ffffff" : "#000000",
-                                                marginBottom: isView ? "0px" : "0.5rem",                                           
+                                                marginBottom: isView ? "0px" : "0.5rem",
+                                                fontWeight: "bold",
                                             }}
                                         >   
                                             Currently Reading
