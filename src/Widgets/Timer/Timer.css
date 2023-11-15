@@ -1,5 +1,5 @@
 * {
-    font-family: "Segoe UI";
+    font-family: "ia-writer-mono", monospace;
     color: #37352F;
 }
 
@@ -28,12 +28,11 @@ body {
     font-size: min(32vmin, 91px);
     grid-row: 1 / span 1;
     margin: 0;
-    font-family: "Segoe UI";
+    /* font-variant-numeric: tabular-nums; */
 }
 
 #mins {
     text-align: right;
-    width: 1.2em;
 }
 
 #col {
@@ -47,7 +46,6 @@ body {
 
 #secs {
     text-align: left;
-    width: 1.2em;
 }
 
 #ico {

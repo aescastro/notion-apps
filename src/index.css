@@ -16,3 +16,8 @@ code {
   font-family: "Inter";
   src: local("Inter"), url(./assets/fonts/Inter-VariableFont_slnt\,wght.ttf) format("truetype");
 }
+
+@font-face {
+  font-family: "ia-writer-mono";
+  src: local("ia-writer-mono"), url(./assets/fonts/ia-writer-mono-latin-400-normal.ttf) format("truetype");
+}
