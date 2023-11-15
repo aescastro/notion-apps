@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/notion-apps/static/css/main.24082a8d.css",
+    "main.css": "/notion-apps/static/css/main.e4f5dfc0.css",
     "main.js": "/notion-apps/static/js/main.c3c86d39.js",
     "static/js/787.6f1943c0.chunk.js": "/notion-apps/static/js/787.6f1943c0.chunk.js",
     "static/media/Inter-VariableFont_slnt,wght.ttf": "/notion-apps/static/media/Inter-VariableFont_slnt,wght.853e01975d2783d9fa29.ttf",
     "static/media/Notification_Sound.wav": "/notion-apps/static/media/Notification_Sound.b84b0afb77bce206e971.wav",
+    "static/media/ia-writer-mono-latin-400-normal.ttf": "/notion-apps/static/media/ia-writer-mono-latin-400-normal.7c7d9a9d7a69648cdd1d.ttf",
     "static/media/Click_Sound.wav": "/notion-apps/static/media/Click_Sound.dea565afae1db70941ed.wav",
     "static/media/cup-hot-fill.svg": "/notion-apps/static/media/cup-hot-fill.0f18853652a9e2a3bb8a0b3ae5e0f62f.svg",
     "index.html": "/notion-apps/index.html",
     "static/media/pen-fill.svg": "/notion-apps/static/media/pen-fill.efdf7d839f232701a73f9d038fe4eb19.svg",
-    "main.24082a8d.css.map": "/notion-apps/static/css/main.24082a8d.css.map",
+    "main.e4f5dfc0.css.map": "/notion-apps/static/css/main.e4f5dfc0.css.map",
     "main.c3c86d39.js.map": "/notion-apps/static/js/main.c3c86d39.js.map",
     "787.6f1943c0.chunk.js.map": "/notion-apps/static/js/787.6f1943c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.24082a8d.css",
+    "static/css/main.e4f5dfc0.css",
     "static/js/main.c3c86d39.js"
   ]
 }
