@@ -1,7 +1,3 @@
-* {
-    color: #37352F;
-}
-
 body {
     display: flex;
     flex-direction: row;
@@ -21,7 +17,6 @@ body {
     right: min(9.0vmin, 22px);
     margin-bottom: 12px;
     border-radius: 15px;
-    font-family: "ia-writer-mono", monospace;
 }
 
 #content h1 {

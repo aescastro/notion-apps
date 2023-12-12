@@ -14,6 +14,7 @@ import {
     string,
     number,
 } from "yup";
+
 import { 
     useDarkLightSwitcher ,
     useQuery
@@ -90,8 +91,7 @@ const ReadingTracker = () => {
                                     style={{
                                         justifyContent: "center",
                                         padding: "0px 30px",
-                                        boxSizing: "border-box",                                           
-                                        fontFamily: "ia-writer-mono",
+                                        boxSizing: "border-box",
                                     }}
                                 >
                                     <div

@@ -6,7 +6,6 @@ import { ReactComponent as WorkingIcon } from '../../assets/icons/pen-fill.svg';
 import { ReactComponent as BreakIcon } from '../../assets/icons/cup-hot-fill.svg';
 import { Widget } from '../Widget';
 import {
-    useDarkLightSwitcher,
     useQuery,
 } from '../../utils';
 
@@ -28,7 +27,6 @@ function Timer() {
     const notif = useRef();
     const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
-    const isDarkMode = useDarkLightSwitcher();
     const query = useQuery();
     
     const runTimer = () => {
