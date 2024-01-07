@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { 
     Stack,
     FormControl,
-    ProgressBar
+    ProgressBar,
+    FormGroup,
 } from "react-bootstrap";
 import { 
     Formik,
@@ -23,7 +24,7 @@ import {
 import { Widget } from "../Widget";
 
 const readingSchema = object({
-    book: string(),
+    book: string().required("Required"),
     currentPage: number().min(0).integer("Must be an integer").required("Required"),
     totalPages: number().positive().integer("Must be an integer").required("Required").when("currentPage", (currentPage, schema) => {
         return schema.test("totalPages", "Total pages cannot be less than current pages", (totalPages) => {
@@ -108,15 +109,20 @@ const ReadingTracker = () => {
                                         >   
                                             Currently Reading
                                         </h6>
-                                        <FormControl 
+                                        <FormGroup className="position-relative">
+                                            <FormControl 
                                             plaintext={isView}
                                             readOnly={isView}
                                             name="book"
                                             as={Field}
+                                            isInvalid={formik.errors.book && formik.touched.book}
                                             style={{
                                                 color: (isDarkMode && isView) ? "#ffffff" : "#000000",                                           
                                             }}
-                                        />    
+                                             />
+                                            <FormControl.Feedback type="invalid">{formik.errors.book}</FormControl.Feedback>   
+                                        </FormGroup>
+                                         
                                     </div>
                                     
                                     <Stack 
@@ -170,18 +176,28 @@ const ReadingTracker = () => {
                                                 >
                                                     On page
                                                 </span>
-                                                <FormControl
-                                                    plaintext={isView}
-                                                    readOnly={isView}
-                                                    name="currentPage"
-                                                    as={Field}
-                                                    isInvalid={formik.errors.currentPage && formik.touched.currentPage}
-                                                    size="sm"
-                                                    style={{
-                                                        fontSize: "13.5px",
-                                                        width: "5em",
-                                                    }}
-                                                />
+                                                <FormGroup className="position-relative">
+                                                    <FormControl
+                                                        plaintext={isView}
+                                                        readOnly={isView}
+                                                        name="currentPage"
+                                                        as={Field}
+                                                        isInvalid={formik.errors.currentPage && formik.touched.currentPage}
+                                                        size="sm"
+                                                        style={{
+                                                            fontSize: "13.5px",
+                                                        }}
+                                                    />
+                                                    <FormControl.Feedback 
+                                                        type="invalid"
+                                                        style={{
+                                                            position: "absolute",
+                                                            top: "30px"
+                                                        }}
+                                                    >
+                                                        {formik.errors.currentPage}
+                                                    </FormControl.Feedback>
+                                                </FormGroup>
                                                 <span
                                                     style={{
                                                         fontSize: "13.5px",
@@ -190,18 +206,28 @@ const ReadingTracker = () => {
                                                 >
                                                     of
                                                 </span>
-                                                <FormControl
-                                                    plaintext={isView}
-                                                    readOnly={isView}
-                                                    name="totalPages"
-                                                    isInvalid={formik.errors.totalPages && formik.touched.totalPages}
-                                                    as={Field}
-                                                    size="sm"
-                                                    style={{
-                                                        fontSize: "13.5px",
-                                                        width: "5em",
-                                                    }}
-                                                />
+                                                <FormGroup className="position-relative">
+                                                    <FormControl
+                                                        plaintext={isView}
+                                                        readOnly={isView}
+                                                        name="totalPages"
+                                                        isInvalid={formik.errors.totalPages && formik.touched.totalPages}
+                                                        as={Field}
+                                                        size="sm"
+                                                        style={{
+                                                            fontSize: "13.5px",
+                                                        }}
+                                                    />
+                                                    <FormControl.Feedback 
+                                                        type="invalid"
+                                                        style={{
+                                                            position: "absolute",
+                                                            top: "30px"
+                                                        }}
+                                                    >
+                                                        {formik.errors.totalPages}
+                                                    </FormControl.Feedback>
+                                                </FormGroup>
                                             </Stack>
                                         } 
                                     
