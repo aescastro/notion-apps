@@ -25,8 +25,8 @@ import { Widget } from "../Widget";
 
 const readingSchema = object({
     book: string().required("Required"),
-    currentPage: number().min(0).integer("Must be an integer").required("Required"),
-    totalPages: number().positive().integer("Must be an integer").required("Required").when("currentPage", (currentPage, schema) => {
+    currentPage: number().typeError("Must be a number").min(0, "Must be greater or equal to 0").integer("Must be an integer").required("Required"),
+    totalPages: number().typeError("Must be a number").positive("Must be positive").integer("Must be an integer").required("Required").when("currentPage", (currentPage, schema) => {
         return schema.test("totalPages", "Total pages cannot be less than current pages", (totalPages) => {
             return totalPages >= currentPage;
         });        
