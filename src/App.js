@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 
-import { ReadingTracker, Timer } from './widgets';
+import { ReadingTracker, Timer, Clock } from './widgets';
 import { Home } from './pages';
 import { setBackgroundColour, useDarkLightSwitcher } from './utils';
 
@@ -20,6 +20,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/Pomodoro-Timer" element={<Timer />} />
         <Route path="/Reading-Tracker" element={<ReadingTracker/>} />
+        <Route path="/Clock" element={<Clock/>} />
       </Routes>
   );
 }

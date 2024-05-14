@@ -5,6 +5,7 @@ const Home = () => {
         <Stack>
             <Link to="/Pomodoro-Timer">Timer</Link>
             <Link to="/Reading-Tracker">Reading Tracker</Link>
+            <Link to="/Clock">Clock</Link>
         </Stack>
     )
 }
