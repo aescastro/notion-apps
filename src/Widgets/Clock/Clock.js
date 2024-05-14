@@ -5,7 +5,7 @@ import moment from "moment";
 
 const Clock = () => {
     const [date, setDate] = useState(moment().format("dddd, MMMM Do"));
-    const [time, setTime] = useState(moment().format("h:mm A"));
+    const [time, setTime] = useState(moment().format("hh:mm A"));
 
     useEffect(() => {
         setInterval(() => {
