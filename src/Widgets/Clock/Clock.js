@@ -26,12 +26,17 @@ const Clock = () => {
                 <h1
                     style={{
                         margin: "0",
-                        fontSize: "25vh"
+                        fontSize: "30vh"
                     }}
                 >
                     {time}
                 </h1>
-                <h2>
+                <h2
+                    style={{
+                        margin: "0",
+                        fontSize: "11vh"
+                    }}
+                >
                     {date}
                 </h2>  
             </Stack>
