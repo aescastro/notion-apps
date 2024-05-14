@@ -2,6 +2,7 @@
 Widgets developed by me to use in my personal Notion. Currently hosted on: https://aescastro.github.io/notion-apps/
 
 **Widgets Available:**
+- Clock
 - Pomodoro Timer
 - Reading Tracker
 
