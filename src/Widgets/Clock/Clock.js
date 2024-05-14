@@ -26,7 +26,8 @@ const Clock = () => {
                 <h1
                     style={{
                         margin: "0",
-                        fontSize: "30vh"
+                        fontSize: "30vh",
+                        fontWeight: "bold",
                     }}
                 >
                     {time}
@@ -34,7 +35,7 @@ const Clock = () => {
                 <h2
                     style={{
                         margin: "0",
-                        fontSize: "11vh"
+                        fontSize: "12vh"
                     }}
                 >
                     {date}
