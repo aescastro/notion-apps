@@ -12,7 +12,7 @@ Each widget can be customized using the following query parameters
 ### General use
 - **fontType:** Changes font of the widget. Can be set to `mono` or `serif` to set the font to match Notion's monospace and serif fonts respectively. If left empty the font will be Notion's sans-serif font
 - **bg:** Sets the background colour of the widget. Accepts hex codes or rgb.
-- **mode:** Can be set to `light` or `dark` to match Notion's lightt and dark mode respectively. If left empty the widget will match the user's system setting
+- **mode:** Can be set to `light`, `dark`, or `system` to match Notion's light and dark mode. `system` mode makes the widget appear in light or dark mode depending on the machine's system setting. If left empty the widget will be in light mode.
 - **fontColour** Sets widget's fontColour. Accepts hex or rgb values
 
 ### Reading Tracker

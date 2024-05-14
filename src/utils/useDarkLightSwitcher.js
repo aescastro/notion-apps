@@ -12,20 +12,16 @@ export const setBackgroundColour = (element, isDarkMode) => {
 
 export const useDarkLightSwitcher = () => {
     const query = useQuery();
-    const [forcedMode, setForcedMode] = useState();
+    const [forcedMode, setForcedMode] = useState("light");
     const [isDarkMode, setIsDarkMode] = useState();
     const forcedModeRef = useRef();
 
     useEffect(() => {
-        forcedModeRef.current = forcedMode; // Update the ref whenever forcedMode changes
-    }, [forcedMode]);
-
-    useEffect(() => {
         const handleDarkModeChange = ({ matches }) => {
-            if (!forcedModeRef.current) {
+            if (forcedModeRef.current === "system") {
                 setIsDarkMode(matches);
             }
-        };
+        }
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleDarkModeChange);
 
@@ -35,11 +31,15 @@ export const useDarkLightSwitcher = () => {
     }, []);
 
     useEffect(() => {
-        setForcedMode(query.has("mode") ? query.get("mode") : null);
+        forcedModeRef.current = forcedMode; // Update the ref whenever forcedMode changes
+    }, [forcedMode]);
+
+    useEffect(() => {
+        setForcedMode(query.has("mode") ? query.get("mode") : "light");
     }, [query]);
 
     useEffect(() => {
-        if (!forcedMode) {
+        if (forcedMode === "system") {
             setIsDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
         } else {
             setIsDarkMode(forcedMode === "dark");
