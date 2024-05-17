@@ -5,7 +5,7 @@ export const NOTION_BACKGROUNDS = {
 }
 
 export const NOTION_FONTS = {
-    mono: "ia-writer-mono",
-    serif: "Lyon-Text",
+    mono: "ia-writer-mono, monospace",
+    serif: "Lyon-Text, serif",
     sans: "sans-serif",
 }
