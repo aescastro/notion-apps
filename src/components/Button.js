@@ -11,10 +11,12 @@ const Button = (props) => {
                 borderRadius: "10px",
                 border: `1px solid ${DARK_GREEN}`,
                 textTransform: "none",
+                fontSize: "16px",
+                fontWeight: 400,
                 "&:hover": {
                     backgroundColor: DARK_GREEN,
                     color: LIGHT_GREEN,
-                    cursor: "pointer"
+                    cursor: "pointer",
                 }
             }}
         >
