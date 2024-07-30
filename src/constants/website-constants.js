@@ -1,0 +1,4 @@
+const LIGHT_GREEN = "#D0E876";
+const DARK_GREEN = "#166E36";
+
+export {LIGHT_GREEN, DARK_GREEN};

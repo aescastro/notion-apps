@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { 
-    Stack,
-    FormControl,
     ProgressBar,
-    FormGroup,
 } from "react-bootstrap";
+import {
+    Stack,
+    FormGroup,
+    TextField,
+} from "@mui/material";
 import { 
     Formik,
     Form,
-    Field
 } from "formik";
 import {
     object,
@@ -22,6 +23,7 @@ import {
 } from "../../utils";
 
 import { Widget } from "../Widget";
+import { Field } from "../../components"
 
 const readingSchema = object({
     book: string().required("Required"),
@@ -78,7 +80,11 @@ const ReadingTracker = () => {
             <Widget>
                 <Formik
                     initialValues={values}
-                    onSubmit={(values) => setValues(values)}
+                    onSubmit={(values) => {
+                            setValues(values)
+                            setIsView(!isView)
+                        }
+                    }
                     validationSchema={readingSchema}
                 >
                     {
@@ -89,15 +95,16 @@ const ReadingTracker = () => {
                                 }}
                             >
                                 <Stack 
-                                    style={{
+                                    sx={{
                                         justifyContent: "center",
                                         padding: "0px 30px",
                                         boxSizing: "border-box",
                                     }}
                                 >
-                                    <div
-                                        style={{
-                                            marginBottom: isView ? "1rem" : "1.5rem"
+                                    <Stack
+                                        sx={{
+                                            marginBottom: isView ? "1rem" : "1.5rem",
+                                            gap: "7px"
                                         }}
                                     >
                                         <h6
@@ -109,25 +116,20 @@ const ReadingTracker = () => {
                                         >   
                                             Currently Reading
                                         </h6>
-                                        <FormGroup className="position-relative">
-                                            <FormControl 
-                                            plaintext={isView}
-                                            readOnly={isView}
-                                            name="book"
-                                            as={Field}
-                                            isInvalid={formik.errors.book && formik.touched.book}
-                                            style={{
-                                                color: (isDarkMode && isView) ? "#ffffff" : "#000000",                                           
-                                            }}
-                                             />
-                                            <FormControl.Feedback type="invalid">{formik.errors.book}</FormControl.Feedback>   
+                                        <FormGroup>
+                                            <Field
+                                                name="book"
+                                                error={!isView && formik.errors.book}
+                                                helperText={formik.errors.book}
+                                                isView={isView}
+                                            />
                                         </FormGroup>
                                          
-                                    </div>
+                                    </Stack>
                                     
                                     <Stack 
                                         direction="horizontal"
-                                        style={{
+                                        sx={{
                                             alignSelf: "start",
                                             width: "100%",
                                             gap: "9px",
@@ -142,9 +144,8 @@ const ReadingTracker = () => {
                                             }}
                                         />
                                         <button 
-                                            type="submit" 
+                                            type="submit"
                                             disabled={!formik.isValid} 
-                                            onClick={() => setIsView(!isView)}
                                             style={{
                                                 borderRadius: "4px",
                                                 border: "0.5px solid #000",
@@ -161,7 +162,7 @@ const ReadingTracker = () => {
                                         !isView &&
                                             <Stack
                                                 direction="horizontal"
-                                                style={{
+                                                sx={{
                                                     justifyContent: "center",
                                                     gap: "5px",
                                                     alignItems: "center",
@@ -176,27 +177,18 @@ const ReadingTracker = () => {
                                                 >
                                                     On page
                                                 </span>
-                                                <FormGroup className="position-relative">
-                                                    <FormControl
-                                                        plaintext={isView}
-                                                        readOnly={isView}
+                                                <FormGroup
+                                                    sx={{
+                                                        position: "relative",
+                                                        top: formik.errors.currentPage ? "11px" : "0",
+                                                    }}
+                                                >
+                                                    <Field
                                                         name="currentPage"
-                                                        as={Field}
-                                                        isInvalid={formik.errors.currentPage && formik.touched.currentPage}
-                                                        size="sm"
-                                                        style={{
-                                                            fontSize: "13.5px",
-                                                        }}
+                                                        isView={isView}
+                                                        error={!isView && formik.errors.currentPage}
+                                                        helperText={formik.errors.currentPage}
                                                     />
-                                                    <FormControl.Feedback 
-                                                        type="invalid"
-                                                        style={{
-                                                            position: "absolute",
-                                                            top: "30px"
-                                                        }}
-                                                    >
-                                                        {formik.errors.currentPage}
-                                                    </FormControl.Feedback>
                                                 </FormGroup>
                                                 <span
                                                     style={{
@@ -206,27 +198,17 @@ const ReadingTracker = () => {
                                                 >
                                                     of
                                                 </span>
-                                                <FormGroup className="position-relative">
-                                                    <FormControl
-                                                        plaintext={isView}
-                                                        readOnly={isView}
+                                                <FormGroup
+                                                    sx={{
+                                                        position: "relative",
+                                                        top: formik.errors.totalPages ? "11px" : "0",
+                                                    }}>
+                                                    <Field
                                                         name="totalPages"
-                                                        isInvalid={formik.errors.totalPages && formik.touched.totalPages}
-                                                        as={Field}
-                                                        size="sm"
-                                                        style={{
-                                                            fontSize: "13.5px",
-                                                        }}
+                                                        isView={isView}
+                                                        error={!isView && formik.errors.totalPages}
+                                                        helperText={formik.errors.totalPages}
                                                     />
-                                                    <FormControl.Feedback 
-                                                        type="invalid"
-                                                        style={{
-                                                            position: "absolute",
-                                                            top: "30px"
-                                                        }}
-                                                    >
-                                                        {formik.errors.totalPages}
-                                                    </FormControl.Feedback>
                                                 </FormGroup>
                                             </Stack>
                                         } 

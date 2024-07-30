@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Widget } from "../Widget"; 
-import { Stack } from "react-bootstrap";
+import Stack from '@mui/material/Stack';
 import moment from "moment";
 
 const Clock = () => {
@@ -18,7 +18,7 @@ const Clock = () => {
     return (
         <Widget>
             <Stack
-                style={{
+                sx={{
                     alignItems: "center",
                     justifyContent: "center",
                 }}
@@ -35,7 +35,8 @@ const Clock = () => {
                 <h2
                     style={{
                         margin: "0",
-                        fontSize: "12vh"
+                        fontSize: "12vh",
+                        fontWeight: "500"
                     }}
                 >
                     {date}
