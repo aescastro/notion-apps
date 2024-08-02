@@ -5,7 +5,6 @@ import {
 import {
     Stack,
     FormGroup,
-    TextField,
 } from "@mui/material";
 import { 
     Formik,
@@ -16,6 +15,7 @@ import {
     string,
     number,
 } from "yup";
+import styled from "@emotion/styled";
 
 import { 
     useDarkLightSwitcher ,
@@ -24,6 +24,25 @@ import {
 
 import { Widget } from "../Widget";
 import { Field } from "../../components"
+
+const Button = styled.button`
+    border-radius: 4px;
+    border: 0.5px solid #000;
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 13px;
+`;
+
+const H6 = styled.h6(({isDarkMode, isView}) => ({
+    color: isDarkMode ? "#ffffff" : "#000000",
+    marginBottom: isView ? "0px" : "0.5rem",
+    fontWeight: "bold",
+}));
+
+const Span = styled.span(({isDarkMode}) => ({
+    fontSize: "13.5px",
+    color: isDarkMode ? "#ffffff" : "#000000",
+}));
 
 const readingSchema = object({
     book: string().required("Required"),
@@ -107,15 +126,12 @@ const ReadingTracker = () => {
                                             gap: "7px"
                                         }}
                                     >
-                                        <h6
-                                            style={{
-                                                color: isDarkMode ? "#ffffff" : "#000000",
-                                                marginBottom: isView ? "0px" : "0.5rem",
-                                                fontWeight: "bold",
-                                            }}
+                                        <H6
+                                            isDarkMode={isDarkMode}
+                                            isView={isView}
                                         >   
                                             Currently Reading
-                                        </h6>
+                                        </H6>
                                         <FormGroup>
                                             <Field
                                                 name="book"
@@ -143,19 +159,12 @@ const ReadingTracker = () => {
                                                 backgroundColor: "#e9ecef",
                                             }}
                                         />
-                                        <button 
+                                        <Button 
                                             type="submit"
                                             disabled={!formik.isValid} 
-                                            style={{
-                                                borderRadius: "4px",
-                                                border: "0.5px solid #000",
-                                                background: "#FFFFFF",
-                                                color: "#000000",
-                                                fontSize: "13px",
-                                            }}
                                         >
                                             {isView ? "Edit" : "Save"}
-                                        </button>
+                                        </Button>
                                     </Stack>
 
                                     {
@@ -169,14 +178,11 @@ const ReadingTracker = () => {
                                                     marginTop: "6px"
                                                 }}
                                             >
-                                                <span
-                                                    style={{
-                                                        fontSize: "13.5px",
-                                                        color: isDarkMode ? "#ffffff" : "#000000",
-                                                    }}
+                                                <Span
+                                                    isDarkMode={isDarkMode}
                                                 >
                                                     On page
-                                                </span>
+                                                </Span>
                                                 <FormGroup
                                                     sx={{
                                                         position: "relative",
@@ -190,14 +196,11 @@ const ReadingTracker = () => {
                                                         helperText={formik.errors.currentPage}
                                                     />
                                                 </FormGroup>
-                                                <span
-                                                    style={{
-                                                        fontSize: "13.5px",
-                                                        color: isDarkMode ? "#ffffff" : "#000000",
-                                                    }}  
+                                                <Span
+                                                    isDarkMode={isDarkMode}
                                                 >
                                                     of
-                                                </span>
+                                                </Span>
                                                 <FormGroup
                                                     sx={{
                                                         position: "relative",

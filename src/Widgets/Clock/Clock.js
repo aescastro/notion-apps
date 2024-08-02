@@ -1,7 +1,20 @@
 import { useState, useEffect } from "react";
-import { Widget } from "../Widget"; 
 import Stack from '@mui/material/Stack';
 import moment from "moment";
+import styled from "@emotion/styled";
+import { Widget } from "../Widget"; 
+
+const H1 = styled.h1`
+    margin: 0;
+    font-size: 30vh;
+    font-weight: bold;
+`;
+
+const H2 = styled.h2`
+    margin: 0;
+    font-size: 12vh;
+    font-weight: 500;
+`
 
 const Clock = () => {
     const [date, setDate] = useState(moment().format("dddd, MMMM Do"));
@@ -23,24 +36,12 @@ const Clock = () => {
                     justifyContent: "center",
                 }}
             >
-                <h1
-                    style={{
-                        margin: "0",
-                        fontSize: "30vh",
-                        fontWeight: "bold",
-                    }}
-                >
+                <H1>
                     {time}
-                </h1>
-                <h2
-                    style={{
-                        margin: "0",
-                        fontSize: "12vh",
-                        fontWeight: "500"
-                    }}
-                >
+                </H1>
+                <H2>
                     {date}
-                </h2>  
+                </H2>  
             </Stack>
         </Widget>
     );

@@ -10,7 +10,7 @@ const Home = () => {
         >
             <Header/>
             <Stack
-                style={{
+                sx={{
                     justifyContent: "center",
                     alignItems: "center",
                     height: "100%",

@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import { 
     NOTION_FONTS, 
     NOTION_BACKGROUNDS 
@@ -36,8 +37,8 @@ export const Widget = (props) => {
     }, [isDarkMode, query]);
 
     return (
-        <div
-            style={{
+        <Box
+            sx={{
                 width: "100vw",
                 height: "100vh",
                 display: "flex",
@@ -50,6 +51,6 @@ export const Widget = (props) => {
             }}
         >
             {props.children}
-        </div>
+        </Box>
     )
 }

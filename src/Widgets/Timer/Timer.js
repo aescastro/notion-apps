@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
+
 import './Timer.css';
 import clickSound from '../../assets/sounds/Click_Sound.wav';
 import notifSound from '../../assets/sounds/Notification_Sound.wav';
@@ -8,6 +10,12 @@ import { Widget } from '../Widget';
 import {
     useQuery,
 } from '../../utils';
+
+const Button = styled.button(({query}) => ({
+    backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
+    color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+    borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+}));
 
 
 const TimerState = {
@@ -208,30 +216,22 @@ function Timer() {
                 
                 <span id="session-display">{sessions}</span>
             
-                <button 
+                <Button 
                     className="access-buttons" 
                     id="start" 
                     onClick={runTimer}
-                    style={{
-                        backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
-                        color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-                        borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-                    }}
+                    query={query}
                 > 
                     {running ? "Pause" : "Start"} 
-                </button>
-                <button 
+                </Button>
+                <Button 
                     className="access-buttons" 
                     id="cancel" 
                     onClick={cancelTimer}
-                    style={{
-                        backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
-                        color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-                        borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-                    }}
+                    query={query}
                 > 
                     Cancel 
-                </button>
+                </Button>
             </div>    
         </Widget>
     );
