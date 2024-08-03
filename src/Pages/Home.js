@@ -1,25 +1,68 @@
 import { Link } from 'react-router-dom';
-import Stack from '@mui/material/Stack';
+import {
+    Stack,
+    Grid,
+ } from '@mui/material';
 
 import { Header } from '../components';
+import { MAIN_BACKGROUND_COLOUR } from '../constants';
+
 const Home = () => {
     return (
         <Stack
             width="100%"
             height="100%"
+            sx={{
+                backgroundColor: MAIN_BACKGROUND_COLOUR,
+            }}
         >
             <Header/>
-            <Stack
+            <Grid
+                container
                 sx={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
+                    boxSizing: "border-box",
+                    flexGrow: 1,
                 }}
             >
-                <Link to="/Pomodoro-Timer">Timer</Link>
-                <Link to="/Reading-Tracker">Reading Tracker</Link>
-                <Link to="/Clock">Clock</Link>
-            </Stack>
+                <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Link to="/Clock">Clock</Link>
+                </Grid>
+                
+                <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Link to="/Pomodoro-Timer">Timer</Link>
+                </Grid>
+
+                <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Link to="/Reading-Tracker">Reading Tracker</Link>
+                </Grid>
+            </Grid>
         </Stack>
     )
 }

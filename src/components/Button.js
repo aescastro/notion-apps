@@ -13,6 +13,7 @@ const Button = (props) => {
                 textTransform: "none",
                 fontSize: "16px",
                 fontWeight: 400,
+                color: DARK_GREEN,
                 "&:hover": {
                     backgroundColor: DARK_GREEN,
                     color: LIGHT_GREEN,

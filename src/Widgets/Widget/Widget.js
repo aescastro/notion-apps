@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+
 import { 
     NOTION_FONTS, 
     NOTION_BACKGROUNDS 
@@ -21,9 +22,9 @@ export const Widget = (props) => {
         if (query.has("bg")) {
             setBg(query.get("bg"));
         } else if (isDarkMode) {
-            setBg(NOTION_BACKGROUNDS.dark);
+            setBg(NOTION_BACKGROUNDS.darkMode);
         } else {
-            setBg(NOTION_BACKGROUNDS.light);
+            setBg(NOTION_BACKGROUNDS.lightMode);
         }
         
         if (query.has("fontColour")) {

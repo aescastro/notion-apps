@@ -20,7 +20,8 @@ const Header = () => {
                 maxHeight:"88px",
                 fontWeight: 400,
                 color: DARK_GREEN,
-                cursor: "default"
+                cursor: "default",
+                flexGrow: 0,
             }} 
         >
             <Stack
