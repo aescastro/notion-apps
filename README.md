@@ -17,6 +17,8 @@ Each widget can be customized using the following query parameters
 
 ### Reading Tracker
 - **progressColour**: Sets the colour of the reading tracker's progress bar. Accepts hex or rgb values.
+
+### Clock
 - **timezone**: Changes what timezone the displayed time is in
 
 ### Example
