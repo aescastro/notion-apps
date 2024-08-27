@@ -17,6 +17,7 @@ Each widget can be customized using the following query parameters
 
 ### Reading Tracker
 - **progressColour**: Sets the colour of the reading tracker's progress bar. Accepts hex or rgb values.
+- **timezone**: Changes what timezone the displayed time is in
 
 ### Example
 https://aescastro.github.io/notion-apps/#/Pomodoro-Timer?bg=6A877D&fontColour=FFFFFF&fontType=mono
