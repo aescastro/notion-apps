@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { 
+import {
     ProgressBar,
 } from "react-bootstrap";
 import {
     Stack,
     FormGroup,
 } from "@mui/material";
-import { 
+import {
     Formik,
     Form,
 } from "formik";
@@ -17,8 +17,8 @@ import {
 } from "yup";
 import styled from "@emotion/styled";
 
-import { 
-    useDarkLightSwitcher ,
+import {
+    useDarkLightSwitcher,
     useQuery
 } from "../../utils";
 
@@ -33,13 +33,13 @@ const Button = styled.button`
     font-size: 13px;
 `;
 
-const H6 = styled.h6(({isDarkMode, isView}) => ({
+const H6 = styled.h6(({ isDarkMode, isView }) => ({
     color: isDarkMode ? "#ffffff" : "#000000",
     marginBottom: isView ? "0px" : "0.5rem",
     fontWeight: "bold",
 }));
 
-const Span = styled.span(({isDarkMode}) => ({
+const Span = styled.span(({ isDarkMode }) => ({
     fontSize: "13.5px",
     color: isDarkMode ? "#ffffff" : "#000000",
 }));
@@ -50,7 +50,7 @@ const readingSchema = object({
     totalPages: number().typeError("Must be a number").positive("Must be positive").integer("Must be an integer").required("Required").when("currentPage", (currentPage, schema) => {
         return schema.test("totalPages", "Total pages cannot be less than current pages", (totalPages) => {
             return totalPages >= currentPage;
-        });        
+        });
     }),
 });
 
@@ -60,7 +60,7 @@ const ReadingTracker = () => {
         const savedBook = localStorage.getItem("book");
         const savedCurrentPage = localStorage.getItem("currentPage");
         const savedTotalPages = localStorage.getItem("totalPages");
-        
+
         const book = JSON.parse(savedBook);
         const currentPage = JSON.parse(savedCurrentPage);
         const totalPages = JSON.parse(savedTotalPages);
@@ -100,9 +100,8 @@ const ReadingTracker = () => {
                 <Formik
                     initialValues={values}
                     onSubmit={(values) => {
-                            setValues(values)
-                            setIsView(!isView)
-                        }
+                        setValues(values)
+                    }
                     }
                     validationSchema={readingSchema}
                 >
@@ -113,7 +112,7 @@ const ReadingTracker = () => {
                                     width: "100%",
                                 }}
                             >
-                                <Stack 
+                                <Stack
                                     sx={{
                                         justifyContent: "center",
                                         padding: "0px 30px",
@@ -129,7 +128,7 @@ const ReadingTracker = () => {
                                         <H6
                                             isDarkMode={isDarkMode}
                                             isView={isView}
-                                        >   
+                                        >
                                             Currently Reading
                                         </H6>
                                         <FormGroup>
@@ -140,10 +139,10 @@ const ReadingTracker = () => {
                                                 isView={isView}
                                             />
                                         </FormGroup>
-                                         
+
                                     </Stack>
-                                    
-                                    <Stack 
+
+                                    <Stack
                                         direction="horizontal"
                                         sx={{
                                             alignSelf: "start",
@@ -151,7 +150,7 @@ const ReadingTracker = () => {
                                             gap: "9px",
                                         }}
                                     >
-                                        <ProgressBar 
+                                        <ProgressBar
                                             label={`${percent}%`}
                                             now={percent}
                                             style={{
@@ -159,9 +158,10 @@ const ReadingTracker = () => {
                                                 backgroundColor: "#e9ecef",
                                             }}
                                         />
-                                        <Button 
+                                        <Button
                                             type="submit"
-                                            disabled={!formik.isValid} 
+                                            disabled={!formik.isValid}
+                                            onClick={() => setIsView(!isView)}
                                         >
                                             {isView ? "Edit" : "Save"}
                                         </Button>
@@ -169,63 +169,63 @@ const ReadingTracker = () => {
 
                                     {
                                         !isView &&
-                                            <Stack
-                                                direction="horizontal"
+                                        <Stack
+                                            direction="horizontal"
+                                            sx={{
+                                                justifyContent: "center",
+                                                gap: "5px",
+                                                alignItems: "center",
+                                                marginTop: "6px"
+                                            }}
+                                        >
+                                            <Span
+                                                isDarkMode={isDarkMode}
+                                            >
+                                                On page
+                                            </Span>
+                                            <FormGroup
                                                 sx={{
-                                                    justifyContent: "center",
-                                                    gap: "5px",
-                                                    alignItems: "center",
-                                                    marginTop: "6px"
+                                                    position: "relative",
+                                                    top: formik.errors.currentPage ? "11px" : "0",
                                                 }}
                                             >
-                                                <Span
-                                                    isDarkMode={isDarkMode}
-                                                >
-                                                    On page
-                                                </Span>
-                                                <FormGroup
-                                                    sx={{
-                                                        position: "relative",
-                                                        top: formik.errors.currentPage ? "11px" : "0",
-                                                    }}
-                                                >
-                                                    <Field
-                                                        name="currentPage"
-                                                        isView={isView}
-                                                        error={!isView && formik.errors.currentPage}
-                                                        helperText={formik.errors.currentPage}
-                                                    />
-                                                </FormGroup>
-                                                <Span
-                                                    isDarkMode={isDarkMode}
-                                                >
-                                                    of
-                                                </Span>
-                                                <FormGroup
-                                                    sx={{
-                                                        position: "relative",
-                                                        top: formik.errors.totalPages ? "11px" : "0",
-                                                    }}>
-                                                    <Field
-                                                        name="totalPages"
-                                                        isView={isView}
-                                                        error={!isView && formik.errors.totalPages}
-                                                        helperText={formik.errors.totalPages}
-                                                    />
-                                                </FormGroup>
-                                            </Stack>
-                                        } 
-                                    
-                                    </Stack>      
-                            </Form>  
+                                                <Field
+                                                    name="currentPage"
+                                                    isView={isView}
+                                                    error={!isView && formik.errors.currentPage}
+                                                    helperText={formik.errors.currentPage}
+                                                />
+                                            </FormGroup>
+                                            <Span
+                                                isDarkMode={isDarkMode}
+                                            >
+                                                of
+                                            </Span>
+                                            <FormGroup
+                                                sx={{
+                                                    position: "relative",
+                                                    top: formik.errors.totalPages ? "11px" : "0",
+                                                }}>
+                                                <Field
+                                                    name="totalPages"
+                                                    isView={isView}
+                                                    error={!isView && formik.errors.totalPages}
+                                                    helperText={formik.errors.totalPages}
+                                                />
+                                            </FormGroup>
+                                        </Stack>
+                                    }
+
+                                </Stack>
+                            </Form>
                         )
                     }
                 </Formik>
             </Widget>
         </>
-        
-        
+
+
     )
 }
 
-export {ReadingTracker};
+export { ReadingTracker };
