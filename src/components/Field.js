@@ -4,10 +4,11 @@ import {
 
 import { TextField } from "@mui/material"
 
-import { useDarkLightSwitcher } from "../utils"
+import { useDarkLightSwitcher, useQuery } from "../utils"
 
 const Field = (props) => {
     const isDarkMode = useDarkLightSwitcher()
+    const query = useQuery();
 
     return (
         <FormikField
@@ -20,6 +21,7 @@ const Field = (props) => {
             }}
             inputProps={{
                 sx: {
+                    fontFamily: query.has("fontType") ? query.get("fontType") : "sans-serif",
                     padding: props.isView ? "0" : "0.375rem 0.75rem",
                     color: (isDarkMode) ? "#ffffff" : "#000000",
                 }

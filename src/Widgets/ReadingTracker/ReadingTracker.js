@@ -18,7 +18,6 @@ import {
 import styled from "@emotion/styled";
 
 import {
-    useDarkLightSwitcher,
     useQuery
 } from "../../utils";
 
@@ -33,15 +32,13 @@ const Button = styled.button`
     font-size: 13px;
 `;
 
-const H6 = styled.h6(({ isDarkMode, isView }) => ({
-    color: isDarkMode ? "#ffffff" : "#000000",
+const H6 = styled.h6(({ isView }) => ({
     marginBottom: isView ? "0px" : "0.5rem",
     fontWeight: "bold",
 }));
 
-const Span = styled.span(({ isDarkMode }) => ({
+const Span = styled.span(() => ({
     fontSize: "13.5px",
-    color: isDarkMode ? "#ffffff" : "#000000",
 }));
 
 const readingSchema = object({
@@ -72,7 +69,6 @@ const ReadingTracker = () => {
         }
     });
     const [percent, setPercent] = useState(0);
-    const isDarkMode = useDarkLightSwitcher()
     var query = useQuery()
 
     useEffect(() => {
@@ -126,7 +122,6 @@ const ReadingTracker = () => {
                                         }}
                                     >
                                         <H6
-                                            isDarkMode={isDarkMode}
                                             isView={isView}
                                         >
                                             Currently Reading
@@ -178,9 +173,7 @@ const ReadingTracker = () => {
                                                 marginTop: "6px"
                                             }}
                                         >
-                                            <Span
-                                                isDarkMode={isDarkMode}
-                                            >
+                                            <Span>
                                                 On page
                                             </Span>
                                             <FormGroup
@@ -196,9 +189,7 @@ const ReadingTracker = () => {
                                                     helperText={formik.errors.currentPage}
                                                 />
                                             </FormGroup>
-                                            <Span
-                                                isDarkMode={isDarkMode}
-                                            >
+                                            <Span>
                                                 of
                                             </Span>
                                             <FormGroup
