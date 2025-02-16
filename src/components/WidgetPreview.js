@@ -25,6 +25,7 @@ const Subtitle = styled.span`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    margin-left: 2px;
 `
 
 const WidgetPreview = (props) => {
