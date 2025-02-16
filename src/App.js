@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 
-import { ReadingTracker, Timer, Clock } from './widgets';
-import { Home } from './pages';
+import { ReadingTracker, Timer, Clock } from './Widgets';
+import { Home } from './Pages';
 import { setBackgroundColour, useDarkLightSwitcher } from './utils';
 
 function App() {
