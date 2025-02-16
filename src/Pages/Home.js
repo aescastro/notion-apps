@@ -1,13 +1,20 @@
-import { Link } from 'react-router-dom';
 import {
     Stack,
     Grid,
+    useMediaQuery,
+    useTheme,
  } from '@mui/material';
 
-import { Header } from '../components';
+import { 
+    Header,
+    WidgetPreview,
+} from '../components';
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
+    const theme = useTheme();
+    const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+    const isTablet = useMediaQuery(theme.breakpoints.between('md', "lg"));
     return (
         <Stack
             width="100%"
@@ -30,11 +37,11 @@ const Home = () => {
                     sm={6}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-end" : "center",
+                        alignItems: "flex-end",
                     }}
                 >
-                    <Link to="/Clock">Clock</Link>
+                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
                 </Grid>
                 
                 <Grid
@@ -43,11 +50,11 @@ const Home = () => {
                     sm={6}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-start" : "center",
+                        alignItems: "flex-end",
                     }}
                 >
-                    <Link to="/Pomodoro-Timer">Timer</Link>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Reading Tracker" subtitle="Track progress in your latest read"/>
                 </Grid>
 
                 <Grid
@@ -56,11 +63,11 @@ const Home = () => {
                     sm={6}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-end" : "center",
+                        alignItems: "flex-start",
                     }}
                 >
-                    <Link to="/Reading-Tracker">Reading Tracker</Link>
+                    <WidgetPreview href="/Reading-Tracker" title="Pomodoro Timer" subtitle="Keep focus while giving yourself timely breaks"/>
                 </Grid>
             </Grid>
         </Stack>
