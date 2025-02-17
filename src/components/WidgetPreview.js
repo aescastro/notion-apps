@@ -34,7 +34,7 @@ const PreviewCss = {
     maxHeight: "340px",
     minHeight: "237px",
     maxWidth: "415px",
-    minWidth: "352px", 
+    minWidth: "325px", 
     height: "75%",
     margin: "35px",
 }
@@ -82,7 +82,6 @@ const WidgetPreview = (props) => {
                     background: "#FFF",
                     boxShadow: "1px 2px 4px 3px rgba(0, 0, 0, 0.25)",
                     color: "#000000",
-                    
                     opacity: onHover ? 0.6 : 1,
                     zIndex: 1,
                 }}

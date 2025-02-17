@@ -13,7 +13,7 @@ import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
     const theme = useTheme();
-    const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+    const isDesktop = useMediaQuery('(min-width: 800px)');
     const isTablet = useMediaQuery(theme.breakpoints.between('md', "lg"));
     return (
         <Stack
@@ -33,8 +33,7 @@ const Home = () => {
             >
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
@@ -46,8 +45,7 @@ const Home = () => {
                 
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-start" : "center",
@@ -59,8 +57,7 @@ const Home = () => {
 
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
