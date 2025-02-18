@@ -32,7 +32,7 @@ const Home = () => {
             >
                 <Grid
                     item
-                    xs={isDesktop? 6 : 12}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
@@ -44,7 +44,7 @@ const Home = () => {
                 
                 <Grid
                     item
-                    xs={isDesktop? 6 : 12}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-start" : "center",
@@ -56,7 +56,7 @@ const Home = () => {
 
                 <Grid
                     item
-                    xs={isDesktop? 6 : 12}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
