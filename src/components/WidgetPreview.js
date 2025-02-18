@@ -30,9 +30,6 @@ const Subtitle = styled.span`
     margin-left: 2px;
 `
 
-const PreviewCss = {
-}
-
 const WidgetPreview = (props) => {
     const [onHover, setIsHover] = useState(false);
 
