@@ -22,6 +22,7 @@ const Header = () => {
                 color: DARK_GREEN,
                 cursor: "default",
                 flexGrow: 0,
+                zIndex: 3,
             }} 
         >
             <Stack

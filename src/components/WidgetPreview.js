@@ -31,89 +31,93 @@ const Subtitle = styled.span`
 `
 
 const PreviewCss = {
-    maxHeight: "340px",
-    minHeight: "237px",
-    maxWidth: "415px",
-    minWidth: "325px", 
-    height: "75%",
-    margin: "35px",
 }
 
 const WidgetPreview = (props) => {
     const [onHover, setIsHover] = useState(false);
+
     return (
-        <>
+
+        <MuiLink
+            as={Link}
+            to={props.href}
+            underline="none"
+            sx={{
+                position: "relative",
+                maxWidth: "415px",
+                minWidth: "325px",
+                borderRadius: "10px",
+                border: "1px solid #000",
+                background: "#FFF",
+                boxShadow: "1px 2px 4px 3px rgba(0, 0, 0, 0.25)",
+                color: "#000000",
+                height: "75%",
+                maxHeight: "340px",
+                minHeight: "237px",
+                width: "40%",
+            }}
+        >
             <Stack
+                onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
                 sx={{
-                    ...PreviewCss,
                     position: "absolute",
                     zIndex: onHover ? 2 : 0,
-                }}
-            >
-                <Stack
-                        sx={{
-                            height: "56px",
-                            width: "187px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            backgroundColor: NOTION_BACKGROUNDS.darkMode,
-                            color: "#FFF",
-                            borderRadius: "10px",
-                            border: "1px solid #000",
-                            boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                            margin: "auto auto auto auto",
-                            
-                        }}
-                    >
-                        
-                        Create Widget
-                    </Stack>
-            </Stack>
-            <MuiLink
-                as={Link}
-                to={props.href}
-                underline="none"
-                onMouseEnter={() => setIsHover(true)}
-                sx={{
-                    ...PreviewCss,
-                    borderRadius: "10px",
-                    border: "1px solid #000",
-                    background: "#FFF",
-                    boxShadow: "1px 2px 4px 3px rgba(0, 0, 0, 0.25)",
-                    color: "#000000",
-                    opacity: onHover ? 0.6 : 1,
-                    zIndex: 1,
+                    height: "100%", 
+                    width: "100%",
+                    bottom: "10px"
                 }}
             >
                 <Stack
                     sx={{
-                        height: "100%",
+                        height: "56px",
+                        width: "187px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor: NOTION_BACKGROUNDS.darkMode,
+                        color: "#FFF",
+                        borderRadius: "10px",
+                        border: "1px solid #000",
+                        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                        margin: "auto auto auto auto",
+                        visibility: onHover ? "visible" : "hidden",
                     }}
                 >
-                    
-                    <Stack
-                        sx={{
-                            flexGrow: 1,
-                        }}
-                    >
-                        test
-                    </Stack>
-                    <Stack
-                        sx={{
-                            borderRadius: "0 0 10px 10px",
-                            background: LIGHT_GREEN,
-                            maxHeight: "85px",
-                            padding: "21px",
-                            flexGrow: 0,
-                        }}
-                    >
-                        <Title>{props.title}</Title>
-                        <Subtitle>{props.subtitle}</Subtitle>
-                    </Stack>
+
+                    Create Widget
                 </Stack>
-            </MuiLink>
-        </>
+            </Stack>
+            <Stack
+                sx={{
+                    height: "100%",
+                    zIndex: 1,
+                    opacity: onHover ? 0.6 : 1,
+                }}
+            >
+
+                <Stack
+                    sx={{
+                        flexGrow: 1,
+                    }}
+                >
+                    test
+                </Stack>
+                <Stack
+                    sx={{
+                        borderRadius: "0 0 10px 10px",
+                        background: LIGHT_GREEN,
+                        maxHeight: "85px",
+                        padding: "21px",
+                        flexGrow: 0,
+                    }}
+                >
+                    <Title>{props.title}</Title>
+                    <Subtitle>{props.subtitle}</Subtitle>
+                </Stack>
+            </Stack>
+            
+            
+        </MuiLink>
     );
 }
 

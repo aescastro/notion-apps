@@ -26,6 +26,7 @@ const Home = () => {
             <Header/>
             <Grid
                 container
+                spacing={"50px"}
                 sx={{
                     boxSizing: "border-box",
                     flexGrow: 1,
@@ -64,7 +65,7 @@ const Home = () => {
                         alignItems: "flex-start",
                     }}
                 >
-                    <WidgetPreview href="/Reading-Tracker" title="Pomodoro Timer" subtitle="Keep focus while giving yourself timely breaks"/>
+                    <WidgetPreview href="/Reading-Tracker" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
                 </Grid>
             </Grid>
         </Stack>
