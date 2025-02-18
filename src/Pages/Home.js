@@ -2,7 +2,6 @@ import {
     Stack,
     Grid,
     useMediaQuery,
-    useTheme,
  } from '@mui/material';
 
 import { 
@@ -12,9 +11,8 @@ import {
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
-    const theme = useTheme();
     const isDesktop = useMediaQuery('(min-width: 800px)');
-    const isTablet = useMediaQuery(theme.breakpoints.between('md', "lg"));
+
     return (
         <Stack
             width="100%"
