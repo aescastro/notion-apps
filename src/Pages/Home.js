@@ -11,7 +11,7 @@ import {
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
-    const isDesktop = useMediaQuery('(min-width: 815px)');
+    const isDesktop = useMediaQuery('(min-width: 800px)');
 
     return (
         <Stack

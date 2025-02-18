@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import {
     Stack,
     Link as MuiLink,
@@ -29,26 +30,8 @@ const Subtitle = styled.span`
     margin-left: 2px;
 `
 
-const WidgetPreviewDiv = styled.Stack`
-    height: 100%;
-`
-
-const CreatWidgetDiv = styled.Stack`
-    position: absolute;
-    height: 100%, 
-    width: 100%,
-    bottom: "10px",
-    &:hover {
-        visibility: visible;
-        transition: visibility 0.5s linear;
-    }
-    &:hover ${WidgetPreviewDiv} {
-        opacity: 0.6;
-        transition: opacity 0.5s linear;
-    }
-`
-
 const WidgetPreview = (props) => {
+    const [onHover, setIsHover] = useState(false);
 
     return (
 
@@ -59,7 +42,7 @@ const WidgetPreview = (props) => {
             sx={{
                 position: "relative",
                 aspectRatio: "415/340",
-                height: "80%",
+                height: "75%",
                 minHeight: "237px",
                 borderRadius: "10px",
                 border: "1px solid #000",
@@ -68,7 +51,17 @@ const WidgetPreview = (props) => {
                 color: "#000000",
             }}
         >
-            <CreatWidgetDiv>
+            <Stack
+                onMouseEnter={() => setIsHover(true)}
+                onMouseLeave={() => setIsHover(false)}
+                sx={{
+                    position: "absolute",
+                    zIndex: onHover ? 2 : 0,
+                    height: "100%", 
+                    width: "100%",
+                    bottom: "10px"
+                }}
+            >
                 <Stack
                     sx={{
                         height: "56px",
@@ -81,13 +74,20 @@ const WidgetPreview = (props) => {
                         border: "1px solid #000",
                         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                         margin: "auto auto auto auto",
+                        visibility: onHover ? "visible" : "hidden",
                     }}
                 >
 
                     Create Widget
                 </Stack>
-            </CreatWidgetDiv>
-            <WidgetPreviewDiv>
+            </Stack>
+            <Stack
+                sx={{
+                    height: "100%",
+                    zIndex: 1,
+                    opacity: onHover ? 0.6 : 1,
+                }}
+            >
 
                 <Stack
                     sx={{
@@ -100,7 +100,7 @@ const WidgetPreview = (props) => {
                     sx={{
                         borderRadius: "0 0 10px 10px",
                         background: LIGHT_GREEN,
-                        maxHeight: "90px",
+                        maxHeight: "85px",
                         padding: "21px",
                         flexGrow: 0,
                     }}
@@ -108,7 +108,7 @@ const WidgetPreview = (props) => {
                     <Title>{props.title}</Title>
                     <Subtitle>{props.subtitle}</Subtitle>
                 </Stack>
-            </WidgetPreviewDiv>
+            </Stack>
             
             
         </MuiLink>
