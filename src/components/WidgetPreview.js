@@ -42,7 +42,7 @@ const WidgetPreview = (props) => {
             sx={{
                 position: "relative",
                 aspectRatio: "415/340",
-                height: "75%",
+                height: "80%",
                 minHeight: "237px",
                 borderRadius: "10px",
                 border: "1px solid #000",
@@ -100,7 +100,7 @@ const WidgetPreview = (props) => {
                     sx={{
                         borderRadius: "0 0 10px 10px",
                         background: LIGHT_GREEN,
-                        maxHeight: "85px",
+                        maxHeight: "90px",
                         padding: "21px",
                         flexGrow: 0,
                     }}
