@@ -53,7 +53,7 @@ const Home = () => {
                         alignItems: "flex-end",
                     }}
                 >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Reading Tracker" subtitle="Track progress in your latest read"/>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
                 </Grid>
 
                 <Grid
@@ -65,8 +65,9 @@ const Home = () => {
                         alignItems: "flex-start",
                     }}
                 >
-                    <WidgetPreview href="/Reading-Tracker" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
+                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
                 </Grid>
+                
             </Grid>
         </Stack>
     )
