@@ -66,10 +66,6 @@ const WidgetPreview = (props) => {
                 background: "#FFF",
                 boxShadow: "1px 2px 4px 3px rgba(0, 0, 0, 0.25)",
                 color: "#000000",
-                height: "75%",
-                maxHeight: "340px",
-                minHeight: "237px",
-                width: "40%",
             }}
         >
             <CreatWidgetDiv>
