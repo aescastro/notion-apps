@@ -2,6 +2,7 @@ import {
     Stack,
 } from "@mui/material";
 import styled from "@emotion/styled"
+import { Textfit } from "react-textfit";
 
 import {
     LIGHT_GREEN,
@@ -11,7 +12,7 @@ import {
     ReactComponent as ListIcon
 } from "../assets/icons/list.svg"
 
-const Title = styled.h1`
+const Title = styled(Textfit)`
     color: ${DARK_GREEN};
     font-family: "Josefin Sans";
     font-size: 32px;
@@ -20,6 +21,8 @@ const Title = styled.h1`
     line-height: normal;
     flex-grow: 1;
     flex-shrink: 1;
+    height: 100%;
+    align-content: center; 
 `;
 
 const Icon = styled(ListIcon)`
@@ -27,6 +30,7 @@ const Icon = styled(ListIcon)`
     height: 32px;
     width: 32px;
     margin-left: auto;  
+    flex-shrink: 0; 
 `;
 
 const MobileHeader = () => {
@@ -35,8 +39,10 @@ const MobileHeader = () => {
             direction="row"
             sx={{
                 background: LIGHT_GREEN,
-                height: "74px",
-                padding: "21px 18px"
+                height: "88px",
+                padding: "21px 18px",
+                alignItems: "center",
+                gap: "7px",
             }}
         >
             <Title>
