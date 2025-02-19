@@ -1,13 +1,18 @@
-import { Link } from 'react-router-dom';
 import {
     Stack,
     Grid,
+    useMediaQuery,
  } from '@mui/material';
 
-import { Header } from '../components';
+import { 
+    Header,
+    WidgetPreview,
+} from '../components';
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
+    const isDesktop = useMediaQuery('(min-width: 815px)');
+
     return (
         <Stack
             width="100%"
@@ -19,6 +24,7 @@ const Home = () => {
             <Header/>
             <Grid
                 container
+                spacing={"50px"}
                 sx={{
                     boxSizing: "border-box",
                     flexGrow: 1,
@@ -26,42 +32,40 @@ const Home = () => {
             >
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-end" : "center",
+                        alignItems: "flex-end",
                     }}
                 >
-                    <Link to="/Clock">Clock</Link>
+                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
                 </Grid>
                 
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-start" : "center",
+                        alignItems: "flex-end",
                     }}
                 >
-                    <Link to="/Pomodoro-Timer">Timer</Link>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
                 </Grid>
 
                 <Grid
                     item
-                    xs={12}
-                    sm={6}
+                    xs={isDesktop ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: isDesktop ? "flex-end" : "center",
+                        alignItems: "flex-start",
                     }}
                 >
-                    <Link to="/Reading-Tracker">Reading Tracker</Link>
+                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
                 </Grid>
+                
             </Grid>
         </Stack>
     )
