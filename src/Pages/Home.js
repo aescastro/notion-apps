@@ -20,6 +20,7 @@ const Home = () => {
             height="100%"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
+                overflow: "hidden",
             }}
         >
             {isDesktop ? <Header/> : <MobileHeader/>}
