@@ -7,6 +7,7 @@ import {
 import { 
     Header,
     WidgetPreview,
+    MobileHeader,
 } from '../components';
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
@@ -21,7 +22,8 @@ const Home = () => {
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
             }}
         >
-            <Header/>
+            {isDesktop ? <Header/> : <MobileHeader/>}
+        
             <Grid
                 container
                 spacing={isDesktop ? "50px" : "0px"}
