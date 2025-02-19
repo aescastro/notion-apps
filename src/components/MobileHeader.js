@@ -40,6 +40,8 @@ const MenuIcon = styled(ListIcon)`
     width: 32px;
     margin-left: auto;  
     flex-shrink: 0; 
+    rotate: ${(props) => props.isOpen ? "-90deg" : "0deg"};
+    transition: rotate 0.5s ease;
 `;
 
 const CloseIcon = styled(XIcon)`
@@ -48,6 +50,8 @@ const CloseIcon = styled(XIcon)`
     width: 30px;
     margin-left: auto;
     margin-bottom: 70px;
+    rotate: ${(props) => props.isOpen ? "-90deg" : "0deg"};
+    transition: rotate 0.5s ease;
 `;
 
 const MenuText = styled.span`
@@ -85,7 +89,7 @@ const MobileHeader = () => {
                     adri's notion widgets
                 </Title>
 
-                <MenuIcon onClick={() => setIsOpen(true)} />
+                <MenuIcon onClick={() => setIsOpen(true)} isOpen={isOpen}/>
             </Stack>
             <Stack
                 sx={{
@@ -104,7 +108,7 @@ const MobileHeader = () => {
                     padding: "21px 18px",
                 }}
             >
-                <CloseIcon onClick={() => setIsOpen(false)} />
+                <CloseIcon onClick={() => setIsOpen(false)} isOpen={isOpen}/>
 
                 <Stack 
                     sx={{
