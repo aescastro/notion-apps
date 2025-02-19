@@ -1,6 +1,19 @@
+@media screen and (min-width: 815px) {
+  body {
+    height: 100vh;
+  }
+  
+}
+
+@media screen and (max-width: 814px) {
+  body {
+    height: 1000px;
+  }
+  
+}
+
 body {
   margin: 0;
-  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

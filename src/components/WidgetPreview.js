@@ -109,8 +109,6 @@ const WidgetPreview = (props) => {
                     <Subtitle>{props.subtitle}</Subtitle>
                 </Stack>
             </Stack>
-            
-            
         </MuiLink>
     );
 }
