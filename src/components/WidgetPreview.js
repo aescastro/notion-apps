@@ -78,7 +78,7 @@ const WidgetPreview = (props) => {
                     }}
                 >
 
-                    Create Widget
+                    View Widget
                 </Stack>
             </Stack>
             <Stack
