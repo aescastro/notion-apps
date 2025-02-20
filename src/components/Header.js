@@ -1,11 +1,14 @@
-import Stack from '@mui/material/Stack';
+import { Link } from "react-router-dom";
+import { 
+    Box,
+    Stack,
+    Link as MuiLink,
+} from '@mui/material';
 
-
-import { LIGHT_GREEN, DARK_GREEN } from "../constants";
+import { LIGHT_GREEN, DARK_GREEN, LINKS, HOVER_GREEN } from "../constants";
 import {
     Button
 } from "../components"
-import { Box } from '@mui/material';
 
 const Header = () => {
     return (
@@ -32,51 +35,51 @@ const Header = () => {
                     alignItems: "center",
                 }}
             >
-                <Box
-                    sx={{
-                        fontSize: "40px",
-                        maxHeight: "100%",
-                        position: "relative",
-                        "&:hover": {
-                            cursor: "pointer"
-                        }
-                    }}
-                >
-                    adri's notion widgets
-                </Box>
+                <MuiLink as={Link} to={LINKS.HOME} underline="none">
+                    <Box
+                        sx={{
+                            fontSize: "40px",
+                            maxHeight: "100%",
+                            position: "relative",
+                            color: DARK_GREEN,
+                        }}
+                    >
+                        adri's notion widgets
+                    </Box>
+                </MuiLink>
 
-                <Box
-                    sx={{
-                        fontSize: "24px",
-                        color: DARK_GREEN,
-                        "&:hover": {
-                            color: "#218E49",
-                            cursor: "pointer"
-                        }
-                    }}
-                >
-                    home
-                </Box>
+                <MuiLink as={Link} to={LINKS.HOME} underline="none">
+                    <Box
+                        sx={{
+                            fontSize: "24px",
+                            color: DARK_GREEN,
+                            "&:hover": {
+                                color: HOVER_GREEN,
+                            }
+                        }}
+                    >
+                        home
+                    </Box>
+                </MuiLink>
 
-                <Box
-                    sx={{
-                        fontSize: "24px",
-                        color: DARK_GREEN,
-                        "&:hover": {
-                            color: "#218E49",
-                            cursor: "pointer"
-                        }
-                    }}
-                >
-                    about
-                </Box>                
+                <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
+                    <Box
+                        sx={{
+                            fontSize: "24px",
+                            color: DARK_GREEN,
+                            "&:hover": {
+                                color: HOVER_GREEN
+                            }
+                        }}
+                    >
+                        about
+                    </Box>    
+                </MuiLink>            
             </Stack> 
 
-            <Stack
-                direction="horizontal"
-            >
+            <MuiLink as={Link} to={LINKS.CONTACT} underline="none">
                 <Button>contact</Button>
-            </Stack>
+            </MuiLink>
         </Stack>    
     )
 }

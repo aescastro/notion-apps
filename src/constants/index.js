@@ -8,6 +8,8 @@ import {
     LIGHT_GREEN,
     DARK_GREEN,
     MAIN_BACKGROUND_COLOUR,
+    LINKS,
+    HOVER_GREEN,
 } from "./website-constants"
 
 export {
@@ -16,4 +18,6 @@ export {
     LIGHT_GREEN,
     DARK_GREEN,
     MAIN_BACKGROUND_COLOUR,
+    LINKS,
+    HOVER_GREEN,
 }

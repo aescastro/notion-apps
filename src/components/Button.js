@@ -14,6 +14,8 @@ const Button = (props) => {
                 fontSize: "16px",
                 fontWeight: 400,
                 color: DARK_GREEN,
+                width: "fit-content",
+                padding: "5px 10px",
                 "&:hover": {
                     backgroundColor: DARK_GREEN,
                     color: LIGHT_GREEN,

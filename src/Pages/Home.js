@@ -7,6 +7,7 @@ import {
 import { 
     Header,
     WidgetPreview,
+    MobileHeader,
 } from '../components';
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
@@ -19,12 +20,14 @@ const Home = () => {
             height="100%"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
+                overflow: "hidden",
             }}
         >
-            <Header/>
+            {isDesktop ? <Header/> : <MobileHeader/>}
+        
             <Grid
                 container
-                spacing={"50px"}
+                spacing={isDesktop ? "50px" : "0px"}
                 sx={{
                     boxSizing: "border-box",
                     flexGrow: 1,
@@ -36,7 +39,7 @@ const Home = () => {
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
-                        alignItems: "flex-end",
+                        alignItems: isDesktop ? "flex-end" : "center",
                     }}
                 >
                     <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
@@ -48,7 +51,7 @@ const Home = () => {
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-start" : "center",
-                        alignItems: "flex-end",
+                        alignItems: isDesktop ? "flex-end" : "center",
                     }}
                 >
                     <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
@@ -60,7 +63,7 @@ const Home = () => {
                     sx={{
                         display: "flex",
                         justifyContent: isDesktop ? "flex-end" : "center",
-                        alignItems: "flex-start",
+                        alignItems: isDesktop ? "flex-start" : "center",
                     }}
                 >
                     <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
