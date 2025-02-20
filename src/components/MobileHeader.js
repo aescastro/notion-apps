@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
     Stack,
-    Box
+    Box,
+    Link as MuiLink,
 } from "@mui/material";
 import styled from "@emotion/styled"
 import { Textfit } from "react-textfit";
@@ -12,6 +14,8 @@ import {
 import {
     LIGHT_GREEN,
     DARK_GREEN,
+    LINKS,
+    HOVER_GREEN,
 } from "../constants"
 import {
     ReactComponent as ListIcon
@@ -32,6 +36,7 @@ const Title = styled(Textfit)`
     flex-shrink: 1;
     height: 100%;
     align-content: center; 
+    text-decoration: none;
 `;
 
 const MenuIcon = styled(ListIcon)`
@@ -62,6 +67,9 @@ const MenuText = styled.span`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    :hover {
+        color: ${HOVER_GREEN};
+    }
 `;
 
 const MobileHeader = () => {
@@ -85,11 +93,14 @@ const MobileHeader = () => {
                     overflow: "hidden",
                 }}
             >
-                <Title>
-                    adri's notion widgets
-                </Title>
+                <MuiLink as={Link} to={LINKS.HOME} underline="none">
+                    <Title>
 
-                <MenuIcon onClick={() => setIsOpen(true)} isOpen={isOpen}/>
+                        adri's notion widgets
+                    </Title>
+                </MuiLink>
+
+                <MenuIcon onClick={() => setIsOpen(true)} isOpen={isOpen} />
             </Stack>
             <Stack
                 sx={{
@@ -106,28 +117,35 @@ const MobileHeader = () => {
                     transform: `translateX(${isOpen ? "-100%" : "0"})`,
                     transition: "transform 0.5s ease",
                     padding: "21px 18px",
+                    zIndex: 3,
                 }}
             >
-                <CloseIcon onClick={() => setIsOpen(false)} isOpen={isOpen}/>
+                <CloseIcon onClick={() => setIsOpen(false)} isOpen={isOpen} />
 
-                <Stack 
+                <Stack
                     sx={{
                         gap: "30px",
                         justifyContent: "center",
                         alignItems: "center",
                     }}
                 >
-                    <MenuText>
-                        home
-                    </MenuText>
+                    <MuiLink as={Link} to={LINKS.HOME} underline="none">
+                        <MenuText>
+                            home
+                        </MenuText>
+                    </MuiLink>
 
-                    <MenuText>
-                        about
-                    </MenuText>
+                    <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
+                        <MenuText>  
+                            about
+                        </MenuText>
+                    </MuiLink>
 
-                    <Button>
-                        contact
-                    </Button>
+                    <MuiLink as={Link} to={LINKS.CONTACT} underline="none">
+                        <Button>
+                            contact
+                        </Button>
+                    </MuiLink>
                 </Stack>
             </Stack>
         </Box>
