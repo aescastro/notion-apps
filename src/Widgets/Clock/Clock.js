@@ -9,13 +9,13 @@ import { useQuery } from "../../utils";
 
 const H1 = styled.h1`
     margin: 0;
-    font-size: min(calc(0.3 * ${(props) => props.height}px), calc(0.3 * ${(props) => props.width}px));
+    font-size: calc(0.3 * ${(props) => props.height}px);
     font-weight: bold;
 `;
 
 const H2 = styled.h2`
     margin: 0;
-    font-size: min(calc(0.12 * ${(props) => props.height}px), calc(0.12 * ${(props) => props.width}px));
+    font-size: calc(0.12 * ${(props) => props.height}px);
     font-weight: 500;
 `
 
