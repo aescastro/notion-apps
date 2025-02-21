@@ -2,22 +2,25 @@ import { useState, useEffect } from "react";
 import Stack from '@mui/material/Stack';
 import moment from 'moment-timezone';
 import styled from "@emotion/styled";
+import useDimensions from "react-cool-dimensions";
+
 import { Widget } from "../Widget"; 
 import { useQuery } from "../../utils";
 
 const H1 = styled.h1`
     margin: 0;
-    font-size: 30vh;
+    font-size: min(calc(0.3 * ${(props) => props.height}px), calc(0.3 * ${(props) => props.width}px));
     font-weight: bold;
 `;
 
 const H2 = styled.h2`
     margin: 0;
-    font-size: 12vh;
+    font-size: min(calc(0.12 * ${(props) => props.height}px), calc(0.12 * ${(props) => props.width}px));
     font-weight: 500;
 `
 
 const Clock = () => {
+    const { observe, width, height } = useDimensions();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
     var query = useQuery();
@@ -44,12 +47,15 @@ const Clock = () => {
                 sx={{
                     alignItems: "center",
                     justifyContent: "center",
+                    aspectRatio: "1.75 / 1",
+                    width: "100%",
                 }}
+                ref={observe}
             >
-                <H1>
+                <H1 height={height} width={width}>
                     {time}
                 </H1>
-                <H2>
+                <H2 height={height} width={width}>
                     {date}
                 </H2>  
             </Stack>

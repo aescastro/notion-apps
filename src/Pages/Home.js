@@ -17,7 +17,7 @@ const Home = () => {
     return (
         <Stack
             width="100%"
-            height="100%"
+            height={isDesktop ? "100vh" : "1000px"}
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
                 overflow: "hidden",
