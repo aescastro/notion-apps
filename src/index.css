@@ -1,16 +1,4 @@
-@media screen and (min-width: 815px) {
-  body {
-    height: 100vh;
-  }
-  
-}
 
-@media screen and (max-width: 814px) {
-  body {
-    height: 1000px;
-  }
-  
-}
 
 body {
   margin: 0;

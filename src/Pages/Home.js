@@ -12,34 +12,36 @@ import {
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
 
 const Home = () => {
-    const isDesktop = useMediaQuery('(min-width: 815px)');
+    const isDesktopWidth = useMediaQuery('(min-width: 815px)');
+    const isSmallHeight = useMediaQuery('(max-height: 725px)');
 
     return (
         <Stack
             width="100%"
-            height="100%"
+            height={isDesktopWidth ? isSmallHeight ? "fit-content" : "100vh" : "1000px"}
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflow: "hidden",
+                overflow: isDesktopWidth ? "visible" : "hidden",
             }}
         >
-            {isDesktop ? <Header/> : <MobileHeader/>}
+            {isDesktopWidth ? <Header/> : <MobileHeader/>}
         
             <Grid
                 container
-                spacing={isDesktop ? "50px" : "0px"}
+                spacing={isDesktopWidth ? "50px" : "0px"}
                 sx={{
                     boxSizing: "border-box",
+                    padding: isDesktopWidth ? "50px" : "20px",
                     flexGrow: 1,
                 }}
             >
                 <Grid
                     item
-                    xs={isDesktop ? 6 : 12}
+                    xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktop ? "flex-end" : "center",
-                        alignItems: isDesktop ? "flex-end" : "center",
+                        justifyContent: isDesktopWidth ? "flex-end" : "center",
+                        alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
                     <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
@@ -47,11 +49,11 @@ const Home = () => {
                 
                 <Grid
                     item
-                    xs={isDesktop ? 6 : 12}
+                    xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktop ? "flex-start" : "center",
-                        alignItems: isDesktop ? "flex-end" : "center",
+                        justifyContent: isDesktopWidth ? "flex-start" : "center",
+                        alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
                     <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
@@ -59,11 +61,11 @@ const Home = () => {
 
                 <Grid
                     item
-                    xs={isDesktop ? 6 : 12}
+                    xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktop ? "flex-end" : "center",
-                        alignItems: isDesktop ? "flex-start" : "center",
+                        justifyContent: isDesktopWidth ? "flex-end" : "center",
+                        alignItems: isDesktopWidth ? "flex-start" : "center",
                     }}
                 >
                     <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
