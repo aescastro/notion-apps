@@ -40,9 +40,9 @@ const Grid = styled.div(({containerHeight, containerWidth}) => ({
     position: "relative",
     marginBottom: "12px",
     borderRadius: "15px",
-    padding: "50px",
+    padding: "5%",
     height: "100%",
-    right: `min(calc(0.09 * ${containerHeight}px), calc(0.09 * ${containerWidth}px))`,
+    right: `min(calc(0.05 * ${containerHeight}px), calc(0.05 * ${containerWidth}px))`,
 }));
 
 const Button = styled.button(({ query, gridCol, containerHeight, containerWidth }) => ({
@@ -259,15 +259,17 @@ function Timer() {
     return (
         <Widget>
             <Box
+                ref={observe}
                 sx={{
                     width: "100%",
                     maxHeight: "100%",
                     maxWidth: "100%",
-                    aspectRatio: "1 / 1",
+                    aspectRatio: "1.25 / 1",
                 }}
             >
                 <Grid
-                    ref={observe}
+                    containerHeight={height}
+                    containerWidth={width}
                 >
                     {
                         state === TimerState.work ?
@@ -323,7 +325,8 @@ function Timer() {
                             fontWeight: "bold",
                             fontSize: `min(calc(0.12 * ${width}px), calc(0.12 * ${height}px))`,
                             textAlign: "center",
-                            marginBottom: "5vmin",
+                            justifySelf: "center",
+                            alignSelf: "center",
                         }}
                     >
                         {sessions}
