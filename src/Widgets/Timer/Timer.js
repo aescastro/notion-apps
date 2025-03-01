@@ -1,22 +1,71 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
+import useDimensions from 'react-cool-dimensions';
+import {
+    Box,
+} from "@mui/material";
 
-import './Timer.css';
 import clickSound from '../../assets/sounds/Click_Sound.wav';
 import notifSound from '../../assets/sounds/Notification_Sound.wav';
-import { ReactComponent as WorkingIcon } from '../../assets/icons/pen-fill.svg';
-import { ReactComponent as BreakIcon } from '../../assets/icons/cup-hot-fill.svg';
+import { ReactComponent as WIcon } from '../../assets/icons/pen-fill.svg';
+import { ReactComponent as BIcon } from '../../assets/icons/cup-hot-fill.svg';
 import { Widget } from '../Widget';
 import {
     useQuery,
 } from '../../utils';
 
-const Button = styled.button(({query}) => ({
+const icoCss = {
+    gridRow: "1/span 1",
+    marginRight: "5px",
+    cursor: "pointer",
+    "&:hover": {
+        filter: "brightness(1.5)",
+    }
+}
+
+const timeCss = {
+    gridRow: "1 / span 1",
+    margin: "0",
+    fontWeight: "bold",
+    lineHeight: "normal",
+};
+
+const Grid = styled.div(({containerHeight, containerWidth}) => ({
+    display: "grid",
+    justifyContent: "center",
+    alignItems: "center",
+    gridTemplateColumns: "auto auto",
+    gridTemplateRows: "auto auto auto",
+    userSelect: "none",
+    position: "relative",
+    marginBottom: "12px",
+    borderRadius: "15px",
+    padding: "5%",
+    height: "100%",
+    right: `min(calc(0.05 * ${containerHeight}px), calc(0.05 * ${containerWidth}px))`,
+}));
+
+const Button = styled.button(({ query, gridCol, containerHeight, containerWidth }) => ({
     backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
     color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
     borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+    fontSize: `min(calc(0.06 * ${containerHeight}px), calc(0.06 * ${containerWidth}px))`,
+    gridRow: "3 / span 1",
+    borderRadius: "4px",
+    borderWidth: "1px",
+    padding: `min(calc(0.03 * ${containerHeight}px), calc(0.03 * ${containerWidth}px)) 0`,
+    cursor: "pointer",
+    gridColumnStart: gridCol,
 }));
 
+const WorkIcon = styled(WIcon)(({containerHeight, containerWidth}) => ({
+    ...icoCss,
+    height: `min(calc(0.175 * ${containerHeight}px), calc(0.175 * ${containerWidth}px))`,
+}));
+const BreakIcon = styled(BIcon)(({containerHeight, containerWidth}) => ({
+    ...icoCss,
+    height: `min(calc(0.175 * ${containerHeight}px), calc(0.175 * ${containerWidth}px))`,
+}));
 
 const TimerState = {
     work: "working",
@@ -25,6 +74,8 @@ const TimerState = {
 };
 
 function Timer() {
+    const { observe, width, height } = useDimensions();
+
     const [minutes, setMinutes] = useState();
     const [seconds, setSeconds] = useState();
     const [sessions, setSessions] = useState();
@@ -36,7 +87,7 @@ function Timer() {
     const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
     const query = useQuery();
-    
+
     const runTimer = () => {
         click.current.play();
         setRunning(!running);
@@ -55,21 +106,21 @@ function Timer() {
             case TimerState.shortBreak:
                 setMinutes(5);
                 setSeconds(0);
-            break;
+                break;
             case TimerState.longBreak:
                 setMinutes(15);
                 setSeconds(0);
-            break;
+                break;
             case TimerState.work:
                 setMinutes(25);
                 setSeconds(0);
-            break;
+                break;
             default:
                 break;
         }
     }
 
-    const changeState = () => {  
+    const changeState = () => {
         click.current.play();
         clearInterval(ret);
 
@@ -91,7 +142,7 @@ function Timer() {
                 case TimerState.longBreak:
                     setState(TimerState.work);
                     setMinutes(25);
-                    setSeconds(0);  
+                    setSeconds(0);
                     break;
                 default:
                     break;
@@ -123,16 +174,16 @@ function Timer() {
             setSessions(0);
             setState(TimerState.work);
         }
-       
+
     }, []);
-    
+
     useEffect(() => {
         const timerDone = () => {
             notif.current.play();
-    
+
             if (state === TimerState.work) {
                 var nextSessions = sessions + 1;
-                
+
                 if (nextSessions % 4 === 0) {
                     setState(TimerState.longBreak);
                 } else {
@@ -141,8 +192,8 @@ function Timer() {
                 setSessions(nextSessions);
             } else {
                 setState(TimerState.work);
-            } 
-            
+            }
+
         }
 
         if (running) {
@@ -151,17 +202,17 @@ function Timer() {
                 var timeleft = countDownDate - now;
                 var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.round((timeleft % (1000 * 60)) / 1000);
-                
+
                 if (seconds === 60) {
                     seconds = 0;
                     minutes++;
                 }
-                
+
                 if (timeleft <= 0) {
-                    timerDone(); 
+                    timerDone();
                     setMinutes(0);
-                    setSeconds(0);     
-                    clearInterval(nextRet);              
+                    setSeconds(0);
+                    clearInterval(nextRet);
                 } else {
                     setMinutes(minutes);
                     setSeconds(seconds);
@@ -174,23 +225,23 @@ function Timer() {
 
     useEffect(() => {
         if (running) {
-            setCountDownDate(new Date().getTime() + (1000*60*minutes) + (1000*seconds));
+            setCountDownDate(new Date().getTime() + (1000 * 60 * minutes) + (1000 * seconds));
         } else {
             clearInterval(ret);
         }
     }, [running]);
 
-    useEffect(()=> {
-        switch(state) {
+    useEffect(() => {
+        switch (state) {
             case TimerState.work:
-                setCountDownDate(new Date().getTime() + (1000*60*25));
-            break;
+                setCountDownDate(new Date().getTime() + (1000 * 60 * 25));
+                break;
             case TimerState.shortBreak:
-                setCountDownDate(new Date().getTime() + (1000*60*5));
-            break;
+                setCountDownDate(new Date().getTime() + (1000 * 60 * 5));
+                break;
             case TimerState.longBreak:
-                setCountDownDate(new Date().getTime() + (1000*60*15));
-            break;
+                setCountDownDate(new Date().getTime() + (1000 * 60 * 15));
+                break;
             default:
                 break;
         }
@@ -207,34 +258,103 @@ function Timer() {
 
     return (
         <Widget>
-            <div id="content">
-                {state === TimerState.work ? <WorkingIcon id="ico" onClick={changeState}/> : <BreakIcon id="ico" onClick={changeState}/>}
-                    
-                <h1 id="mins">{minutes < 10 ? "0" + minutes.toString() : minutes}</h1>
-                <h1 id="col">:</h1>
-                <h1 id="secs">{seconds < 10 ? "0" + seconds.toString() : seconds}</h1>
-                
-                <span id="session-display">{sessions}</span>
-            
-                <Button 
-                    className="access-buttons" 
-                    id="start" 
-                    onClick={runTimer}
-                    query={query}
-                > 
-                    {running ? "Pause" : "Start"} 
-                </Button>
-                <Button 
-                    className="access-buttons" 
-                    id="cancel" 
-                    onClick={cancelTimer}
-                    query={query}
-                > 
-                    Cancel 
-                </Button>
-            </div>    
+            <Box
+                ref={observe}
+                sx={{
+                    width: "100%",
+                    maxHeight: "100%",
+                    maxWidth: "100%",
+                    aspectRatio: "1.25 / 1",
+                }}
+            >
+                <Grid
+                    containerHeight={height}
+                    containerWidth={width}
+                >
+                    {
+                        state === TimerState.work ?
+                            <WorkIcon 
+                                onClick={changeState} 
+                                containerHeight={height}
+                                containerWidth={width}
+                            />
+                            :
+                            <BreakIcon 
+                                onClick={changeState} 
+                                containerHeight={height}
+                                containerWidth={width}
+                            />
+                    }
+
+                    <Box
+                        sx={{
+                            ...timeCss,
+                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            textAlign: "right",
+                        }}
+                    >
+                        {minutes < 10 ? "0" + minutes.toString() : minutes}
+                    </Box>
+                    <Box
+                        sx={{
+                            ...timeCss,
+                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            textAlign: "center",
+                            position: "relative",
+                            bottom: "5%",
+                        }}
+                    >
+                        :
+                    </Box>
+                    <Box
+                        sx={{
+                            ...timeCss,
+                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            textAlign: "left",
+                        }}
+                    >
+                        {seconds < 10 ? "0" + seconds.toString() : seconds}
+                    </Box>
+
+                    <Box
+                        sx={{
+                            position: "relative",
+                            bottom: "5%",
+                            gridRow: "2 / span 1",
+                            gridColumn: "3 / span 1",
+                            fontWeight: "bold",
+                            fontSize: `min(calc(0.12 * ${width}px), calc(0.12 * ${height}px))`,
+                            textAlign: "center",
+                            justifySelf: "center",
+                            alignSelf: "center",
+                        }}
+                    >
+                        {sessions}
+                    </Box>
+
+                    <Button
+                        onClick={runTimer}
+                        query={query}
+                        gridCol={2}
+                        containerHeight={height}
+                        containerWidth={width}
+                    >
+                        {running ? "Pause" : "Start"}
+                    </Button>
+
+                    <Button
+                        onClick={cancelTimer}
+                        query={query}
+                        gridCol={4}
+                        containerHeight={height}
+                        containerWidth={width}
+                    >
+                        Cancel
+                    </Button>
+                </Grid>
+            </Box>
         </Widget>
     );
 }
 
-export {Timer};
+export { Timer };

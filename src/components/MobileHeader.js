@@ -111,7 +111,6 @@ const MobileHeader = () => {
                     position: isOpen ? "fixed" : "absolute",
                     top: 0,
                     left: "100%",
-                    zIndex: 1,
                     borderRadius: "10px 0 0 10px",
                     border: "1px solid #000",
                     transform: `translateX(${isOpen ? "-100%" : "0"})`,

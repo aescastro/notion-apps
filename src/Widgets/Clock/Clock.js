@@ -25,16 +25,19 @@ const Clock = () => {
     const [time, setTime] = useState();
     var query = useQuery();
 
+    const setTimeInfo = () => {
+        if (query.has("timezone")) {
+            setDate(moment.tz(query.get("timezone")).format("dddd, MMMM Do"));
+            setTime(moment.tz(query.get("timezone")).format("hh:mm A"));
+        } else {
+            setDate(moment().format("dddd, MMMM Do"));
+            setTime(moment().format("hh:mm A"));
+        }
+    }
+
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            if (query.has("timezone")) {
-                setDate(moment.tz(query.get("timezone")).format("dddd, MMMM Do"));
-                setTime(moment.tz(query.get("timezone")).format("hh:mm A"));
-            } else {
-                setDate(moment().format("dddd, MMMM Do"));
-                setTime(moment().format("hh:mm A"));
-            }
-        }, 1000);
+        setTimeInfo();
+        const intervalId = setInterval(setTimeInfo, 1000);
         return () => {
             clearInterval(intervalId);
         }
