@@ -30,14 +30,14 @@ const Subtitle = styled.span`
     margin-left: 2px;
 `
 
-const WidgetPreview = (props) => {
+const WidgetPreview = ({children, href, title, subtitle}) => {
     const [onHover, setIsHover] = useState(false);
 
     return (
 
         <MuiLink
             as={Link}
-            to={props.href}
+            to={href}
             underline="none"
             sx={{
                 position: "relative",
@@ -56,7 +56,7 @@ const WidgetPreview = (props) => {
                 onMouseLeave={() => setIsHover(false)}
                 sx={{
                     position: "absolute",
-                    zIndex: onHover ? 2 : 0,
+                    zIndex: 2,
                     height: "100%", 
                     width: "100%",
                     bottom: "10px"
@@ -92,9 +92,10 @@ const WidgetPreview = (props) => {
                 <Stack
                     sx={{
                         flexGrow: 1,
+                        maxHeight: "calc(100% - 90px)",
                     }}
                 >
-                    TBD
+                    {children}
                 </Stack>
                 <Stack
                     sx={{
@@ -105,8 +106,8 @@ const WidgetPreview = (props) => {
                         flexGrow: 0,
                     }}
                 >
-                    <Title>{props.title}</Title>
-                    <Subtitle>{props.subtitle}</Subtitle>
+                    <Title>{title}</Title>
+                    <Subtitle>{subtitle}</Subtitle>
                 </Stack>
             </Stack>
         </MuiLink>

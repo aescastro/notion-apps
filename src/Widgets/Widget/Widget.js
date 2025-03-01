@@ -1,10 +1,12 @@
 
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { 
     NOTION_FONTS, 
-    NOTION_BACKGROUNDS 
+    NOTION_BACKGROUNDS,
+    LINKS,
 } from "../../constants"
 import { 
     useDarkLightSwitcher, 
@@ -13,6 +15,7 @@ import {
 
 export const Widget = (props) => {
     const query = useQuery();
+    const location = useLocation();
     const font = query.get("fontType"); 
     const [bg, setBg] = useState("");
     const [fontColour, setFontColour] = useState("");
@@ -40,8 +43,9 @@ export const Widget = (props) => {
     return (
         <Box
             sx={{
-                width: "100vw",
-                height: "100vh",
+                //TODO: Change this
+                width: location.pathname == LINKS.HOME ? "100%" : "100vw",
+                height: location.pathname == LINKS.HOME ? "100%" : "100vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

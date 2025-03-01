@@ -10,6 +10,11 @@ import {
     MobileHeader,
 } from '../components';
 import { MAIN_BACKGROUND_COLOUR } from '../constants';
+import {
+    Clock,
+    Timer,
+    ReadingTracker,
+} from "../Widgets"
 
 const Home = () => {
     const isDesktopWidth = useMediaQuery('(min-width: 815px)');
@@ -44,7 +49,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
+                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock/></WidgetPreview>
                 </Grid>
                 
                 <Grid
@@ -56,7 +61,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer/></WidgetPreview>
                 </Grid>
 
                 <Grid
@@ -68,7 +73,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-start" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
+                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker/></WidgetPreview>
                 </Grid>
                 
             </Grid>
