@@ -19,14 +19,17 @@ const H2 = styled.h2`
     font-weight: 500;
 `
 
-const Clock = () => {
+const Clock = (props) => {
     const { observe, width, height } = useDimensions();
     const [date, setDate] = useState();
     const [time, setTime] = useState();
     var query = useQuery();
 
     const setTimeInfo = () => {
-        if (query.has("timezone")) {
+        if (props.preview) {
+            setDate("Tuesday, March 12");
+            setTime("12:05 PM");
+        } else if (query.has("timezone")) {
             setDate(moment.tz(query.get("timezone")).format("dddd, MMMM Do"));
             setTime(moment.tz(query.get("timezone")).format("hh:mm A"));
         } else {
@@ -37,10 +40,14 @@ const Clock = () => {
 
     useEffect(() => {
         setTimeInfo();
-        const intervalId = setInterval(setTimeInfo, 1000);
-        return () => {
-            clearInterval(intervalId);
+        if (!props.preview) {
+            const intervalId = setInterval(setTimeInfo, 1000);
+            return () => {
+                clearInterval(intervalId);
+            }
         }
+
+        return () => {}; 
     }, [query]);
 
 

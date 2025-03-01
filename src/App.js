@@ -18,7 +18,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/Pomodoro-Timer" element={<Timer />} />
+      <Route path="/Pomodoro-Timer" element={<Timer/>} />
       <Route path="/Reading-Tracker" element={<ReadingTracker/>} />
       <Route path="/Clock" element={<Clock/>} />
     </Routes>

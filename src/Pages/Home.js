@@ -49,7 +49,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock/></WidgetPreview>
+                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
                 </Grid>
                 
                 <Grid
@@ -61,7 +61,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer/></WidgetPreview>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
                 </Grid>
 
                 <Grid
