@@ -138,7 +138,7 @@ const ReadingTracker = () => {
                                     </Stack>
 
                                     <Stack
-                                        direction="horizontal"
+                                        direction="row"
                                         sx={{
                                             alignSelf: "start",
                                             width: "100%",
@@ -165,7 +165,7 @@ const ReadingTracker = () => {
                                     {
                                         !isView &&
                                         <Stack
-                                            direction="horizontal"
+                                            direction="row"
                                             sx={{
                                                 justifyContent: "center",
                                                 gap: "5px",

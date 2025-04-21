@@ -25,23 +25,29 @@ import {
 } from "../assets/icons/x-lg.svg"
 
 
-const MenuIcon = styled(ListIcon)`
-    fill: ${DARK_GREEN};
-    height: 32px;
-    width: 32px;
-    margin-left: auto;  
-    flex-shrink: 0; 
-    rotate: ${(props) => props.isOpen ? "-90deg" : "0deg"};
-    transition: rotate 0.5s ease;
+const MenuIcon = styled(ListIcon,
+    {
+        shouldForwardProp: (prop) => prop !== "isOpen"
+    })` 
+        fill: ${DARK_GREEN};
+        height: 32px;
+        width: 32px;
+        margin-left: auto;  
+        flex-shrink: 0; 
+        rotate: ${props =>  props.isOpen ? "-90deg" : "0deg"};
+        transition: rotate 0.5s ease;
 `;
 
-const CloseIcon = styled(XIcon)`
+const CloseIcon = styled(XIcon,
+    {
+        shouldForwardProp: (prop) => prop !== "isOpen"
+    })`
     fill: ${DARK_GREEN};
     height: 30px;
     width: 30px;
     margin-left: auto;
     margin-bottom: 70px;
-    rotate: ${(props) => props.isOpen ? "-90deg" : "0deg"};
+    rotate: ${props =>  props.isOpen ? "-90deg" : "0deg"};
     transition: rotate 0.5s ease;
 `;
 

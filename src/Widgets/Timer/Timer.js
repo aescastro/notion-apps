@@ -30,7 +30,7 @@ const timeCss = {
     lineHeight: "normal",
 };
 
-const Grid = styled.div(({containerHeight, containerWidth}) => ({
+const Grid = styled.div(({containerheight, containerwidth}) => ({
     display: "grid",
     justifyContent: "center",
     alignItems: "center",
@@ -42,29 +42,29 @@ const Grid = styled.div(({containerHeight, containerWidth}) => ({
     borderRadius: "15px",
     padding: "5%",
     height: "100%",
-    right: `min(calc(0.05 * ${containerHeight}px), calc(0.05 * ${containerWidth}px))`,
+    right: `min(calc(0.05 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
 }));
 
-const Button = styled.button(({ query, gridCol, containerHeight, containerWidth }) => ({
+const Button = styled.button(({ query, gridCol, containerheight, containerwidth }) => ({
     backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
     color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
     borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-    fontSize: `min(calc(0.06 * ${containerHeight}px), calc(0.06 * ${containerWidth}px))`,
+    fontSize: `min(calc(0.06 * ${containerheight}px), calc(0.06 * ${containerwidth}px))`,
     gridRow: "3 / span 1",
     borderRadius: "4px",
     borderWidth: "1px",
-    padding: `min(calc(0.03 * ${containerHeight}px), calc(0.03 * ${containerWidth}px)) 0`,
+    padding: `min(calc(0.03 * ${containerheight}px), calc(0.03 * ${containerwidth}px)) 0`,
     cursor: "pointer",
     gridColumnStart: gridCol,
 }));
 
-const WorkIcon = styled(WIcon)(({containerHeight, containerWidth}) => ({
+const WorkIcon = styled(WIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.175 * ${containerHeight}px), calc(0.175 * ${containerWidth}px))`,
+    height: `min(calc(0.175 * ${containerheight}px), calc(0.175 * ${containerwidth}px))`,
 }));
-const BreakIcon = styled(BIcon)(({containerHeight, containerWidth}) => ({
+const BreakIcon = styled(BIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.175 * ${containerHeight}px), calc(0.175 * ${containerWidth}px))`,
+    height: `min(calc(0.175 * ${containerheight}px), calc(0.175 * ${containerwidth}px))`,
 }));
 
 const TimerState = {
@@ -268,21 +268,21 @@ function Timer(props) {
                 }}
             >
                 <Grid
-                    containerHeight={height}
-                    containerWidth={width}
+                    containerheight={height}
+                    containerwidth={width}
                 >
                     {
                         state === TimerState.work ?
                             <WorkIcon 
                                 onClick={changeState} 
-                                containerHeight={height}
-                                containerWidth={width}
+                                containerheight={height}
+                                containerwidth={width}
                             />
                             :
                             <BreakIcon 
                                 onClick={changeState} 
-                                containerHeight={height}
-                                containerWidth={width}
+                                containerheight={height}
+                                containerwidth={width}
                             />
                     }
 
@@ -336,8 +336,8 @@ function Timer(props) {
                         onClick={runTimer}
                         query={query}
                         gridCol={2}
-                        containerHeight={height}
-                        containerWidth={width}
+                        containerheight={height}
+                        containerwidth={width}
                         disabled={props.preview}
                     >
                         {running ? "Pause" : "Start"}
@@ -347,8 +347,8 @@ function Timer(props) {
                         onClick={cancelTimer}
                         query={query}
                         gridCol={4}
-                        containerHeight={height}
-                        containerWidth={width}
+                        containerheight={height}
+                        containerwidth={width}
                         disabled={props.preview}
                     >
                         Cancel
