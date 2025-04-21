@@ -9,10 +9,15 @@ import {
     WidgetPreview,
     MobileHeader,
 } from '../components';
-import { MAIN_BACKGROUND_COLOUR } from '../constants';
+import {
+    Clock,
+    Timer,
+    ReadingTracker,
+} from "../Widgets"
+import { MAIN_BACKGROUND_COLOUR, theme } from '../constants';
 
 const Home = () => {
-    const isDesktopWidth = useMediaQuery('(min-width: 815px)');
+    const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const isSmallHeight = useMediaQuery('(max-height: 725px)');
 
     return (
@@ -44,7 +49,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"/>
+                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
                 </Grid>
                 
                 <Grid
@@ -56,7 +61,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"/>
+                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
                 </Grid>
 
                 <Grid
@@ -68,7 +73,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-start" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"/>
+                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker/></WidgetPreview>
                 </Grid>
                 
             </Grid>

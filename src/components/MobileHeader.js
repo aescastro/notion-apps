@@ -4,9 +4,9 @@ import {
     Stack,
     Box,
     Link as MuiLink,
+    useMediaQuery,
 } from "@mui/material";
 import styled from "@emotion/styled"
-import { Textfit } from "react-textfit";
 
 import {
     Button,
@@ -24,20 +24,6 @@ import {
     ReactComponent as XIcon
 } from "../assets/icons/x-lg.svg"
 
-
-const Title = styled(Textfit)`
-    color: ${DARK_GREEN};
-    font-family: "Josefin Sans";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    flex-grow: 1;
-    flex-shrink: 1;
-    height: 100%;
-    align-content: center; 
-    text-decoration: none;
-`;
 
 const MenuIcon = styled(ListIcon)`
     fill: ${DARK_GREEN};
@@ -73,12 +59,16 @@ const MenuText = styled.span`
 `;
 
 const MobileHeader = () => {
+    const isRegularWidth= useMediaQuery("(min-width: 372px)");
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <Box
             sx={{
                 position: "relative",
+                top: 0,
+                width: "100%",
+                zIndex: 3,
             }}
         >
             <Stack
@@ -91,13 +81,28 @@ const MobileHeader = () => {
                     gap: "7px",
                     position: "relative",
                     overflow: "hidden",
+
                 }}
             >
                 <MuiLink as={Link} to={LINKS.HOME} underline="none">
-                    <Title>
+                    <Box
+                        sx={{                  
+                            color: DARK_GREEN,
+                            fontFamily: "Josefin Sans",
+                            fontSize: isRegularWidth ? "32px" : "27px",
+                            fontStyle: "normal",
+                            fontWeight: "400",
+                            lineHeight: "normal",
+                            flexGrow: "1",
+                            flexShrink: "1",
+                            height: "100%",
+                            alignContent: "center",
+                            textDecoration: "none",
+                        }}
+                    >
 
                         adri's notion widgets
-                    </Title>
+                    </Box>
                 </MuiLink>
 
                 <MenuIcon onClick={() => setIsOpen(true)} isOpen={isOpen} />
@@ -116,7 +121,6 @@ const MobileHeader = () => {
                     transform: `translateX(${isOpen ? "-100%" : "0"})`,
                     transition: "transform 0.5s ease",
                     padding: "21px 18px",
-                    zIndex: 3,
                 }}
             >
                 <CloseIcon onClick={() => setIsOpen(false)} isOpen={isOpen} />

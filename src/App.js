@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 
 import { ReadingTracker, Timer, Clock } from './Widgets';
-import { Home } from './Pages';
+import { Home, AboutUs, Contact } from './Pages';
 import { setBackgroundColour, useDarkLightSwitcher } from './utils';
+import { LINKS } from './constants'
 
 function App() {
   const isDarkMode = useDarkLightSwitcher();
@@ -18,9 +19,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/Pomodoro-Timer" element={<Timer />} />
+      <Route path="/Pomodoro-Timer" element={<Timer/>} />
       <Route path="/Reading-Tracker" element={<ReadingTracker/>} />
       <Route path="/Clock" element={<Clock/>} />
+      <Route path={LINKS.ABOUT} element={<AboutUs/>}/>
+      <Route path={LINKS.CONTACT} element={<Contact/>}/>
     </Routes>
   );
 }

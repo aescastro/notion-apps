@@ -73,7 +73,7 @@ const TimerState = {
     longBreak: "longBreak"
 };
 
-function Timer() {
+function Timer(props) {
     const { observe, width, height } = useDimensions();
 
     const [minutes, setMinutes] = useState();
@@ -158,7 +158,7 @@ function Timer() {
 
         var stored = new Date(parseInt(window.localStorage.getItem("created")));
         var storedToday = stored && stored.getDate() === created.getDate() && stored.getMonth() === created.getMonth() && stored.getFullYear() === created.getFullYear();
-        if (storedToday) {
+        if (storedToday && !props.preview) {
             let minutes = parseInt(window.localStorage.getItem("minutes"));
             let seconds = parseInt(window.localStorage.getItem("seconds"));
             let sessions = parseInt(window.localStorage.getItem("sessions"));
@@ -338,6 +338,7 @@ function Timer() {
                         gridCol={2}
                         containerHeight={height}
                         containerWidth={width}
+                        disabled={props.preview}
                     >
                         {running ? "Pause" : "Start"}
                     </Button>
@@ -348,6 +349,7 @@ function Timer() {
                         gridCol={4}
                         containerHeight={height}
                         containerWidth={width}
+                        disabled={props.preview}
                     >
                         Cancel
                     </Button>
