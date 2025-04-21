@@ -71,7 +71,7 @@ const MobileHeader = () => {
     return (
         <Box
             sx={{
-                position: "relative",
+                position: "fixed",
                 top: 0,
                 width: "100%",
                 zIndex: 3,
