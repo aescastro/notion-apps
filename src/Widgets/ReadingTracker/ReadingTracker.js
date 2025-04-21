@@ -129,7 +129,7 @@ const ReadingTracker = () => {
                                         <FormGroup>
                                             <Field
                                                 name="book"
-                                                error={!isView && formik.errors.book}
+                                                error={!isView && formik.errors.book != undefined}
                                                 helperText={formik.errors.book}
                                                 isView={isView}
                                             />
@@ -185,7 +185,7 @@ const ReadingTracker = () => {
                                                 <Field
                                                     name="currentPage"
                                                     isView={isView}
-                                                    error={!isView && formik.errors.currentPage}
+                                                    error={!isView && formik.errors.currentPage != undefined}
                                                     helperText={formik.errors.currentPage}
                                                 />
                                             </FormGroup>
@@ -200,7 +200,7 @@ const ReadingTracker = () => {
                                                 <Field
                                                     name="totalPages"
                                                     isView={isView}
-                                                    error={!isView && formik.errors.totalPages}
+                                                    error={!isView && formik.errors.totalPages != undefined}
                                                     helperText={formik.errors.totalPages}
                                                 />
                                             </FormGroup>
