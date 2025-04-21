@@ -6,6 +6,7 @@ const Button = (props) => {
     return (
         <MuiButton
             onClick={props.onClick}
+            type={props.type}
             sx={{
                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 borderRadius: "10px",
@@ -15,6 +16,7 @@ const Button = (props) => {
                 fontWeight: 400,
                 color: DARK_GREEN,
                 width: "fit-content",
+                backgroundColor: LIGHT_GREEN,
                 padding: "5px 10px",
                 "&:hover": {
                     backgroundColor: DARK_GREEN,

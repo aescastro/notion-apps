@@ -26,6 +26,8 @@ const Header = () => {
                 cursor: "default",
                 flexGrow: 0,
                 zIndex: 3,
+                position: "sticky",
+                top: 0,
             }} 
         >
             <Stack

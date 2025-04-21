@@ -9,15 +9,15 @@ import {
     WidgetPreview,
     MobileHeader,
 } from '../components';
-import { MAIN_BACKGROUND_COLOUR } from '../constants';
 import {
     Clock,
     Timer,
     ReadingTracker,
 } from "../Widgets"
+import { MAIN_BACKGROUND_COLOUR, theme } from '../constants';
 
 const Home = () => {
-    const isDesktopWidth = useMediaQuery('(min-width: 815px)');
+    const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const isSmallHeight = useMediaQuery('(max-height: 725px)');
 
     return (
