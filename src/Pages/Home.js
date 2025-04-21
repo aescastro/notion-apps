@@ -36,7 +36,7 @@ const Home = () => {
                 spacing={isDesktopWidth ? "50px" : "0px"}
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "50px" : "108px",
+                    padding: isDesktopWidth ? "50px" : "108px 20px 20px 20px",
                     flexGrow: 1,
                 }}
             >
