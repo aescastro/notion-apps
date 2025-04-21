@@ -104,6 +104,7 @@ const WidgetPreview = ({children, href, title, subtitle}) => {
                         maxHeight: "90px",
                         padding: "21px",
                         flexGrow: 0,
+                        marginTop: "auto",
                     }}
                 >
                     <Title>{title}</Title>
