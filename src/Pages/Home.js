@@ -26,7 +26,7 @@ const Home = () => {
             height={isDesktopWidth ? isSmallHeight ? "fit-content" : "100vh" : "1000px"}
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflow: isDesktopWidth ? "visible" : "hidden",
+                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {isDesktopWidth ? <Header/> : <MobileHeader/>}
@@ -36,7 +36,7 @@ const Home = () => {
                 spacing={isDesktopWidth ? "50px" : "0px"}
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "50px" : "20px",
+                    padding: isDesktopWidth ? "50px" : "108px 20px 20px 20px",
                     flexGrow: 1,
                 }}
             >

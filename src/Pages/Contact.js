@@ -87,7 +87,7 @@ const Contact = () => {
             height="max-content"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflow: isDesktopWidth ? "visible" : "hidden",
+                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {
@@ -95,7 +95,7 @@ const Contact = () => {
             }
             <Stack
                 sx={{
-                    padding: "60px 75px",
+                    padding: isDesktopWidth ? "60px 75px" : "148px 50px 60px 50px",
                     gap: "15px",
                     flexGrow: 1,
                 }}
@@ -149,7 +149,7 @@ const Contact = () => {
                                                 as={TextField}
                                                 name="name"
                                                 label="Name"
-                                                error={formik.touched.name && formik.errors.name}
+                                                error={formik.touched.name && formik.errors.name !== undefined}
                                                 helperText={formik.touched.name && formik.errors.name ? formik.errors.name : ""}
                                             />
 
@@ -157,7 +157,7 @@ const Contact = () => {
                                                 as={TextField}
                                                 name="email"
                                                 label="Email *"
-                                                error={formik.touched.email && formik.errors.email}
+                                                error={formik.touched.email && formik.errors.email !== undefined}
                                                 helperText={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
                                             />
 
@@ -167,7 +167,7 @@ const Contact = () => {
                                                 as={TextField}
                                                 name="message"
                                                 label="Message *"
-                                                error={formik.touched.message && formik.errors.message}
+                                                error={formik.touched.message && formik.errors.message !== undefined}
                                                 helperText={formik.touched.message && formik.errors.message ? formik.errors.message : ""}
                                             />
 
