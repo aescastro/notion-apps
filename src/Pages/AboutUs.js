@@ -33,7 +33,7 @@ const AboutUs = () => {
             height="max-content"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflow: isDesktopWidth ? "visible" : "hidden",
+                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {
