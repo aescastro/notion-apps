@@ -1,8 +1,6 @@
 import {
     Stack,
     useMediaQuery,
-    FormControl,
-    TextField,
 } from "@mui/material";
 
 import styled from "@emotion/styled";
@@ -41,7 +39,7 @@ const AboutUs = () => {
             }
             <Stack
                 sx={{
-                    padding: "60px 100px",
+                    padding: isDesktopWidth ? "60px 75px" : "148px 50px 60px 50px",
                     gap: "30px",
                     flexGrow: 1,
                 }}
