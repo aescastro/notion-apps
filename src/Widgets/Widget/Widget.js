@@ -15,7 +15,8 @@ import {
 
 export const Widget = (props) => {
     const query = useQuery();
-    const location = useLocation();
+    const location = useLocation().pathname.split("/")[1];
+    console.log(location)
     const font = query.get("fontType"); 
     const [bg, setBg] = useState("");
     const [fontColour, setFontColour] = useState("");
@@ -44,8 +45,8 @@ export const Widget = (props) => {
         <Box
             sx={{
                 //TODO: Change this
-                width: location.pathname == LINKS.HOME ? "100%" : "100vw",
-                height: location.pathname == LINKS.HOME ? "100%" : "100vh",
+                width: location === "" || location === "builder" ? "100%" : "100vw",
+                height: location === "" || location === "builder" ? "100%" : "100vh",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",

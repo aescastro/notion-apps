@@ -51,7 +51,7 @@ const readingSchema = object({
     }),
 });
 
-const ReadingTracker = () => {
+const ReadingTracker = ({preview}) => {
     const [isView, setIsView] = useState(true);
     const [values, setValues] = useState(() => {
         const savedBook = localStorage.getItem("book");
@@ -155,7 +155,7 @@ const ReadingTracker = () => {
                                         />
                                         <Button
                                             type="submit"
-                                            disabled={!formik.isValid}
+                                            disabled={!formik.isValid || preview}
                                             onClick={() => setIsView(!isView)}
                                         >
                                             {isView ? "Edit" : "Save"}
