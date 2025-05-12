@@ -72,10 +72,11 @@ const Builder = () => {
             <Stack
                 sx={{
                     width: isDesktopWidth ? "50%" : "100%",
-                    height: "100%",
+                    height: "auto",
                     backgroundColor: MAIN_BACKGROUND_COLOUR,
                     justifyContent: "center",
                     alignItems: "center",
+                    marginBottom: "10px",
                 }}>
                 <MuiLink
                     as={Link}
@@ -84,8 +85,8 @@ const Builder = () => {
                     sx={{
                         color: "#000",
                         position: "absolute",
-                        top: "20px",
-                        left: "10px",
+                        top: isDesktopWidth ? "20px" : "12px",
+                        left: isDesktopWidth ? "10px" : "5px",
                         width: "fit-content",
                     }}>
                     <ChevronIcon height="37px" width="32px" />
@@ -93,21 +94,24 @@ const Builder = () => {
                 <Stack
                     sx={{
                         alignItems: "center",
-                        height: "100%",
+                        height: isDesktopWidth ? "100%" : "auto",
+                        margin: isDesktopWidth ? "0px" : "52px 0 22px 0",
                         padding: isDesktopWidth ? "40px 0px" : "30px",
                         justifyContent: "center",
                         alignItems: "center",
+                        maxWidth: isDesktopWidth ? "50vw" : "80vw",
+                        padding: isDesktopWidth ? "0 50px" : "0px",
+            
                     }}
                 >
                     <Box
                         sx={{
-                            height: isDesktopWidth ? "30vh" : "60%",
+                            width: "100%",
                             aspectRatio: "438/330",
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
                             borderRadius: "10px",
                             border: "1px solid #000",
-                            maxHeight: "calc((50vw - 50px) * 330 / 438)",
                         }}>
                         {
                             widget === "clock" ? <Clock preview />
@@ -132,8 +136,7 @@ const Builder = () => {
                         sx={{
                             marginTop: isDesktopWidth ? "auto" : "20px",
                             height: isDesktopWidth ? "55px" : "38px",
-                            width: "40vh",
-                            maxWidth: "calc(50vw - 50px)",
+                            width: "100%",
                             borderRadius: "10px",
                             border: "1px solid rgb(0, 0, 0)",
                             background: "#FFF",
@@ -216,6 +219,7 @@ const Builder = () => {
                             fontWeight: 500,
                             lineHeight: "normal",
                             marginTop: "5px",
+                            marginBottom: isDesktopWidth ? "15px" : "0px",
                         }}
                     >
                         paste this link into your Notion page and click “Embed”
