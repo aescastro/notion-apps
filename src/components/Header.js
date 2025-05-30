@@ -64,7 +64,7 @@ const Header = () => {
                     </Box>
                 </MuiLink>
 
-                <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
+                {/* <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
                     <Box
                         sx={{
                             fontSize: "24px",
@@ -76,7 +76,7 @@ const Header = () => {
                     >
                         about
                     </Box>    
-                </MuiLink>            
+                </MuiLink>             */}
             </Stack> 
 
             <MuiLink as={Link} to={LINKS.CONTACT} underline="none">
