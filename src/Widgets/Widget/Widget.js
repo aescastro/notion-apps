@@ -6,7 +6,6 @@ import { Box } from '@mui/material';
 import { 
     NOTION_FONTS, 
     NOTION_BACKGROUNDS,
-    LINKS,
 } from "../../constants"
 import { 
     useDarkLightSwitcher, 
@@ -16,7 +15,6 @@ import {
 export const Widget = (props) => {
     const query = useQuery();
     const location = useLocation().pathname.split("/")[1];
-    console.log(location)
     const font = query.get("fontType"); 
     const [bg, setBg] = useState("");
     const [fontColour, setFontColour] = useState("");

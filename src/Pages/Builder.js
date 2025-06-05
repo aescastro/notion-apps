@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
     Box,
@@ -15,6 +15,9 @@ import {
     DARK_GREEN,
     theme,
 } from '../constants';
+import {
+    ColorPicker,
+} from '../components';
 import {
     ReactComponent as ChevronIcon
 } from "../assets/icons/chevron-left.svg";
@@ -76,7 +79,6 @@ const Builder = () => {
                     backgroundColor: MAIN_BACKGROUND_COLOUR,
                     justifyContent: "center",
                     alignItems: "center",
-                    marginBottom: "10px",
                 }}>
                 <MuiLink
                     as={Link}
@@ -96,12 +98,12 @@ const Builder = () => {
                         alignItems: "center",
                         height: isDesktopWidth ? "100%" : "auto",
                         margin: isDesktopWidth ? "0px" : "52px 0 22px 0",
-                        padding: isDesktopWidth ? "40px 0px" : "30px",
+                        // padding: isDesktopWidth ? "40px 0px" : "30px",
                         justifyContent: "center",
                         alignItems: "center",
                         maxWidth: isDesktopWidth ? "50vw" : "80vw",
                         padding: isDesktopWidth ? "0 50px" : "0px",
-            
+
                     }}
                 >
                     <Box
@@ -193,20 +195,20 @@ const Builder = () => {
                                 horizontal: 'center',
                             }}
                             slotProps={{
-                                    "paper": {
-                                        sx: {
-                                            padding: "5px"
-                                        }
+                                "paper": {
+                                    sx: {
+                                        padding: "5px"
                                     }
                                 }
+                            }
                             }
                             sx={{
                                 fontFamily: "Josefin Sans",
                                 fontSize: isDesktopWidth ? "14px" : "11px",
                             }}
                         >
-                            
-                                Copied!
+
+                            Copied!
                         </Popover>
                     </Stack>
                     <Box
@@ -236,6 +238,14 @@ const Builder = () => {
                     flexGrow: 0,
                 }}
             >
+                <ColorPicker
+                    label="Background Colour"
+                    name="bgColour"
+                    controls={{
+                        "disabled": false,
+                        "readOnly": false,
+                        "closeOnSelect": false,
+                    }} />
             </Stack>
         </Stack>
     );
