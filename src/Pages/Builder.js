@@ -6,8 +6,17 @@ import {
     Stack,
     Link as MuiLink,
     Popover,
+    FormControl,
+    FormLabel,
+    FormHelperText,
     useMediaQuery,
 } from '@mui/material';
+import {
+    Formik,
+    Field,
+    Form,
+} from "formik";
+import * as Yup from "yup";
 
 import {
     MAIN_BACKGROUND_COLOUR,
@@ -29,9 +38,48 @@ import {
     Timer,
     ReadingTracker,
 } from "../Widgets"
+import styled from '@emotion/styled';
+
+const StyledForm = styled(Form)(() => ({
+    width: "50%",
+    height: "100%",
+    backgroundColor: "white",
+    padding: "60px 50px",
+    gap: "15px",
+    flexGrow: 0,
+}))
+
+const validationSchema = Yup.object({
+    bgColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+    fontColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+    progressColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+    buttonBg: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+    buttonFontColour:Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+})
+
+const Select = styled.select(() => ({
+    backgroundColor: "#ffffff",
+    borderRadius: "4px",
+    boxShadow: "none",
+    borderWidth: "1px",
+    borderColor: "#EDF2F7",
+    borderStyle: "solid",
+    height: "40px",
+    fontSize: "0.875rem",
+    width: "calc(296px + 0.5rem)"
+}))
 
 const Builder = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
+    const initialValues = {
+        bgColour: "#ffffff",
+        fontColour: "#000000",
+        mode: "light",
+        fontType: "default",
+        progressColour: "#000000",
+        buttonBg: "#ffffff",
+        buttonFontColour: "#000000",
+    }
     const location = useLocation();
     const widget = location.pathname.split("/").pop();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -100,7 +148,6 @@ const Builder = () => {
                         margin: isDesktopWidth ? "0px" : "52px 0 22px 0",
                         // padding: isDesktopWidth ? "40px 0px" : "30px",
                         justifyContent: "center",
-                        alignItems: "center",
                         maxWidth: isDesktopWidth ? "50vw" : "80vw",
                         padding: isDesktopWidth ? "0 50px" : "0px",
 
@@ -228,25 +275,170 @@ const Builder = () => {
                     </Box>
                 </Stack>
             </Stack>
-            <Stack
-                sx={{
-                    width: "50%",
-                    height: "100%",
-                    backgroundColor: "white",
-                    padding: "60px 50px",
-                    gap: "15px",
-                    flexGrow: 0,
-                }}
+
+            <Formik
+                initialValues={initialValues}
             >
-                <ColorPicker
-                    label="Background Colour"
-                    name="bgColour"
-                    controls={{
-                        "disabled": false,
-                        "readOnly": false,
-                        "closeOnSelect": false,
-                    }} />
-            </Stack>
+                {
+                    formik => (
+                        <StyledForm
+                            validationSchema={validationSchema}
+                        >
+                            <Stack
+                                gap="15px"
+                            >
+                                <FormControl>
+                                    <FormLabel>Background Colour</FormLabel>
+                                    <Field
+                                        as={ColorPicker}
+                                        label="Background Colour"
+                                        name="bgColour"
+                                        defaultValue="#FFFFFF"
+                                        controls={{
+                                            "disabled": false,
+                                            "readOnly": false,
+                                            "closeOnSelect": false,
+                                        }}
+                                    />
+                                    {
+                                        formik.errors.bgColour &&
+                                        <FormHelperText
+                                            error
+                                        >
+                                            Invalid colour
+                                        </FormHelperText>
+                                    }
+
+                                </FormControl>
+
+                                <FormControl>
+                                    <FormLabel>Font Colour</FormLabel>
+                                    <Field
+                                        as={ColorPicker}
+                                        name="fontColour"
+                                        defaultValue="#000000"
+                                        controls={{
+                                            "disabled": false,
+                                            "readOnly": false,
+                                            "closeOnSelect": false,
+                                        }}
+                                    />
+                                    {
+                                        formik.errors.fontColour &&
+                                        <FormHelperText
+                                            error
+                                        >
+                                            Invalid colour
+                                        </FormHelperText>
+                                    }
+                                </FormControl>
+
+                                <FormControl>
+                                    <FormLabel>Font Type</FormLabel>
+                                    <Field
+                                        as={Select}
+                                        name="fontType"
+                                    >
+                                        <option value="default">Default</option>
+                                        <option value="serif">Serif</option>
+                                        <option value="mono">Mono</option>
+                                    </Field>
+                                </FormControl>
+
+                                {
+                                    widget === "pomodoro-timer" &&
+                                    <>
+                                        <FormControl>
+                                            <FormLabel>Button Background Colour</FormLabel>
+                                            <Field
+                                                as={ColorPicker}
+                                                name="buttonBg"
+                                                defaultValue="#000000"
+                                                controls={{
+                                                    "disabled": false,
+                                                    "readOnly": false,
+                                                    "closeOnSelect": false,
+                                                }}
+                                            />
+                                            {
+                                                formik.errors.buttonBg &&
+                                                <FormHelperText
+                                                    error
+                                                >
+                                                    Invalid colour
+                                                </FormHelperText>
+                                            }
+                                        </FormControl>
+
+                                        <FormControl>
+                                            <FormLabel>Button Font Colour</FormLabel>
+                                            <Field
+                                                as={ColorPicker}
+                                                name="buttonFontColour"
+                                                defaultValue="#000000"
+                                                controls={{
+                                                    "disabled": false,
+                                                    "readOnly": false,
+                                                    "closeOnSelect": false,
+                                                }}
+                                            />
+                                            {
+                                                formik.errors.buttonFontColour &&
+                                                <FormHelperText
+                                                    error
+                                                >
+                                                    Invalid colour
+                                                </FormHelperText>
+                                            }
+                                        </FormControl>
+                                    </>
+                                }
+
+                                {
+                                    widget === "reading-tracker" &&
+                                    <FormControl>
+                                        <FormLabel>Progress Colour</FormLabel>
+                                        <Field
+                                            as={ColorPicker}
+                                            name="progressColour"
+                                            defaultValue="#000000"
+                                            controls={{
+                                                "disabled": false,
+                                                "readOnly": false,
+                                                "closeOnSelect": false,
+                                            }}
+                                        />
+                                        {
+                                            formik.errors.progressColour &&
+                                            <FormHelperText
+                                                error
+                                            >
+                                                Invalid colour
+                                            </FormHelperText>
+                                        }
+                                    </FormControl>
+                                }
+
+                                <FormControl>
+                                    <FormLabel>Light/Dark Mode</FormLabel>
+                                    <Field
+                                        as={Select}
+                                        name="mode"
+                                    >
+                                        <option value="light">Light</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="system">System</option>
+                                    </Field>
+                                </FormControl>
+
+                            </Stack>
+                        </StyledForm>
+                    )
+                }
+
+            </Formik>
+
+
         </Stack>
     );
 }

@@ -3,13 +3,17 @@ import { Portal, normalizeProps, useMachine } from "@zag-js/react"
 import { useId } from "react"
 import "./ColourPicker.css"
 
+const Show = (props) => {
+  const { when, children } = props
+  return when ? <>{children}</> : null
+}
 
 export default function ColorPicker(props) {
   const service = useMachine(colorPicker.machine, {
     id: useId(),
-    defaultValue: colorPicker.parse("#38a169").toFormat("hsla"),
+    defaultValue: colorPicker.parse(props.defaultValue).toFormat("rgba"),
     ...props.controls,
-    format: "hsla",
+    format: "rgba",
     name: props.name,
   })
 
@@ -17,9 +21,9 @@ export default function ColorPicker(props) {
 
   return (
     <div id="picker" {...api.getRootProps()}>
-      <label {...api.getLabelProps()}>
+      {/* <label {...api.getLabelProps()}>
         <span>{props.label}</span>
-      </label>
+      </label> */}
 
       <div {...api.getControlProps()}>
         <div>
@@ -63,7 +67,8 @@ export default function ColorPicker(props) {
                 </div>
               </div>
 
-              
+
+              <Show when={api.format.startsWith("rgb")}>
                 <div>
                   <div>
                     <input {...api.getChannelInputProps({ channel: "red" })} />
@@ -86,7 +91,9 @@ export default function ColorPicker(props) {
                     <span>A</span>
                   </div>
                 </div>
+              </Show>
 
+              
             </div>
           </div>
         </div>
