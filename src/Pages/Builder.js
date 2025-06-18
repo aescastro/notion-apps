@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
     Box,
@@ -12,9 +12,7 @@ import {
     useMediaQuery,
 } from '@mui/material';
 import {
-    Formik,
-    Field,
-    Form,
+    useFormik,
 } from "formik";
 import * as Yup from "yup";
 
@@ -40,22 +38,13 @@ import {
 } from "../Widgets"
 import styled from '@emotion/styled';
 
-const StyledForm = styled(Form)(() => ({
-    width: "50%",
-    height: "100%",
-    backgroundColor: "white",
-    padding: "60px 50px",
-    gap: "15px",
-    flexGrow: 0,
-}))
-
-const validationSchema = Yup.object({
-    bgColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-    fontColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-    progressColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-    buttonBg: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-    buttonFontColour:Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-})
+// const validationSchema = Yup.object({
+//     bgColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+//     fontColour: Yup.string(),
+//     progressColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+//     buttonBg: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+//     buttonFontColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
+// })
 
 const Select = styled.select(() => ({
     backgroundColor: "#ffffff",
@@ -71,21 +60,23 @@ const Select = styled.select(() => ({
 
 const Builder = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
-    const initialValues = {
-        bgColour: "#ffffff",
-        fontColour: "#000000",
-        mode: "light",
-        fontType: "default",
-        progressColour: "#000000",
-        buttonBg: "#ffffff",
-        buttonFontColour: "#000000",
-    }
+    const formik = useFormik({
+        initialValues: {
+            bgColour: "#ffffff",
+            fontColour: "#000000",
+            mode: "light",
+            fontType: "default",
+            progressColour: "#000000",
+            buttonBg: "#ffffff",
+            buttonFontColour: "#000000",
+        },
+    })
     const location = useLocation();
     const widget = location.pathname.split("/").pop();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
-    const [widgetUrl, setWidgetUrl] = useState(() => {
+    const [baseUrl] = useState(() => {
         switch (widget) {
             case "clock":
                 return "https://aescastro.github.io/notion-apps/#/Clock"
@@ -97,7 +88,25 @@ const Builder = () => {
                 return "";
         }
     });
+    const [widgetUrl, setWidgetUrl] = useState(baseUrl);
 
+    useEffect(() => {
+        var nextUrl = baseUrl + `?bg=${formik.values.bgColour}&fontColour=${formik.values.fontColour}&fontType=${formik.values.fontType}&mode=${formik.values.mode}`;
+
+        switch (widget) {
+            case "reading-tracker":
+                nextUrl += `&progressColour=${formik.values.progressColour}`
+                break;
+            case "pomodoro-timer":
+                nextUrl += `&buttonBg=${formik.values.buttonBg}&buttonFontColour=${formik.values.buttonFontColour}`
+                break;
+            default:
+                break;
+
+        }
+
+        setWidgetUrl(nextUrl)
+    }, [formik.values, baseUrl])
 
     const handleClick = (event) => {
         navigator.clipboard.writeText(widgetUrl)
@@ -276,170 +285,161 @@ const Builder = () => {
                 </Stack>
             </Stack>
 
-            <Formik
-                initialValues={initialValues}
+            <Stack
+                gap="15px"
+                sx={{
+                    width: "50%",
+                    height: "100%",
+                    backgroundColor: "white",
+                    padding: "60px 50px",
+                    gap: "15px",
+                    flexGrow: 0,
+                }}
             >
-                {
-                    formik => (
-                        <StyledForm
-                            validationSchema={validationSchema}
+                <FormControl>
+                    <FormLabel>Background Colour</FormLabel>
+                    <ColorPicker
+                        label="Background Colour"
+                        name="bgColour"
+                        defaultValue="#FFFFFF"
+                        setFieldValue={formik.setFieldValue}
+                        value={formik.values.bgColour}
+                        type="color"
+                    />
+                    {
+                        formik.errors.bgColour &&
+                        <FormHelperText
+                            error
                         >
-                            <Stack
-                                gap="15px"
-                            >
-                                <FormControl>
-                                    <FormLabel>Background Colour</FormLabel>
-                                    <Field
-                                        as={ColorPicker}
-                                        label="Background Colour"
-                                        name="bgColour"
-                                        defaultValue="#FFFFFF"
-                                        controls={{
-                                            "disabled": false,
-                                            "readOnly": false,
-                                            "closeOnSelect": false,
-                                        }}
-                                    />
-                                    {
-                                        formik.errors.bgColour &&
-                                        <FormHelperText
-                                            error
-                                        >
-                                            Invalid colour
-                                        </FormHelperText>
-                                    }
+                            Invalid colour
+                        </FormHelperText>
+                    }
 
-                                </FormControl>
+                </FormControl>
 
-                                <FormControl>
-                                    <FormLabel>Font Colour</FormLabel>
-                                    <Field
-                                        as={ColorPicker}
-                                        name="fontColour"
-                                        defaultValue="#000000"
-                                        controls={{
-                                            "disabled": false,
-                                            "readOnly": false,
-                                            "closeOnSelect": false,
-                                        }}
-                                    />
-                                    {
-                                        formik.errors.fontColour &&
-                                        <FormHelperText
-                                            error
-                                        >
-                                            Invalid colour
-                                        </FormHelperText>
-                                    }
-                                </FormControl>
+                <FormControl>
+                    <FormLabel>Font Colour</FormLabel>
+                    <ColorPicker
+                        name="fontColour"
+                        setFieldValue={formik.setFieldValue}
+                        value={formik.values.fontColour}
+                    />
+                    {
+                        formik.errors.fontColour &&
+                        <FormHelperText
+                            error
+                        >
+                            Invalid colour
+                        </FormHelperText>
+                    }
+                </FormControl>
 
-                                <FormControl>
-                                    <FormLabel>Font Type</FormLabel>
-                                    <Field
-                                        as={Select}
-                                        name="fontType"
-                                    >
-                                        <option value="default">Default</option>
-                                        <option value="serif">Serif</option>
-                                        <option value="mono">Mono</option>
-                                    </Field>
-                                </FormControl>
+                <FormControl>
+                    <FormLabel>Font Type</FormLabel>
+                    <Select
+                        name="fontType"
+                        onChange={formik.handleChange}
+                        value={formik.values.fontType}
+                    >
+                        <option value="default">Default</option>
+                        <option value="serif">Serif</option>
+                        <option value="mono">Mono</option>
+                    </Select>
+                </FormControl>
 
-                                {
-                                    widget === "pomodoro-timer" &&
-                                    <>
-                                        <FormControl>
-                                            <FormLabel>Button Background Colour</FormLabel>
-                                            <Field
-                                                as={ColorPicker}
-                                                name="buttonBg"
-                                                defaultValue="#000000"
-                                                controls={{
-                                                    "disabled": false,
-                                                    "readOnly": false,
-                                                    "closeOnSelect": false,
-                                                }}
-                                            />
-                                            {
-                                                formik.errors.buttonBg &&
-                                                <FormHelperText
-                                                    error
-                                                >
-                                                    Invalid colour
-                                                </FormHelperText>
-                                            }
-                                        </FormControl>
+                {
+                    widget === "pomodoro-timer" &&
+                    <>
+                        <FormControl>
+                            <FormLabel>Button Background Colour</FormLabel>
+                            <ColorPicker
+                                name="buttonBg"
+                                defaultValue="#000000"
+                                controls={{
+                                    "disabled": false,
+                                    "readOnly": false,
+                                    "closeOnSelect": false,
+                                }}
+                                setFieldValue={formik.setFieldValue}
+                                value={formik.values.buttonBg}
+                            />
+                            {
+                                formik.errors.buttonBg &&
+                                <FormHelperText
+                                    error
+                                >
+                                    Invalid colour
+                                </FormHelperText>
+                            }
+                        </FormControl>
 
-                                        <FormControl>
-                                            <FormLabel>Button Font Colour</FormLabel>
-                                            <Field
-                                                as={ColorPicker}
-                                                name="buttonFontColour"
-                                                defaultValue="#000000"
-                                                controls={{
-                                                    "disabled": false,
-                                                    "readOnly": false,
-                                                    "closeOnSelect": false,
-                                                }}
-                                            />
-                                            {
-                                                formik.errors.buttonFontColour &&
-                                                <FormHelperText
-                                                    error
-                                                >
-                                                    Invalid colour
-                                                </FormHelperText>
-                                            }
-                                        </FormControl>
-                                    </>
-                                }
-
-                                {
-                                    widget === "reading-tracker" &&
-                                    <FormControl>
-                                        <FormLabel>Progress Colour</FormLabel>
-                                        <Field
-                                            as={ColorPicker}
-                                            name="progressColour"
-                                            defaultValue="#000000"
-                                            controls={{
-                                                "disabled": false,
-                                                "readOnly": false,
-                                                "closeOnSelect": false,
-                                            }}
-                                        />
-                                        {
-                                            formik.errors.progressColour &&
-                                            <FormHelperText
-                                                error
-                                            >
-                                                Invalid colour
-                                            </FormHelperText>
-                                        }
-                                    </FormControl>
-                                }
-
-                                <FormControl>
-                                    <FormLabel>Light/Dark Mode</FormLabel>
-                                    <Field
-                                        as={Select}
-                                        name="mode"
-                                    >
-                                        <option value="light">Light</option>
-                                        <option value="dark">Dark</option>
-                                        <option value="system">System</option>
-                                    </Field>
-                                </FormControl>
-
-                            </Stack>
-                        </StyledForm>
-                    )
+                        <FormControl>
+                            <FormLabel>Button Font Colour</FormLabel>
+                            <ColorPicker
+                                name="buttonFontColour"
+                                defaultValue="#000000"
+                                controls={{
+                                    "disabled": false,
+                                    "readOnly": false,
+                                    "closeOnSelect": false,
+                                }}
+                                setFieldValue={formik.setFieldValue}
+                                value={formik.values.buttonFontColour}
+                            />
+                            {
+                                formik.errors.buttonFontColour &&
+                                <FormHelperText
+                                    error
+                                >
+                                    Invalid colour
+                                </FormHelperText>
+                            }
+                        </FormControl>
+                    </>
                 }
 
-            </Formik>
+                {
+                    widget === "reading-tracker" &&
+                    <FormControl>
+                        <FormLabel>Progress Colour</FormLabel>
+                        <ColorPicker
+                            name="progressColour"
+                            defaultValue="#000000"
+                            controls={{
+                                "disabled": false,
+                                "readOnly": false,
+                                "closeOnSelect": false,
+                            }}
+                            onChange={formik.handleChange}
+                            value={formik.values.progressColour}
+                        />
+                        {
+                            formik.errors.progressColour &&
+                            <FormHelperText
+                                error
+                            >
+                                Invalid colour
+                            </FormHelperText>
+                        }
+                    </FormControl>
+                }
 
+                <FormControl>
+                    <FormLabel>Light/Dark Mode</FormLabel>
+                    <Select
+                        name="mode"
+                        onChange={formik.handleChange}
+                        value={formik.values.mode}
+                    >
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="system">System</option>
+                    </Select>
+                </FormControl>
 
-        </Stack>
+            </Stack>
+
+        </Stack >
     );
 }
 
