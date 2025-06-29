@@ -4,7 +4,7 @@ import { Box, Button, Popover } from "@mui/material";
 
 export default function ColorPicker(props) {
   const [anchorEl, setAnchorEl] = useState(null)
-  const [color, setColor] = useState(props.value);
+  const [color, setColor] = useState(`#${props.value}`);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

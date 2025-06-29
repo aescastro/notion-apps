@@ -73,7 +73,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-start" : "center",
                     }}
                 >
-                    <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker/></WidgetPreview>
+                    <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker preview/></WidgetPreview>
                 </Grid>
                 
             </Grid>

@@ -14,13 +14,14 @@ import {
 import {
     useFormik,
 } from "formik";
-import * as Yup from "yup";
+import styled from '@emotion/styled';
 
 import {
     MAIN_BACKGROUND_COLOUR,
     LIGHT_GREEN,
     DARK_GREEN,
     theme,
+    NOTION_BACKGROUNDS,
 } from '../constants';
 import {
     ColorPicker,
@@ -36,7 +37,7 @@ import {
     Timer,
     ReadingTracker,
 } from "../Widgets"
-import styled from '@emotion/styled';
+import { useDarkLightSwitcher } from '../utils';
 
 // const validationSchema = Yup.object({
 //     bgColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
@@ -62,13 +63,13 @@ const Builder = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const formik = useFormik({
         initialValues: {
-            bgColour: "#ffffff",
-            fontColour: "#000000",
+            bgColour: "FFFFFF",
+            fontColour: "000000",
             mode: "light",
-            fontType: "default",
-            progressColour: "#000000",
-            buttonBg: "#ffffff",
-            buttonFontColour: "#000000",
+            fontType: "sans",
+            progressColour: "000000",
+            buttonBg: "FFFFFF",
+            buttonFontColour: "000000",
         },
     })
     const location = useLocation();
@@ -76,6 +77,8 @@ const Builder = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+    var isDarkMode = useDarkLightSwitcher("system");
+
     const [baseUrl] = useState(() => {
         switch (widget) {
             case "clock":
@@ -89,6 +92,10 @@ const Builder = () => {
         }
     });
     const [widgetUrl, setWidgetUrl] = useState(baseUrl);
+
+    useEffect(() => {
+        console.log(isDarkMode);
+    }, [isDarkMode])
 
     useEffect(() => {
         var nextUrl = baseUrl + `?bg=${formik.values.bgColour}&fontColour=${formik.values.fontColour}&fontType=${formik.values.fontType}&mode=${formik.values.mode}`;
@@ -106,7 +113,7 @@ const Builder = () => {
         }
 
         setWidgetUrl(nextUrl)
-    }, [formik.values, baseUrl])
+    }, [formik.values, baseUrl, widget])
 
     const handleClick = (event) => {
         navigator.clipboard.writeText(widgetUrl)
@@ -133,7 +140,7 @@ const Builder = () => {
                 sx={{
                     width: isDesktopWidth ? "50%" : "100%",
                     height: "auto",
-                    backgroundColor: MAIN_BACKGROUND_COLOUR,
+                    backgroundColor: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? NOTION_BACKGROUNDS.darkMode : "white",
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
@@ -142,7 +149,7 @@ const Builder = () => {
                     to="/"
                     underline="none"
                     sx={{
-                        color: "#000",
+                        color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "black",
                         position: "absolute",
                         top: isDesktopWidth ? "20px" : "12px",
                         left: isDesktopWidth ? "10px" : "5px",
@@ -172,9 +179,9 @@ const Builder = () => {
                             border: "1px solid #000",
                         }}>
                         {
-                            widget === "clock" ? <Clock preview />
-                                : widget === "pomodoro-timer" ? <Timer preview />
-                                    : widget === "reading-tracker" ? <ReadingTracker preview />
+                            widget === "clock" ? <Clock preview {...formik.values} />
+                                : widget === "pomodoro-timer" ? <Timer preview {...formik.values}/>
+                                    : widget === "reading-tracker" ? <ReadingTracker preview {...formik.values}/>
                                         : <Stack
                                             sx={{
                                                 width: "100%",
@@ -269,7 +276,7 @@ const Builder = () => {
                     </Stack>
                     <Box
                         sx={{
-                            color: "rgba(0, 0, 0, 0.64)",
+                            color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
                             textAlign: "center",
                             fontFamily: "Josefin Sans",
                             fontSize: isDesktopWidth ? "14px" : "11px",
@@ -285,17 +292,32 @@ const Builder = () => {
                 </Stack>
             </Stack>
 
+
             <Stack
                 gap="15px"
                 sx={{
-                    width: "50%",
+                    width: isDesktopWidth ? "50%" : "100%",
                     height: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: MAIN_BACKGROUND_COLOUR,
                     padding: "60px 50px",
                     gap: "15px",
                     flexGrow: 0,
                 }}
             >
+
+                <FormControl>
+                    <FormLabel>Light/Dark Mode</FormLabel>
+                    <Select
+                        name="mode"
+                        onChange={formik.handleChange}
+                        value={formik.values.mode}
+                    >
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="system">System</option>
+                    </Select>
+                </FormControl>
+
                 <FormControl>
                     <FormLabel>Background Colour</FormLabel>
                     <ColorPicker
@@ -341,7 +363,7 @@ const Builder = () => {
                         onChange={formik.handleChange}
                         value={formik.values.fontType}
                     >
-                        <option value="default">Default</option>
+                        <option value="sans">Default</option>
                         <option value="serif">Serif</option>
                         <option value="mono">Mono</option>
                     </Select>
@@ -410,7 +432,7 @@ const Builder = () => {
                                 "readOnly": false,
                                 "closeOnSelect": false,
                             }}
-                            onChange={formik.handleChange}
+                            setFieldValue={formik.setFieldValue}
                             value={formik.values.progressColour}
                         />
                         {
@@ -424,18 +446,7 @@ const Builder = () => {
                     </FormControl>
                 }
 
-                <FormControl>
-                    <FormLabel>Light/Dark Mode</FormLabel>
-                    <Select
-                        name="mode"
-                        onChange={formik.handleChange}
-                        value={formik.values.mode}
-                    >
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="system">System</option>
-                    </Select>
-                </FormControl>
+
 
             </Stack>
 

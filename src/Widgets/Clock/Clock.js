@@ -52,7 +52,7 @@ const Clock = (props) => {
 
 
     return (
-        <Widget>
+        <Widget {...props}>
             <Stack
                 sx={{
                     alignItems: "center",

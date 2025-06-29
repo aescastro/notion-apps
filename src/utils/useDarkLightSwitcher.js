@@ -10,7 +10,7 @@ export const setBackgroundColour = (element, isDarkMode) => {
     }
 }
 
-export const useDarkLightSwitcher = () => {
+export const useDarkLightSwitcher = (fMode) => {
     const query = useQuery();
     const [forcedMode, setForcedMode] = useState("light");
     const [isDarkMode, setIsDarkMode] = useState();
@@ -35,8 +35,8 @@ export const useDarkLightSwitcher = () => {
     }, [forcedMode]);
 
     useEffect(() => {
-        setForcedMode(query.has("mode") ? query.get("mode") : "light");
-    }, [query]);
+        setForcedMode(fMode ? fMode : query.has("mode") ? query.get("mode") : "light");
+    }, [query, fMode]);
 
     useEffect(() => {
         if (forcedMode === "system") {

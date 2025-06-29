@@ -45,10 +45,10 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     right: `min(calc(0.05 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
 }));
 
-const Button = styled.button(({ query, gridCol, containerheight, containerwidth }) => ({
-    backgroundColor: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
-    color: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-    borderColor: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+const Button = styled.button(({ query, gridCol, containerheight, containerwidth, bgColour, color }) => ({
+    backgroundColor: bgColour ? `#${bgColour}`: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
+    color: color ? `#${color}`: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+    borderColor: color ? `#${color}`: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
     fontSize: `min(calc(0.06 * ${containerheight}px), calc(0.06 * ${containerwidth}px))`,
     gridRow: "3 / span 1",
     borderRadius: "4px",
@@ -257,7 +257,7 @@ function Timer(props) {
     }, [minutes, seconds, sessions, state]);
 
     return (
-        <Widget>
+        <Widget {...props}>
             <Box
                 ref={observe}
                 sx={{
@@ -339,6 +339,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={props.preview}
+                        bgColour={props.buttonBg}
+                        color={props.buttonFontColour}
                     >
                         {running ? "Pause" : "Start"}
                     </Button>
@@ -350,6 +352,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={props.preview}
+                        bgColour={props.buttonBg}
+                        color={props.buttonFontColour}
                     >
                         Cancel
                     </Button>

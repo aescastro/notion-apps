@@ -21,9 +21,9 @@ const Field = (props) => {
             }}
             inputProps={{
                 sx: {
-                    fontFamily: query.has("fontType") ? query.get("fontType") : "sans-serif",
+                    fontFamily: props.fontType ?? query.has("fontType") ?? "sans-serif",
                     padding: props.isView ? "0" : "0.375rem 0.75rem",
-                    color: (isDarkMode) ? "#ffffff" : "#000000",
+                    color: props.fontColour ? `#${props.fontColour}` : (isDarkMode) ? "#ffffff" : "#000000",
                 }
             }}
             sx={{
