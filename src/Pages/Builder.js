@@ -59,7 +59,7 @@ const Builder = () => {
     const formik = useFormik({
         initialValues: {
             bg: "FFFFFF",
-            fontColour: "000000",
+            fontColour: "37352F",
             mode: "light",
             fontType: "sans",
             progressColour: "000000",
