@@ -177,7 +177,7 @@ const Builder = () => {
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
                             borderRadius: "10px",
-                            border: isDarkMode ? "1px solid #FFF" : "1px solid #000",
+                            border: (isDarkMode &&  formik.values.reactive) ? "1px dashed #FFF" : "1px solid #000",
                         }}>
                         {
                             widget === "clock" ? <Clock preview {...widgetProps} />

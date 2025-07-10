@@ -12,6 +12,7 @@ import { LINKS, theme } from './constants'
 
 function App() {
   const isDarkMode = useDarkLightSwitcher();
+  //TODO make hook that gets widget props here instead of manually extracting in every widget
 
   useEffect(() => {
     setBackgroundColour(document.body, isDarkMode);
