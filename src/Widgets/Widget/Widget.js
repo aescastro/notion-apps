@@ -19,26 +19,26 @@ export const Widget = (props) => {
     var isDarkMode = useDarkLightSwitcher(props.mode);
 
     useEffect(() => {
-        if (props.preview == null) {
-            if (query.has("bg")) {
-                setBg(query.get("bg"));
-            } else if (isDarkMode) {
-                setBg(NOTION_BACKGROUNDS.darkMode);
-            } else {
-                setBg(NOTION_BACKGROUNDS.lightMode);
-            }
-
-            if (query.has("fontColour")) {
-                setFontColour(query.get("fontColour"))
-            } else if (isDarkMode) {
-                setFontColour("#ffffff");
-            } else {
-                setFontColour("#37352F");
-            }
+        if (query.has("bg")) {
+            setBg(query.get("bg"));
+        } else if (props.bg) {
+            setBg(props.bg);
+        } else if (isDarkMode) {
+            setBg(NOTION_BACKGROUNDS.darkMode);
         } else {
-            setBg(props.bgColour);
-            setFontColour(props.fontColour)
+            setBg(NOTION_BACKGROUNDS.lightMode);
         }
+
+        if (query.has("fontColour")) {
+            setFontColour(query.get("fontColour"))
+        } else if (props.fontColour) {
+            setFontColour(props.fontColour)
+        }else if (isDarkMode) {
+            setFontColour("ffffff");
+        } else {
+            setFontColour("37352F");
+        }
+
 
     }, [isDarkMode, query, props]);
 

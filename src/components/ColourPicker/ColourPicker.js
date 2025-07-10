@@ -2,6 +2,7 @@ import { useState, } from "react"
 import { ChromePicker } from "react-color"
 import { Box, Button, Popover } from "@mui/material";
 
+//TODO make colour logic less idiotic
 export default function ColorPicker(props) {
   const [anchorEl, setAnchorEl] = useState(null)
   const [color, setColor] = useState(`#${props.value}`);

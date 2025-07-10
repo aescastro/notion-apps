@@ -10,6 +10,8 @@ import {
     FormLabel,
     FormHelperText,
     useMediaQuery,
+    Switch,
+    FormControlLabel,
 } from '@mui/material';
 import {
     useFormik,
@@ -39,13 +41,6 @@ import {
 } from "../Widgets"
 import { useDarkLightSwitcher } from '../utils';
 
-// const validationSchema = Yup.object({
-//     bgColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-//     fontColour: Yup.string(),
-//     progressColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-//     buttonBg: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-//     buttonFontColour: Yup.string().matches("/^#([0-9a-f]{3}|[0-9a-f]{6})$/i"),
-// })
 
 const Select = styled.select(() => ({
     backgroundColor: "#ffffff",
@@ -63,15 +58,17 @@ const Builder = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const formik = useFormik({
         initialValues: {
-            bgColour: "FFFFFF",
+            bg: "FFFFFF",
             fontColour: "000000",
             mode: "light",
             fontType: "sans",
             progressColour: "000000",
             buttonBg: "FFFFFF",
             buttonFontColour: "000000",
+            reactive: false,
         },
     })
+    const [widgetProps, setWidgetProps] = useState(formik.values);
     const location = useLocation();
     const widget = location.pathname.split("/").pop();
     const [anchorEl, setAnchorEl] = useState(null);
@@ -94,26 +91,30 @@ const Builder = () => {
     const [widgetUrl, setWidgetUrl] = useState(baseUrl);
 
     useEffect(() => {
-        console.log(isDarkMode);
-    }, [isDarkMode])
+        var nextUrl = baseUrl + "?"
+        var props = formik.values.reactive ? widgetProps : formik.values;
 
-    useEffect(() => {
-        var nextUrl = baseUrl + `?bg=${formik.values.bgColour}&fontColour=${formik.values.fontColour}&fontType=${formik.values.fontType}&mode=${formik.values.mode}`;
-
-        switch (widget) {
-            case "reading-tracker":
-                nextUrl += `&progressColour=${formik.values.progressColour}`
-                break;
-            case "pomodoro-timer":
-                nextUrl += `&buttonBg=${formik.values.buttonBg}&buttonFontColour=${formik.values.buttonFontColour}`
-                break;
-            default:
-                break;
-
+        for (var prop in props) {
+            if (prop !== "reactive"){
+                nextUrl += `&${prop}=${formik.values[prop]}`
+            }            
         }
 
-        setWidgetUrl(nextUrl)
-    }, [formik.values, baseUrl, widget])
+        setWidgetUrl(nextUrl.replace("&",""));
+    }, [formik.values, baseUrl, widget, widgetProps])
+
+    useEffect(() => {
+        if (formik.values.mode === "system" && formik.values.reactive) {
+            let nextWidgetProps = {...formik.values};
+            delete nextWidgetProps["bg"]
+            delete nextWidgetProps["fontColour"];
+            delete nextWidgetProps["buttonBg"];
+            delete nextWidgetProps["buttonFontColour"];
+            setWidgetProps(nextWidgetProps);
+        } else {
+            setWidgetProps(formik.values);
+        }
+    }, [formik.values])
 
     const handleClick = (event) => {
         navigator.clipboard.writeText(widgetUrl)
@@ -172,16 +173,16 @@ const Builder = () => {
                     <Box
                         sx={{
                             width: "100%",
-                            aspectRatio: "438/330",
+                            aspectRatio: "460/330",
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
                             borderRadius: "10px",
-                            border: "1px solid #000",
+                            border: isDarkMode ? "1px solid #FFF" : "1px solid #000",
                         }}>
                         {
-                            widget === "clock" ? <Clock preview {...formik.values} />
-                                : widget === "pomodoro-timer" ? <Timer preview {...formik.values}/>
-                                    : widget === "reading-tracker" ? <ReadingTracker preview {...formik.values}/>
+                            widget === "clock" ? <Clock preview {...widgetProps} />
+                                : widget === "pomodoro-timer" ? <Timer preview {...widgetProps} />
+                                    : widget === "reading-tracker" ? <ReadingTracker preview {...widgetProps} />
                                         : <Stack
                                             sx={{
                                                 width: "100%",
@@ -318,43 +319,68 @@ const Builder = () => {
                     </Select>
                 </FormControl>
 
-                <FormControl>
-                    <FormLabel>Background Colour</FormLabel>
-                    <ColorPicker
-                        label="Background Colour"
-                        name="bgColour"
-                        defaultValue="#FFFFFF"
-                        setFieldValue={formik.setFieldValue}
-                        value={formik.values.bgColour}
-                        type="color"
-                    />
-                    {
-                        formik.errors.bgColour &&
-                        <FormHelperText
-                            error
-                        >
-                            Invalid colour
-                        </FormHelperText>
-                    }
+                {
+                    formik.values.mode === "system" &&
+                    <FormControl>
+                        <FormControlLabel
+                            label="Match notion font/background colour as system mode changes?"
+                            control={
+                                <Switch
+                                    name="reactive"
+                                    color="defailt"
+                                    checked={formik.values.reactive}
+                                    value={formik.values.reactive}
+                                    onChange={formik.handleChange}
+                                />}
+                        />
 
-                </FormControl>
+                    </FormControl>
+                }
 
-                <FormControl>
-                    <FormLabel>Font Colour</FormLabel>
-                    <ColorPicker
-                        name="fontColour"
-                        setFieldValue={formik.setFieldValue}
-                        value={formik.values.fontColour}
-                    />
-                    {
-                        formik.errors.fontColour &&
-                        <FormHelperText
-                            error
-                        >
-                            Invalid colour
-                        </FormHelperText>
-                    }
-                </FormControl>
+                {
+                    (formik.values.mode !== "system" || !formik.values.reactive) &&
+                    <>
+                        <FormControl>
+                            <FormLabel>Background Colour</FormLabel>
+                            <ColorPicker
+                                label="Background Colour"
+                                name="bg"
+                                defaultValue="#FFFFFF"
+                                setFieldValue={formik.setFieldValue}
+                                value={formik.values.bg}
+                                type="color"
+                            />
+                            {
+                                formik.errors.bg &&
+                                <FormHelperText
+                                    error
+                                >
+                                    Invalid colour
+                                </FormHelperText>
+                            }
+
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>Font Colour</FormLabel>
+                            <ColorPicker
+                                name="fontColour"
+                                setFieldValue={formik.setFieldValue}
+                                value={formik.values.fontColour}
+                            />
+                            {
+                                formik.errors.fontColour &&
+                                <FormHelperText
+                                    error
+                                >
+                                    Invalid colour
+                                </FormHelperText>
+                            }
+                        </FormControl>
+                    </>
+                }
+
+
 
                 <FormControl>
                     <FormLabel>Font Type</FormLabel>
@@ -370,7 +396,7 @@ const Builder = () => {
                 </FormControl>
 
                 {
-                    widget === "pomodoro-timer" &&
+                    widget === "pomodoro-timer" && (formik.values.mode !== "system" || !formik.values.reactive) &&
                     <>
                         <FormControl>
                             <FormLabel>Button Background Colour</FormLabel>
