@@ -55,6 +55,8 @@ const Select = styled.select(() => ({
 }))
 
 const Builder = () => {
+    const location = useLocation();
+    const widget = location.pathname.split("/").pop();
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const formik = useFormik({
         initialValues: {
@@ -62,15 +64,14 @@ const Builder = () => {
             fontColour: "37352F",
             mode: "light",
             fontType: "sans",
-            progressColour: "000000",
-            buttonBg: "FFFFFF",
-            buttonFontColour: "000000",
             reactive: false,
+            ...(widget ==="reading-tracker") && {progressColour: "000000"},
+            ...(widget === "pomodoro-timer") && {buttonBg: "37352F"},
+            ...(widget === "pomodoro-timer") && {buttonFontColour: "000000"},
         },
     })
     const [widgetProps, setWidgetProps] = useState(formik.values);
-    const location = useLocation();
-    const widget = location.pathname.split("/").pop();
+    
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -110,6 +111,7 @@ const Builder = () => {
             delete nextWidgetProps["fontColour"];
             delete nextWidgetProps["buttonBg"];
             delete nextWidgetProps["buttonFontColour"];
+            delete nextWidgetProps["progressColour"];
             setWidgetProps(nextWidgetProps);
         } else {
             setWidgetProps(formik.values);
@@ -163,7 +165,6 @@ const Builder = () => {
                         alignItems: "center",
                         height: isDesktopWidth ? "100%" : "auto",
                         margin: isDesktopWidth ? "0px" : "52px 0 22px 0",
-                        // padding: isDesktopWidth ? "40px 0px" : "30px",
                         justifyContent: "center",
                         maxWidth: isDesktopWidth ? "50vw" : "80vw",
                         padding: isDesktopWidth ? "0 50px" : "0px",
@@ -447,7 +448,7 @@ const Builder = () => {
                 }
 
                 {
-                    widget === "reading-tracker" &&
+                    widget === "reading-tracker" && (formik.values.mode !== "system" || !formik.values.reactive) &&
                     <FormControl>
                         <FormLabel>Progress Colour</FormLabel>
                         <ColorPicker
