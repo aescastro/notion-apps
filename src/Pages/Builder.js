@@ -78,7 +78,7 @@ const Builder = () => {
     var isDarkMode = useDarkLightSwitcher("system");
 
     const [baseUrl] = useState(() => {
-        const appUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/notion-apps/#" : "https://aescastro.github.io/notion-apps/#/";
+        const appUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/notion-apps/#" : "https://aescastro.github.io/notion-apps/#";
         switch (widget) {
             case "clock":
                 return appUrl + "/Clock"
