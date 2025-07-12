@@ -71,11 +71,9 @@ export const useWidgetParams = (props) => {
                 newParams.progressColour = props.progressColour;
             } else if (query.has("progressColour")) {
                 newParams.progressColour = query.get("progressColour");
-            } else if (isDarkMode) {
+            } else  {
                 newParams.progressColour = "000000";
-            } else {
-                newParams.progressColour = "ffffff";
-            }
+            } 
 
             return newParams;
         });
