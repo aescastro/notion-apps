@@ -66,7 +66,7 @@ const Builder = () => {
             fontType: "sans",
             reactive: false,
             ...(widget ==="reading-tracker") && {progressColour: "000000"},
-            ...(widget === "pomodoro-timer") && {buttonBg: "37352F"},
+            ...(widget === "pomodoro-timer") && {buttonBg: "ffffff"},
             ...(widget === "pomodoro-timer") && {buttonFontColour: "000000"},
         },
     })
