@@ -78,13 +78,14 @@ const Builder = () => {
     var isDarkMode = useDarkLightSwitcher("system");
 
     const [baseUrl] = useState(() => {
+        const appUrl = process.env.NODE_ENV === "development" ? "http://localhost:3000/notion-apps/#" : "https://aescastro.github.io/notion-apps/#/";
         switch (widget) {
             case "clock":
-                return "https://aescastro.github.io/notion-apps/#/Clock"
+                return appUrl + "/Clock"
             case "pomodoro-timer":
-                return "https://aescastro.github.io/notion-apps/#/Pomodoro-Timer";
+                return appUrl + "/Pomodoro-Timer";
             case "reading-tracker":
-                return "https://aescastro.github.io/notion-apps/#/Reading-Tracker";
+                return appUrl + "/Reading-Tracker";
             default:
                 return "";
         }
@@ -178,7 +179,7 @@ const Builder = () => {
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
                             borderRadius: "10px",
-                            border: (isDarkMode &&  formik.values.reactive) ? "1px dashed #FFF" : "1px solid #000",
+                            border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "1px dashed #FFF" : "1px solid #000",
                         }}>
                         {
                             widget === "clock" ? <Clock preview {...widgetProps} />
