@@ -32,10 +32,9 @@ const Home = () => {
             {isDesktopWidth ? <Header/> : <MobileHeader/>}
         
             <Box
-                // spacing={isDesktopWidth ? "50px" : "0px"}
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "50px" : "108px 20px 20px 20px",
+                    padding: isDesktopWidth ? "35px 35px 123px 35px" : "108px 20px 20px 20px",
                     flexGrow: 1,
                     gridTemplateRows: isDesktopWidth ? "50% 50%" : "auto auto auto",
                     gridTemplateColumns: isDesktopWidth ? "50% 50%" : "auto",
@@ -63,7 +62,7 @@ const Home = () => {
                         display: "flex",
                         justifySelf: isDesktopWidth ? "flex-start" : "center",
                         alignSelf: isDesktopWidth ? "flex-end" : "center",
-                        gridArea: "1 / 2 / span 1 / span 1",
+                        gridArea: isDesktopWidth ? "1 / 2 / span 1 / span 1" : "2 / 1 / span 1 / span 1",
                         height: "75%"
                     }}
                 >                
@@ -77,7 +76,7 @@ const Home = () => {
                         display: "flex",
                         justifySelf: isDesktopWidth ? "flex-end" : "center",
                         alignSelf: isDesktopWidth ? "flex-start" : "center",
-                        gridArea: "2 / 1 / span 1 / span 1",
+                        gridArea: isDesktopWidth ? "2 / 1 / span 1 / span 1" : "3 / 1 / span 1 / span 1",
                         height: "75%"
                     }}
                 >              

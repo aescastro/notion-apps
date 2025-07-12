@@ -144,11 +144,11 @@ const MobileHeader = () => {
                         </MenuText>
                     </MuiLink>
 
-                    <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
+                    {/* <MuiLink as={Link} to={LINKS.ABOUT} underline="none">
                         <MenuText>  
                             about
                         </MenuText>
-                    </MuiLink>
+                    </MuiLink> */}
 
                     <MuiLink as={Link} to={LINKS.CONTACT} underline="none">
                         <Button>
