@@ -34,12 +34,13 @@ const Home = () => {
             <Box
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "35px 35px 123px 35px" : "108px 20px 20px 20px",
+                    padding: isDesktopWidth ? "35px" : "115px 20px 20px 20px",
+                    marginBottom: isDesktopWidth ? "88px" : "0",
                     flexGrow: 1,
                     gridTemplateRows: isDesktopWidth ? "50% 50%" : "auto auto auto",
                     gridTemplateColumns: isDesktopWidth ? "50% 50%" : "auto",
                     display: "grid",
-                    gap: isDesktopWidth ? "50px" : "0"
+                    gap: isDesktopWidth ? "50px" : "0px"
                 }}
             >
                 <Box
