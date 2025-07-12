@@ -51,16 +51,16 @@ const readingSchema = object({
     }),
 });
 
-const ReadingTracker = () => {
+const ReadingTracker = (props) => {
     const [isView, setIsView] = useState(true);
     const [values, setValues] = useState(() => {
         const savedBook = localStorage.getItem("book");
         const savedCurrentPage = localStorage.getItem("currentPage");
         const savedTotalPages = localStorage.getItem("totalPages");
 
-        const book = JSON.parse(savedBook);
-        const currentPage = JSON.parse(savedCurrentPage);
-        const totalPages = JSON.parse(savedTotalPages);
+        const book = props.preview ? "Pride and Prejudice" : JSON.parse(savedBook);
+        const currentPage = props.preview ? 123 : JSON.parse(savedCurrentPage);
+        const totalPages = props.preview ? 364 : JSON.parse(savedTotalPages);
 
         return {
             book: book || "",
@@ -78,9 +78,12 @@ const ReadingTracker = () => {
             setPercent(0);
         }
 
-        localStorage.setItem("book", JSON.stringify(values.book));
-        localStorage.setItem("currentPage", JSON.stringify(values.currentPage));
-        localStorage.setItem("totalPages", JSON.stringify(values.totalPages));
+        if (!props.preview) {
+            localStorage.setItem("book", JSON.stringify(values.book));
+            localStorage.setItem("currentPage", JSON.stringify(values.currentPage));
+            localStorage.setItem("totalPages", JSON.stringify(values.totalPages));
+        }
+
     }, [values])
 
     return (
@@ -88,11 +91,11 @@ const ReadingTracker = () => {
             <style type="text/css">
                 {`
                     .progress-bar {
-                        background-color: ${query.get("progressColour") || "#000000"}
+                        background-color: ${props.preview && props.progressColour ? `#${props.progressColour}`  : query.get("progressColour") ?? "#000000"}
                     }
                 `}
             </style>
-            <Widget>
+            <Widget {...props}>
                 <Formik
                     initialValues={values}
                     onSubmit={(values) => {
@@ -132,6 +135,8 @@ const ReadingTracker = () => {
                                                 error={!isView && formik.errors.book !== undefined}
                                                 helperText={formik.errors.book}
                                                 isView={isView}
+                                                fontType={props.fontType}
+                                                fontColour={props.fontColour}
                                             />
                                         </FormGroup>
 
@@ -155,7 +160,7 @@ const ReadingTracker = () => {
                                         />
                                         <Button
                                             type="submit"
-                                            disabled={!formik.isValid}
+                                            disabled={!formik.isValid || props.preview}
                                             onClick={() => setIsView(!isView)}
                                         >
                                             {isView ? "Edit" : "Save"}

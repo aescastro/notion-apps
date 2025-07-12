@@ -9,7 +9,7 @@ import { useQuery } from "../../utils";
 
 const H1 = styled.h1`
     margin: 0;
-    font-size: min(calc(0.32 * ${(props) => props.containerHeight}px), calc(0.213 * ${(props) => props.containerWidth}px));
+    font-size: min(calc(0.30 * ${(props) => props.containerHeight}px), calc(0.213 * ${(props) => props.containerWidth}px));
     font-weight: bold;
 `;
 
@@ -52,13 +52,13 @@ const Clock = (props) => {
 
 
     return (
-        <Widget>
+        <Widget {...props}>
             <Stack
                 sx={{
                     alignItems: "center",
                     justifyContent: "center",
                     aspectRatio: "1.75 / 1",
-                    height: "100%",
+                    width: "100%",
                     overflowY: "hidden",
                 }}
                 ref={observe}

@@ -104,9 +104,6 @@ const Contact = () => {
                     Let's Talk
                 </h1>
                 <p
-                    sx={{
-                        fontSize: "20px"
-                    }}
                 >
                     Would you like to contact me for reasons unrelated to this website?  Connect with me on LinkedIn <a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/aescastro/">here</a>.
                 </p>

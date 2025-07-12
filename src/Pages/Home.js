@@ -49,7 +49,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
+                    <WidgetPreview href="/builder/clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
                 </Grid>
                 
                 <Grid
@@ -61,7 +61,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-end" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
+                    <WidgetPreview href="/builder/pomodoro-timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
                 </Grid>
 
                 <Grid
@@ -73,7 +73,7 @@ const Home = () => {
                         alignItems: isDesktopWidth ? "flex-start" : "center",
                     }}
                 >
-                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker/></WidgetPreview>
+                    <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker preview/></WidgetPreview>
                 </Grid>
                 
             </Grid>
