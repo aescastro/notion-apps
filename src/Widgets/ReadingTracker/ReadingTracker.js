@@ -18,7 +18,8 @@ import {
 import styled from "@emotion/styled";
 
 import {
-    useQuery
+    useQuery,
+    useWidgetParams,
 } from "../../utils";
 
 import { Widget } from "../Widget";
@@ -52,15 +53,16 @@ const readingSchema = object({
 });
 
 const ReadingTracker = (props) => {
+    const widgetParams = useWidgetParams(props)
     const [isView, setIsView] = useState(true);
     const [values, setValues] = useState(() => {
         const savedBook = localStorage.getItem("book");
         const savedCurrentPage = localStorage.getItem("currentPage");
         const savedTotalPages = localStorage.getItem("totalPages");
 
-        const book = props.preview ? "Pride and Prejudice" : JSON.parse(savedBook);
-        const currentPage = props.preview ? 123 : JSON.parse(savedCurrentPage);
-        const totalPages = props.preview ? 364 : JSON.parse(savedTotalPages);
+        const book = widgetParams.preview ? "Pride and Prejudice" : JSON.parse(savedBook);
+        const currentPage = widgetParams.preview ? 123 : JSON.parse(savedCurrentPage);
+        const totalPages = widgetParams.preview ? 364 : JSON.parse(savedTotalPages);
 
         return {
             book: book || "",
@@ -69,7 +71,6 @@ const ReadingTracker = (props) => {
         }
     });
     const [percent, setPercent] = useState(0);
-    var query = useQuery()
 
     useEffect(() => {
         if (values.totalPages > 0) {
@@ -78,7 +79,7 @@ const ReadingTracker = (props) => {
             setPercent(0);
         }
 
-        if (!props.preview) {
+        if (!widgetParams.preview) {
             localStorage.setItem("book", JSON.stringify(values.book));
             localStorage.setItem("currentPage", JSON.stringify(values.currentPage));
             localStorage.setItem("totalPages", JSON.stringify(values.totalPages));
@@ -91,11 +92,13 @@ const ReadingTracker = (props) => {
             <style type="text/css">
                 {`
                     .progress-bar {
-                        background-color: ${props.preview && props.progressColour ? `#${props.progressColour}`  : query.get("progressColour") ?? "#000000"}
+                        background-color: #${widgetParams.progressColour};
+                        border: 0.5px solid #FFFFFF;
+                        border-radius: 0.375rem;
                     }
                 `}
             </style>
-            <Widget {...props}>
+            <Widget {...widgetParams}>
                 <Formik
                     initialValues={values}
                     onSubmit={(values) => {
@@ -135,8 +138,8 @@ const ReadingTracker = (props) => {
                                                 error={!isView && formik.errors.book !== undefined}
                                                 helperText={formik.errors.book}
                                                 isView={isView}
-                                                fontType={props.fontType}
-                                                fontColour={props.fontColour}
+                                                fontType={widgetParams.fontType}
+                                                fontColour={widgetParams.fontColour}
                                             />
                                         </FormGroup>
 
@@ -160,7 +163,7 @@ const ReadingTracker = (props) => {
                                         />
                                         <Button
                                             type="submit"
-                                            disabled={!formik.isValid || props.preview}
+                                            disabled={!formik.isValid || widgetParams.preview}
                                             onClick={() => setIsView(!isView)}
                                         >
                                             {isView ? "Edit" : "Save"}

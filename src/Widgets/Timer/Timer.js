@@ -11,7 +11,7 @@ import { ReactComponent as WIcon } from '../../assets/icons/pen-fill.svg';
 import { ReactComponent as BIcon } from '../../assets/icons/cup-hot-fill.svg';
 import { Widget } from '../Widget';
 import {
-    useQuery,
+    useWidgetParams
 } from '../../utils';
 
 const icoCss = {
@@ -45,10 +45,10 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     right: `min(calc(0.05 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
 }));
 
-const Button = styled.button(({ query, gridCol, containerheight, containerwidth, bgColour, color }) => ({
-    backgroundColor: bgColour ? `#${bgColour}`: query.has("buttonBg") ? query.get("buttonBg") : "#FFFFFF",
-    color: color ? `#${color}`: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
-    borderColor: color ? `#${color}`: query.has("buttonFontColour") ? query.get("buttonFontColour") : "#37352F",
+const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColour, color }) => ({
+    backgroundColor: `#${bgColour}`,
+    color: `#${color}`,
+    borderColor: `#${color}`,
     fontSize: `min(calc(0.06 * ${containerheight}px), calc(0.06 * ${containerwidth}px))`,
     gridRow: "3 / span 1",
     borderRadius: "4px",
@@ -75,6 +75,7 @@ const TimerState = {
 
 function Timer(props) {
     const { observe, width, height } = useDimensions();
+    const widgetParams = useWidgetParams(props);
 
     const [minutes, setMinutes] = useState();
     const [seconds, setSeconds] = useState();
@@ -86,8 +87,7 @@ function Timer(props) {
     const notif = useRef();
     const click = useRef();
     const [countDownDate, setCountDownDate] = useState(null);
-    const query = useQuery();
-
+    
     const runTimer = () => {
         click.current.play();
         setRunning(!running);
@@ -158,7 +158,7 @@ function Timer(props) {
 
         var stored = new Date(parseInt(window.localStorage.getItem("created")));
         var storedToday = stored && stored.getDate() === created.getDate() && stored.getMonth() === created.getMonth() && stored.getFullYear() === created.getFullYear();
-        if (storedToday && !props.preview) {
+        if (storedToday && !widgetParams.preview) {
             let minutes = parseInt(window.localStorage.getItem("minutes"));
             let seconds = parseInt(window.localStorage.getItem("seconds"));
             let sessions = parseInt(window.localStorage.getItem("sessions"));
@@ -257,7 +257,7 @@ function Timer(props) {
     }, [minutes, seconds, sessions, state]);
 
     return (
-        <Widget {...props}>
+        <Widget {...widgetParams}>
             <Box
                 ref={observe}
                 sx={{
@@ -334,26 +334,24 @@ function Timer(props) {
 
                     <Button
                         onClick={runTimer}
-                        query={query}
                         gridCol={2}
                         containerheight={height}
                         containerwidth={width}
-                        disabled={props.preview}
-                        bgColour={props.buttonBg}
-                        color={props.buttonFontColour}
+                        disabled={widgetParams.preview}
+                        bgColour={widgetParams.buttonBg}
+                        color={widgetParams.buttonFontColour}
                     >
                         {running ? "Pause" : "Start"}
                     </Button>
 
                     <Button
                         onClick={cancelTimer}
-                        query={query}
                         gridCol={4}
                         containerheight={height}
                         containerwidth={width}
-                        disabled={props.preview}
-                        bgColour={props.buttonBg}
-                        color={props.buttonFontColour}
+                        disabled={widgetParams.preview}
+                        bgColour={widgetParams.buttonBg}
+                        color={widgetParams.buttonFontColour}
                     >
                         Cancel
                     </Button>

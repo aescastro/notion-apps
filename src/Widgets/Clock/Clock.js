@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import useDimensions from "react-cool-dimensions";
 
 import { Widget } from "../Widget"; 
-import { useQuery } from "../../utils";
+import { useQuery, useWidgetParams } from "../../utils";
 
 const H1 = styled.h1`
     margin: 0;
@@ -20,13 +20,14 @@ const H2 = styled.h2`
 `
 
 const Clock = (props) => {
+    const widgetParams = useWidgetParams(props);
     const { observe, width, height } = useDimensions();
-    const [date, setDate] = useState();
-    const [time, setTime] = useState();
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
     var query = useQuery();
 
     const setTimeInfo = () => {
-        if (props.preview) {
+        if (widgetParams.preview) {
             setDate("Tuesday, March 12");
             setTime("12:05 PM");
         } else if (query.has("timezone")) {
@@ -40,7 +41,7 @@ const Clock = (props) => {
 
     useEffect(() => {
         setTimeInfo();
-        if (!props.preview) {
+        if (!widgetParams.preview) {
             const intervalId = setInterval(setTimeInfo, 1000);
             return () => {
                 clearInterval(intervalId);
@@ -48,11 +49,11 @@ const Clock = (props) => {
         }
 
         return () => {}; 
-    }, [query]);
+    }, []);
 
 
     return (
-        <Widget {...props}>
+        <Widget {...widgetParams}>
             <Stack
                 sx={{
                     alignItems: "center",
