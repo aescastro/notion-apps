@@ -1,6 +1,6 @@
 import {
     Stack,
-    Grid,
+    Box,
     useMediaQuery,
  } from '@mui/material';
 
@@ -31,52 +31,59 @@ const Home = () => {
         >
             {isDesktopWidth ? <Header/> : <MobileHeader/>}
         
-            <Grid
-                container
-                spacing={isDesktopWidth ? "50px" : "0px"}
+            <Box
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "50px" : "108px 20px 20px 20px",
+                    padding: isDesktopWidth ? "35px 35px 123px 35px" : "108px 20px 20px 20px",
                     flexGrow: 1,
+                    gridTemplateRows: isDesktopWidth ? "50% 50%" : "auto auto auto",
+                    gridTemplateColumns: isDesktopWidth ? "50% 50%" : "auto",
+                    display: "grid",
+                    gap: isDesktopWidth ? "50px" : "0"
                 }}
             >
-                <Grid
-                    item
+                <Box
                     xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktopWidth ? "flex-end" : "center",
-                        alignItems: isDesktopWidth ? "flex-end" : "center",
+                        alignSelf: isDesktopWidth ? "flex-end" : "center",
+                        justifySelf: isDesktopWidth ? "flex-end" : "center",
+                        gridArea: "1 / 1 / span 1 / span 1",
+                        height: "80%"
                     }}
-                >
+                >               
                     <WidgetPreview href="/builder/clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
-                </Grid>
+                </Box>
                 
-                <Grid
+                <Box
                     item
                     xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktopWidth ? "flex-start" : "center",
-                        alignItems: isDesktopWidth ? "flex-end" : "center",
+                        justifySelf: isDesktopWidth ? "flex-start" : "center",
+                        alignSelf: isDesktopWidth ? "flex-end" : "center",
+                        gridArea: isDesktopWidth ? "1 / 2 / span 1 / span 1" : "2 / 1 / span 1 / span 1",
+                        height: "80%"
                     }}
-                >
+                >                
                     <WidgetPreview href="/builder/pomodoro-timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
-                </Grid>
+                </Box>
 
-                <Grid
+                <Box
                     item
                     xs={isDesktopWidth ? 6 : 12}
                     sx={{
                         display: "flex",
-                        justifyContent: isDesktopWidth ? "flex-end" : "center",
-                        alignItems: isDesktopWidth ? "flex-start" : "center",
+                        justifySelf: isDesktopWidth ? "flex-end" : "center",
+                        alignSelf: isDesktopWidth ? "flex-start" : "center",
+                        gridArea: isDesktopWidth ? "2 / 1 / span 1 / span 1" : "3 / 1 / span 1 / span 1",
+                        height: "80%"
                     }}
-                >
+                >              
                     <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker preview/></WidgetPreview>
-                </Grid>
+                </Box>
                 
-            </Grid>
+            </Box>
         </Stack>
     )
 }

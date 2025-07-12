@@ -42,7 +42,6 @@ const WidgetPreview = ({children, href, title, subtitle}) => {
             sx={{
                 position: "relative",
                 aspectRatio: "415/340",
-                height: "80%",
                 minHeight: "237px",
                 maxHeight: "calc((50vw - 50px) * 330 / 415)",
                 maxWidth: "100%",
