@@ -59,7 +59,7 @@ const Clock = (props) => {
                     alignItems: "center",
                     justifyContent: "center",
                     aspectRatio: "1.75 / 1",
-                    width: "100%",
+                    height: "100%",
                     overflowY: "hidden",
                 }}
                 ref={observe}
