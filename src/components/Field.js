@@ -4,11 +4,11 @@ import {
 
 import { TextField } from "@mui/material"
 
-import { useDarkLightSwitcher, useQuery } from "../utils"
+import { useWidgetParams } from "../utils"
+import { NOTION_FONTS } from "../constants"
 
 const Field = (props) => {
-    const isDarkMode = useDarkLightSwitcher()
-    const query = useQuery();
+    const widgetParams = useWidgetParams(props)
 
     return (
         <FormikField
@@ -21,9 +21,9 @@ const Field = (props) => {
             }}
             inputProps={{
                 sx: {
-                    fontFamily: query.has("fontType") ? query.get("fontType") : "sans-serif",
+                    fontFamily: widgetParams.fontType ? NOTION_FONTS[widgetParams.fontType] : "sans-serif",
                     padding: props.isView ? "0" : "0.375rem 0.75rem",
-                    color: (isDarkMode) ? "#ffffff" : "#000000",
+                    color: `#${widgetParams.fontColour}`,
                 }
             }}
             sx={{

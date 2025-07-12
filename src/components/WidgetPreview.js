@@ -43,6 +43,8 @@ const WidgetPreview = ({children, href, title, subtitle}) => {
                 position: "relative",
                 aspectRatio: "415/340",
                 minHeight: "237px",
+                maxHeight: "calc((50vw - 50px) * 330 / 415)",
+                maxWidth: "100%",
                 borderRadius: "10px",
                 border: "1px solid #000",
                 background: "#FFF",
@@ -77,7 +79,7 @@ const WidgetPreview = ({children, href, title, subtitle}) => {
                     }}
                 >
 
-                    View Widget
+                    Create Widget
                 </Stack>
             </Stack>
             <Stack

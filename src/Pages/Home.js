@@ -52,8 +52,8 @@ const Home = () => {
                         gridArea: "1 / 1 / span 1 / span 1",
                         height: "75%"
                     }}
-                >
-                    <WidgetPreview href="/Clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
+                >               
+                    <WidgetPreview href="/builder/clock" title="Clock" subtitle="Watch time tick by"><Clock preview/></WidgetPreview>
                 </Box>
                 
                 <Box
@@ -66,8 +66,8 @@ const Home = () => {
                         gridArea: "1 / 2 / span 1 / span 1",
                         height: "75%"
                     }}
-                >
-                    <WidgetPreview href="/Pomodoro-Timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
+                >                
+                    <WidgetPreview href="/builder/pomodoro-timer" title="Pomodoro Timer" subtitle="Keep focus while giving yourself breaks"><Timer preview/></WidgetPreview>
                 </Box>
 
                 <Box
@@ -80,8 +80,8 @@ const Home = () => {
                         gridArea: "2 / 1 / span 1 / span 1",
                         height: "75%"
                     }}
-                >
-                    <WidgetPreview href="/Reading-Tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker/></WidgetPreview>
+                >              
+                    <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker preview/></WidgetPreview>
                 </Box>
                 
             </Box>

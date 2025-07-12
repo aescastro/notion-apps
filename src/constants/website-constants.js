@@ -7,6 +7,7 @@ const LINKS = {
     HOME: "/",
     ABOUT: "/about",
     CONTACT: "/contact",
+    BUILDER: "/builder/*",
 }
 
 export {LIGHT_GREEN, DARK_GREEN, MAIN_BACKGROUND_COLOUR, LINKS, HOVER_GREEN};
