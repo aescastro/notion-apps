@@ -175,6 +175,7 @@ const Builder = () => {
                     <Box
                         sx={{
                             width: "100%",
+                            maxHeight: "300px",
                             aspectRatio: "460/330",
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
