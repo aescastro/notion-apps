@@ -52,7 +52,7 @@ export const useWidgetParams = (props) => {
             } else if (query.has("buttonBg")) {
                 newParams.buttonBg = query.get("buttonBg");
             } else if (isDarkMode) {
-                newParams.buttonBg = "37352F";
+                newParams.buttonBg = NOTION_BACKGROUNDS.darkMode.substring(1)
             } else {
                 newParams.buttonBg = "ffffff";
             }
