@@ -60,9 +60,5 @@ export const useWidgetParams = (props) => {
         
     }, [isDarkMode, query, props]);
 
-    useEffect(() => {
-        console.log(props);
-    }, [props])
-
     return widgetParams;
 }

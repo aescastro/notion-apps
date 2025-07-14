@@ -28,7 +28,7 @@ export default function ColorPicker(props) {
         borderStyle: "solid",
         height: "40px",
         fontSize: "0.875rem",
-        width: "calc(296px + 0.5rem)",
+        width: "100%",
       }}
     >
       <Button

@@ -51,7 +51,7 @@ const Select = styled.select(() => ({
     borderStyle: "solid",
     height: "40px",
     fontSize: "0.875rem",
-    width: "calc(296px + 0.5rem)"
+    width: "100%"
 }))
 
 const Builder = () => {
@@ -65,11 +65,11 @@ const Builder = () => {
             mode: "light",
             fontType: "sans",
             reactive: false,
-            ...(widget ==="reading-tracker") && {progressColour: "#000000"},
+            ...(widget === "reading-tracker") && { progressColour: "#000000" },
         },
     })
     const [widgetProps, setWidgetProps] = useState(formik.values);
-    
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -95,17 +95,17 @@ const Builder = () => {
         var props = formik.values.reactive ? widgetProps : formik.values;
 
         for (var prop in props) {
-            if (prop !== "reactive"){
-                nextUrl += `&${prop}=${formik.values[prop].replace("#","")}`
-            }            
+            if (prop !== "reactive") {
+                nextUrl += `&${prop}=${formik.values[prop].replace("#", "")}`
+            }
         }
 
-        setWidgetUrl(nextUrl.replace("&",""));
+        setWidgetUrl(nextUrl.replace("&", ""));
     }, [formik.values, baseUrl, widget, widgetProps])
 
     useEffect(() => {
         if (formik.values.mode === "system" && formik.values.reactive) {
-            let nextWidgetProps = {...formik.values};
+            let nextWidgetProps = { ...formik.values };
             delete nextWidgetProps["bg"]
             delete nextWidgetProps["fontColour"];
             delete nextWidgetProps["buttonBg"];
@@ -296,134 +296,139 @@ const Builder = () => {
 
 
             <Stack
-                gap="15px"
                 sx={{
                     width: isDesktopWidth ? "50%" : "100%",
                     height: "100%",
                     backgroundColor: MAIN_BACKGROUND_COLOUR,
-                    padding: "60px 50px",
+                    padding: isDesktopWidth ? "60px 50px" : "60px 0px 0px 0px",
                     gap: "15px",
                     flexGrow: 0,
+                    alignItems: isDesktopWidth ? "left" : "center"
                 }}
             >
+                <Stack
+                    gap="15px"
+                    sx={{
+                        width: isDesktopWidth ? "calc(296px + 0.5rem)" : "80vw",
+                        maxWidth: "332px",
+                    }}
+                >
 
-                <FormControl>
-                    <FormLabel>Light/Dark Mode</FormLabel>
-                    <Select
-                        name="mode"
-                        onChange={formik.handleChange}
-                        value={formik.values.mode}
-                    >
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="system">System</option>
-                    </Select>
-                </FormControl>
-
-                {
-                    formik.values.mode === "system" &&
                     <FormControl>
-                        <FormControlLabel
-                            label="Match notion font/background colour as system mode changes?"
-                            control={
-                                <Switch
-                                    name="reactive"
-                                    color="defailt"
-                                    checked={formik.values.reactive}
-                                    value={formik.values.reactive}
-                                    onChange={formik.handleChange}
-                                />}
-                        />
-
+                        <FormLabel>Light/Dark Mode</FormLabel>
+                        <Select
+                            name="mode"
+                            onChange={formik.handleChange}
+                            value={formik.values.mode}
+                        >
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                            <option value="system">System</option>
+                        </Select>
                     </FormControl>
-                }
 
-                {
-                    (formik.values.mode !== "system" || !formik.values.reactive) &&
-                    <>
+                    {
+                        formik.values.mode === "system" &&
                         <FormControl>
-                            <FormLabel>Background Colour</FormLabel>
+                            <FormControlLabel
+                                label="Match notion font/background colour as system mode changes?"
+                                control={
+                                    <Switch
+                                        name="reactive"
+                                        color="defailt"
+                                        checked={formik.values.reactive}
+                                        value={formik.values.reactive}
+                                        onChange={formik.handleChange}
+                                    />}
+                            />
+
+                        </FormControl>
+                    }
+
+                    {
+                        (formik.values.mode !== "system" || !formik.values.reactive) &&
+                        <>
+                            <FormControl>
+                                <FormLabel>Background Colour</FormLabel>
+                                <ColorPicker
+                                    label="Background Colour"
+                                    name="bg"
+                                    defaultValue="#FFFFFF"
+                                    setFieldValue={formik.setFieldValue}
+                                    value={formik.values.bg}
+                                    type="color"
+                                />
+                                {
+                                    formik.errors.bg &&
+                                    <FormHelperText
+                                        error
+                                    >
+                                        Invalid colour
+                                    </FormHelperText>
+                                }
+
+                            </FormControl>
+
+                            <FormControl>
+                                <FormLabel>Font Colour</FormLabel>
+                                <ColorPicker
+                                    name="fontColour"
+                                    setFieldValue={formik.setFieldValue}
+                                    value={formik.values.fontColour}
+                                />
+                                {
+                                    formik.errors.fontColour &&
+                                    <FormHelperText
+                                        error
+                                    >
+                                        Invalid colour
+                                    </FormHelperText>
+                                }
+                            </FormControl>
+                        </>
+                    }
+
+
+
+                    <FormControl>
+                        <FormLabel>Font Type</FormLabel>
+                        <Select
+                            name="fontType"
+                            onChange={formik.handleChange}
+                            value={formik.values.fontType}
+                        >
+                            <option value="sans">Default</option>
+                            <option value="serif">Serif</option>
+                            <option value="mono">Mono</option>
+                        </Select>
+                    </FormControl>
+
+                    {
+                        widget === "reading-tracker" && (formik.values.mode !== "system" || !formik.values.reactive) &&
+                        <FormControl>
+                            <FormLabel>Progress Colour</FormLabel>
                             <ColorPicker
-                                label="Background Colour"
-                                name="bg"
-                                defaultValue="#FFFFFF"
+                                name="progressColour"
+                                defaultValue="#000000"
+                                controls={{
+                                    "disabled": false,
+                                    "readOnly": false,
+                                    "closeOnSelect": false,
+                                }}
                                 setFieldValue={formik.setFieldValue}
-                                value={formik.values.bg}
-                                type="color"
+                                value={formik.values.progressColour}
                             />
                             {
-                                formik.errors.bg &&
+                                formik.errors.progressColour &&
                                 <FormHelperText
                                     error
                                 >
                                     Invalid colour
                                 </FormHelperText>
                             }
-
                         </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Font Colour</FormLabel>
-                            <ColorPicker
-                                name="fontColour"
-                                setFieldValue={formik.setFieldValue}
-                                value={formik.values.fontColour}
-                            />
-                            {
-                                formik.errors.fontColour &&
-                                <FormHelperText
-                                    error
-                                >
-                                    Invalid colour
-                                </FormHelperText>
-                            }
-                        </FormControl>
-                    </>
-                }
-
-
-
-                <FormControl>
-                    <FormLabel>Font Type</FormLabel>
-                    <Select
-                        name="fontType"
-                        onChange={formik.handleChange}
-                        value={formik.values.fontType}
-                    >
-                        <option value="sans">Default</option>
-                        <option value="serif">Serif</option>
-                        <option value="mono">Mono</option>
-                    </Select>
-                </FormControl>
-
-                {
-                    widget === "reading-tracker" && (formik.values.mode !== "system" || !formik.values.reactive) &&
-                    <FormControl>
-                        <FormLabel>Progress Colour</FormLabel>
-                        <ColorPicker
-                            name="progressColour"
-                            defaultValue="#000000"
-                            controls={{
-                                "disabled": false,
-                                "readOnly": false,
-                                "closeOnSelect": false,
-                            }}
-                            setFieldValue={formik.setFieldValue}
-                            value={formik.values.progressColour}
-                        />
-                        {
-                            formik.errors.progressColour &&
-                            <FormHelperText
-                                error
-                            >
-                                Invalid colour
-                            </FormHelperText>
-                        }
-                    </FormControl>
-                }
-
-
-
+                    }
+                </Stack>
             </Stack>
 
         </Stack >
