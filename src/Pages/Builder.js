@@ -60,12 +60,12 @@ const Builder = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
     const formik = useFormik({
         initialValues: {
-            bg: "FFFFFF",
-            fontColour: "37352F",
+            bg: "#FFFFFF",
+            fontColour: "#37352F",
             mode: "light",
             fontType: "sans",
             reactive: false,
-            ...(widget ==="reading-tracker") && {progressColour: "000000"},
+            ...(widget ==="reading-tracker") && {progressColour: "#000000"},
         },
     })
     const [widgetProps, setWidgetProps] = useState(formik.values);
@@ -96,7 +96,7 @@ const Builder = () => {
 
         for (var prop in props) {
             if (prop !== "reactive"){
-                nextUrl += `&${prop}=${formik.values[prop]}`
+                nextUrl += `&${prop}=${formik.values[prop].replace("#","")}`
             }            
         }
 

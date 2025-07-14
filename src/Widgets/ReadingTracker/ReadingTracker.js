@@ -26,9 +26,9 @@ import { Field } from "../../components"
 
 const Button = styled.button(({color, bg})=> ({
     borderRadius: "4px",
-    border: `0.5px solid #${color}`,
-    background: `#${bg.replace("#", "")}`,
-    color: `#${color}`,
+    border: `0.5px solid ${color}`,
+    background: bg,
+    color: color,
     fontSize: "11px",
 }));
 
@@ -91,7 +91,7 @@ const ReadingTracker = (props) => {
             <style type="text/css">
                 {`
                     .progress-bar {
-                        background-color: #${widgetParams.progressColour};
+                        background-color: ${widgetParams.progressColour};
                         border: 0.5px solid #FFFFFF;
                         border-radius: 0.375rem;
                     }

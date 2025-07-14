@@ -46,9 +46,9 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
 }));
 
 const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColour, color }) => ({
-    backgroundColor: `#${bgColour}`,
-    color: `#${color}`,
-    borderColor: `#${color}`,
+    backgroundColor: bgColour,
+    color: color,
+    borderColor: color,
     fontSize: `min(calc(0.06 * ${containerheight}px), calc(0.06 * ${containerwidth}px))`,
     gridRow: "3 / span 1",
     borderRadius: "4px",

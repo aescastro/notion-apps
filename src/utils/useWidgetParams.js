@@ -30,7 +30,7 @@ export const useWidgetParams = (props) => {
             if (props?.bg) { 
                 newParams.bg = props.bg;
             } else if (query.has("bg")) {
-                newParams.bg = query.get("bg");
+                newParams.bg = `#${query.get("bg")}`;
             } else if (isDarkMode) {
                 newParams.bg = NOTION_BACKGROUNDS.darkMode;
             } else {
@@ -40,11 +40,11 @@ export const useWidgetParams = (props) => {
             if (props?.fontColour) {
                 newParams.fontColour = props.fontColour;
             } else if (query.has("fontColour")) {
-                newParams.fontColour = query.get("fontColour");
+                newParams.fontColour = `#${query.get("fontColour")}`;
             } else if (isDarkMode) {
-                newParams.fontColour = "ffffff";
+                newParams.fontColour = "#ffffff";
             } else {
-                newParams.fontColour = "37352F";
+                newParams.fontColour = "#37352F";
             }
 
             if (props?.progressColour) {
@@ -52,7 +52,7 @@ export const useWidgetParams = (props) => {
             } else if (query.has("progressColour")) {
                 newParams.progressColour = query.get("progressColour");
             } else  {
-                newParams.progressColour = "000000";
+                newParams.progressColour = "#000000";
             } 
 
             return newParams;
