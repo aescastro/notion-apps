@@ -6,6 +6,7 @@ import {
 } from ".";
 import {
     NOTION_BACKGROUNDS,
+    NOTION_FONT_COLOURS
 } from "../constants";
 
 export const useWidgetParams = (props) => {
@@ -42,9 +43,9 @@ export const useWidgetParams = (props) => {
             } else if (query.has("fontColour")) {
                 newParams.fontColour = `#${query.get("fontColour")}`;
             } else if (isDarkMode) {
-                newParams.fontColour = "#ffffff";
+                newParams.fontColour = NOTION_FONT_COLOURS.darkMode;
             } else {
-                newParams.fontColour = "#37352F";
+                newParams.fontColour = NOTION_FONT_COLOURS.lightMode;
             }
 
             if (props?.progressColour) {
