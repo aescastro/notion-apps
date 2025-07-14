@@ -27,7 +27,7 @@ import { Field } from "../../components"
 const Button = styled.button(({color, bg})=> ({
     borderRadius: "4px",
     border: `0.5px solid #${color}`,
-    background: `#${bg}`,
+    background: `#${bg.replace("#", "")}`,
     color: `#${color}`,
     fontSize: "11px",
 }));
@@ -164,8 +164,8 @@ const ReadingTracker = (props) => {
                                             type="submit"
                                             disabled={!formik.isValid || widgetParams.preview}
                                             onClick={() => setIsView(!isView)}
-                                            color={widgetParams.buttonFontColour}
-                                            bg={widgetParams.buttonBg}
+                                            color={widgetParams.fontColour}
+                                            bg={widgetParams.bg}
                                         >
                                             {isView ? "Edit" : "Save"}
                                         </Button>

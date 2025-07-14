@@ -66,8 +66,6 @@ const Builder = () => {
             fontType: "sans",
             reactive: false,
             ...(widget ==="reading-tracker") && {progressColour: "000000"},
-            ...(widget !== "clock") && {buttonBg: "ffffff"},
-            ...(widget !== "clock") && {buttonFontColour: "000000"},
         },
     })
     const [widgetProps, setWidgetProps] = useState(formik.values);
@@ -397,57 +395,6 @@ const Builder = () => {
                         <option value="mono">Mono</option>
                     </Select>
                 </FormControl>
-
-                {
-                    widget !== "clock" && (formik.values.mode !== "system" || !formik.values.reactive) &&
-                    <>
-                        <FormControl>
-                            <FormLabel>Button Background Colour</FormLabel>
-                            <ColorPicker
-                                name="buttonBg"
-                                defaultValue="#000000"
-                                controls={{
-                                    "disabled": false,
-                                    "readOnly": false,
-                                    "closeOnSelect": false,
-                                }}
-                                setFieldValue={formik.setFieldValue}
-                                value={formik.values.buttonBg}
-                            />
-                            {
-                                formik.errors.buttonBg &&
-                                <FormHelperText
-                                    error
-                                >
-                                    Invalid colour
-                                </FormHelperText>
-                            }
-                        </FormControl>
-
-                        <FormControl>
-                            <FormLabel>Button Font Colour</FormLabel>
-                            <ColorPicker
-                                name="buttonFontColour"
-                                defaultValue="#000000"
-                                controls={{
-                                    "disabled": false,
-                                    "readOnly": false,
-                                    "closeOnSelect": false,
-                                }}
-                                setFieldValue={formik.setFieldValue}
-                                value={formik.values.buttonFontColour}
-                            />
-                            {
-                                formik.errors.buttonFontColour &&
-                                <FormHelperText
-                                    error
-                                >
-                                    Invalid colour
-                                </FormHelperText>
-                            }
-                        </FormControl>
-                    </>
-                }
 
                 {
                     widget === "reading-tracker" && (formik.values.mode !== "system" || !formik.values.reactive) &&

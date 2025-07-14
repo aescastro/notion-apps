@@ -338,8 +338,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={widgetParams.preview}
-                        bgColour={widgetParams.buttonBg}
-                        color={widgetParams.buttonFontColour}
+                        bgColour={widgetParams.bg}
+                        color={widgetParams.fontColour}
                     >
                         {running ? "Pause" : "Start"}
                     </Button>
@@ -350,8 +350,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={widgetParams.preview}
-                        bgColour={widgetParams.buttonBg}
-                        color={widgetParams.buttonFontColour}
+                        bgColour={widgetParams.bg}
+                        color={widgetParams.fontColour}
                     >
                         Cancel
                     </Button>

@@ -47,26 +47,6 @@ export const useWidgetParams = (props) => {
                 newParams.fontColour = "37352F";
             }
 
-            if (props?.buttonBg) {
-                newParams.buttonBg = props.buttonBg;
-            } else if (query.has("buttonBg")) {
-                newParams.buttonBg = query.get("buttonBg");
-            } else if (isDarkMode) {
-                newParams.buttonBg = NOTION_BACKGROUNDS.darkMode.substring(1)
-            } else {
-                newParams.buttonBg = "ffffff";
-            }
-
-            if (props?.buttonFontColour) {
-                newParams.buttonFontColour = props.buttonFontColour;
-            } else if (query.has("buttonFontColour")) {
-                newParams.buttonFontColour = query.get("buttonFontColour");
-            } else if (isDarkMode) {
-                newParams.buttonFontColour = "ffffff";
-            } else {
-                newParams.buttonFontColour = "37352F";
-            }
-
             if (props?.progressColour) {
                 newParams.progressColour = props.progressColour;
             } else if (query.has("progressColour")) {
