@@ -18,20 +18,19 @@ import {
 import styled from "@emotion/styled";
 
 import {
-    useQuery,
     useWidgetParams,
 } from "../../utils";
 
 import { Widget } from "../Widget";
 import { Field } from "../../components"
 
-const Button = styled.button`
-    border-radius: 4px;
-    border: 0.5px solid #000;
-    background: #FFFFFF;
-    color: #000000;
-    font-size: 13px;
-`;
+const Button = styled.button(({color})=> ({
+    borderRadius: "4px",
+    border: `0.5px solid #${color}`,
+    background: "#FFFFFF",
+    color: `#${color}`,
+    fontSize: "13px",
+}));
 
 const H6 = styled.h6(({ isView }) => ({
     marginBottom: isView ? "0px" : "0.5rem",
@@ -165,6 +164,7 @@ const ReadingTracker = (props) => {
                                             type="submit"
                                             disabled={!formik.isValid || widgetParams.preview}
                                             onClick={() => setIsView(!isView)}
+                                            color={widgetParams.fontColour}
                                         >
                                             {isView ? "Edit" : "Save"}
                                         </Button>
