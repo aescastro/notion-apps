@@ -66,8 +66,8 @@ const Builder = () => {
             fontType: "sans",
             reactive: false,
             ...(widget ==="reading-tracker") && {progressColour: "000000"},
-            ...(widget === "pomodoro-timer") && {buttonBg: "ffffff"},
-            ...(widget === "pomodoro-timer") && {buttonFontColour: "000000"},
+            ...(widget !== "clock") && {buttonBg: "ffffff"},
+            ...(widget !== "clock") && {buttonFontColour: "000000"},
         },
     })
     const [widgetProps, setWidgetProps] = useState(formik.values);
@@ -399,7 +399,7 @@ const Builder = () => {
                 </FormControl>
 
                 {
-                    widget === "pomodoro-timer" && (formik.values.mode !== "system" || !formik.values.reactive) &&
+                    widget !== "clock" && (formik.values.mode !== "system" || !formik.values.reactive) &&
                     <>
                         <FormControl>
                             <FormLabel>Button Background Colour</FormLabel>

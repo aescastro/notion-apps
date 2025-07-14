@@ -24,12 +24,12 @@ import {
 import { Widget } from "../Widget";
 import { Field } from "../../components"
 
-const Button = styled.button(({color})=> ({
+const Button = styled.button(({color, bg})=> ({
     borderRadius: "4px",
     border: `0.5px solid #${color}`,
-    background: "#FFFFFF",
+    background: `#${bg}`,
     color: `#${color}`,
-    fontSize: "13px",
+    fontSize: "11px",
 }));
 
 const H6 = styled.h6(({ isView }) => ({
@@ -164,7 +164,8 @@ const ReadingTracker = (props) => {
                                             type="submit"
                                             disabled={!formik.isValid || widgetParams.preview}
                                             onClick={() => setIsView(!isView)}
-                                            color={widgetParams.fontColour}
+                                            color={widgetParams.buttonFontColour}
+                                            bg={widgetParams.buttonBg}
                                         >
                                             {isView ? "Edit" : "Save"}
                                         </Button>
