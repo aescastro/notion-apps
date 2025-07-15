@@ -21,8 +21,8 @@ export const Widget = (props) => {
                 justifyContent: "center",
                 borderRadius: "10px",
                 fontFamily: widgetParams.fontType ? NOTION_FONTS[widgetParams.fontType] : "sans-serif",
-                backgroundColor: `#${widgetParams.bg}`,
-                color: `#${widgetParams.fontColour}`,
+                backgroundColor: widgetParams.bg,
+                color: widgetParams.fontColour,
             }}
         >
             {props.children}

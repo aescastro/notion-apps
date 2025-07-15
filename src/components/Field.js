@@ -23,7 +23,7 @@ const Field = (props) => {
                 sx: {
                     fontFamily: widgetParams.fontType ? NOTION_FONTS[widgetParams.fontType] : "sans-serif",
                     padding: props.isView ? "0" : "0.375rem 0.75rem",
-                    color: `#${widgetParams.fontColour}`,
+                    color: widgetParams.fontColour,
                 }
             }}
             sx={{

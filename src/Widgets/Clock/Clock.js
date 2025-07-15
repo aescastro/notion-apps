@@ -9,7 +9,7 @@ import { useQuery, useWidgetParams } from "../../utils";
 
 const H1 = styled.h1`
     margin: 0;
-    font-size: min(calc(0.30 * ${(props) => props.containerHeight}px), calc(0.213 * ${(props) => props.containerWidth}px));
+    font-size: min(calc(0.30 * ${(props) => props.containerHeight}px), calc(0.17 * ${(props) => props.containerWidth}px));
     font-weight: bold;
 `;
 
@@ -59,7 +59,7 @@ const Clock = (props) => {
                     alignItems: "center",
                     justifyContent: "center",
                     aspectRatio: "1.75 / 1",
-                    width: "100%",
+                    height: "100%",
                     overflowY: "hidden",
                 }}
                 ref={observe}

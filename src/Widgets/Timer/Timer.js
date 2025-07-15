@@ -34,7 +34,7 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     display: "grid",
     justifyContent: "center",
     alignItems: "center",
-    gridTemplateColumns: "auto auto",
+    gridTemplateColumns: "auto auto auto auto",
     gridTemplateRows: "auto auto auto",
     userSelect: "none",
     position: "relative",
@@ -46,9 +46,9 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
 }));
 
 const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColour, color }) => ({
-    backgroundColor: `#${bgColour}`,
-    color: `#${color}`,
-    borderColor: `#${color}`,
+    backgroundColor: bgColour,
+    color: color,
+    borderColor: color,
     fontSize: `min(calc(0.06 * ${containerheight}px), calc(0.06 * ${containerwidth}px))`,
     gridRow: "3 / span 1",
     borderRadius: "4px",
@@ -60,11 +60,11 @@ const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColo
 
 const WorkIcon = styled(WIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.175 * ${containerheight}px), calc(0.175 * ${containerwidth}px))`,
+    height: `min(calc(0.15 * ${containerheight}px), calc(0.15 * ${containerwidth}px))`,
 }));
 const BreakIcon = styled(BIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.175 * ${containerheight}px), calc(0.175 * ${containerwidth}px))`,
+    height: `min(calc(0.15 * ${containerheight}px), calc(0.15 * ${containerwidth}px))`,
 }));
 
 const TimerState = {
@@ -270,6 +270,9 @@ function Timer(props) {
                 <Grid
                     containerheight={height}
                     containerwidth={width}
+                    sx={{
+                        gridArea: "1 / 1 / span 1 / span 1"
+                    }}
                 >
                     {
                         state === TimerState.work ?
@@ -289,8 +292,9 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            fontSize: `min(calc(0.25 * ${width}px), calc(0.25 * ${height}px))`,
                             textAlign: "right",
+                            gridColumn: "2 / span 1"
                         }}
                     >
                         {minutes < 10 ? "0" + minutes.toString() : minutes}
@@ -298,10 +302,11 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            fontSize: `min(calc(0.25 * ${width}px), calc(0.25 * ${height}px))`,
                             textAlign: "center",
                             position: "relative",
                             bottom: "5%",
+                            gridColumn: "3 / span 1"
                         }}
                     >
                         :
@@ -309,8 +314,9 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.32 * ${width}px), calc(0.32 * ${height}px))`,
+                            fontSize: `min(calc(0.25 * ${width}px), calc(0.25 * ${height}px))`,
                             textAlign: "left",
+                            gridColumn: "4 / span 1"
                         }}
                     >
                         {seconds < 10 ? "0" + seconds.toString() : seconds}
@@ -338,8 +344,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={widgetParams.preview}
-                        bgColour={widgetParams.buttonBg}
-                        color={widgetParams.buttonFontColour}
+                        bgColour={widgetParams.bg}
+                        color={widgetParams.fontColour}
                     >
                         {running ? "Pause" : "Start"}
                     </Button>
@@ -350,8 +356,8 @@ function Timer(props) {
                         containerheight={height}
                         containerwidth={width}
                         disabled={widgetParams.preview}
-                        bgColour={widgetParams.buttonBg}
-                        color={widgetParams.buttonFontColour}
+                        bgColour={widgetParams.bg}
+                        color={widgetParams.fontColour}
                     >
                         Cancel
                     </Button>

@@ -6,6 +6,7 @@ import {
 } from ".";
 import {
     NOTION_BACKGROUNDS,
+    NOTION_FONT_COLOURS
 } from "../constants";
 
 export const useWidgetParams = (props) => {
@@ -30,7 +31,7 @@ export const useWidgetParams = (props) => {
             if (props?.bg) { 
                 newParams.bg = props.bg;
             } else if (query.has("bg")) {
-                newParams.bg = query.get("bg");
+                newParams.bg = `#${query.get("bg")}`;
             } else if (isDarkMode) {
                 newParams.bg = NOTION_BACKGROUNDS.darkMode;
             } else {
@@ -40,31 +41,11 @@ export const useWidgetParams = (props) => {
             if (props?.fontColour) {
                 newParams.fontColour = props.fontColour;
             } else if (query.has("fontColour")) {
-                newParams.fontColour = query.get("fontColour");
+                newParams.fontColour = `#${query.get("fontColour")}`;
             } else if (isDarkMode) {
-                newParams.fontColour = "ffffff";
+                newParams.fontColour = NOTION_FONT_COLOURS.darkMode;
             } else {
-                newParams.fontColour = "37352F";
-            }
-
-            if (props?.buttonBg) {
-                newParams.buttonBg = props.buttonBg;
-            } else if (query.has("buttonBg")) {
-                newParams.buttonBg = query.get("buttonBg");
-            } else if (isDarkMode) {
-                newParams.buttonBg = "37352F";
-            } else {
-                newParams.buttonBg = "ffffff";
-            }
-
-            if (props?.buttonFontColour) {
-                newParams.buttonFontColour = props.buttonFontColour;
-            } else if (query.has("buttonFontColour")) {
-                newParams.buttonFontColour = query.get("buttonFontColour");
-            } else if (isDarkMode) {
-                newParams.buttonFontColour = "ffffff";
-            } else {
-                newParams.buttonFontColour = "37352F";
+                newParams.fontColour = NOTION_FONT_COLOURS.lightMode;
             }
 
             if (props?.progressColour) {
@@ -72,17 +53,13 @@ export const useWidgetParams = (props) => {
             } else if (query.has("progressColour")) {
                 newParams.progressColour = query.get("progressColour");
             } else  {
-                newParams.progressColour = "000000";
+                newParams.progressColour = "#000000";
             } 
 
             return newParams;
         });
         
     }, [isDarkMode, query, props]);
-
-    useEffect(() => {
-        console.log(props);
-    }, [props])
 
     return widgetParams;
 }

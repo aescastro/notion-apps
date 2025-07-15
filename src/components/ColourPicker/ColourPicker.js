@@ -5,7 +5,7 @@ import { Box, Button, Popover } from "@mui/material";
 //TODO make colour logic less idiotic
 export default function ColorPicker(props) {
   const [anchorEl, setAnchorEl] = useState(null)
-  const [color, setColor] = useState(`#${props.value}`);
+  const [color, setColor] = useState(props.value);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +28,7 @@ export default function ColorPicker(props) {
         borderStyle: "solid",
         height: "40px",
         fontSize: "0.875rem",
-        width: "calc(296px + 0.5rem)",
+        width: "100%",
       }}
     >
       <Button
@@ -58,7 +58,7 @@ export default function ColorPicker(props) {
           color={color}
           onChange={(c) => {
             setColor(c.hex);
-            props.setFieldValue(props.name, c.hex.substring(1))
+            props.setFieldValue(props.name, c.hex)
           }}
         />
       </Popover>

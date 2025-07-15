@@ -21,9 +21,5 @@ Each widget can be customized using the following query parameters
 ### Clock
 - **timezone**: Changes what timezone the displayed time is in. Timezone list: https://gist.github.com/diogocapela/12c6617fc87607d11fd62d2a4f42b02a
 
-### Timer
-- **buttonFontColour**: Sets the font colour of the buttons in this widget
-- **buttonBg**: Sets the background colour of the buttons in this widget
-
 ### Example
 https://aescastro.github.io/notion-apps/#/Pomodoro-Timer?bg=6A877D&fontColour=FFFFFF&fontType=mono
