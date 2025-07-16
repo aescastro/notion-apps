@@ -35,6 +35,9 @@ import {
     ReactComponent as CopyIcon
 } from "../assets/icons/copy.svg";
 import {
+    ReactComponent as FoIcon
+} from "../assets/icons/info-circle.svg";
+import {
     Clock,
     Timer,
     ReadingTracker,
@@ -52,6 +55,13 @@ const Select = styled.select(() => ({
     height: "40px",
     fontSize: "0.875rem",
     width: "100%"
+}))
+
+const InfoIcon = styled(FoIcon)(() => ({
+    width: "12px",
+    height: "12px",
+    position: "relative",
+    bottom: "1px"
 }))
 
 const Builder = () => {
@@ -170,126 +180,150 @@ const Builder = () => {
 
                     }}
                 >
-                    <Box
+                    <Stack
                         sx={{
+                            gap: "5px",
                             width: "100%",
-                            maxHeight: "300px",
-                            aspectRatio: "460/330",
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
-                            borderRadius: "10px",
-                            border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "1px dashed #FFF" : "1px solid #000",
                         }}>
-                        {
-                            widget === "clock" ? <Clock preview {...widgetProps} />
-                                : widget === "pomodoro-timer" ? <Timer preview {...widgetProps} />
-                                    : widget === "reading-tracker" ? <ReadingTracker preview {...widgetProps} />
-                                        : <Stack
-                                            sx={{
-                                                width: "100%",
-                                                height: "100%",
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <h1>Please select a widget to build</h1>
-                                        </Stack>
-                        }
-
-                    </Box>
-                    <Stack
-                        direction="row"
-                        sx={{
-                            marginTop: isDesktopWidth ? "auto" : "20px",
-                            height: isDesktopWidth ? "55px" : "38px",
-                            width: "100%",
-                            borderRadius: "10px",
-                            border: "1px solid rgb(0, 0, 0)",
-                            background: "#FFF",
-                            boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                        }}
-                    >
                         <Box
                             sx={{
-                                margin: "auto",
-                                flexGrow: 1,
-                                textAlign: "center",
-                                padding: isDesktopWidth ? "13px" : "0px 13px",
-                                textOverflow: "ellipsis",
-                                overflow: "hidden",
-                                whiteSpace: "nowrap",
-                                width: "calc(40vh - 54px)",
-                                fontSize: isDesktopWidth ? "16px" : "14px",
+                                aspectRatio: "460/330",
+                                maxHeight: "300px",
+                                borderRadius: "10px",
+                                border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "1px dashed #FFF" : "1px solid #000",
                             }}
                         >
-                            {widgetUrl}
+                            {
+                                widget === "clock" ? <Clock preview {...widgetProps} />
+                                    : widget === "pomodoro-timer" ? <Timer preview {...widgetProps} />
+                                        : widget === "reading-tracker" ? <ReadingTracker preview {...widgetProps} />
+                                            : <Stack
+                                                sx={{
+                                                    width: "100%",
+                                                    height: "100%",
+                                                    display: "flex",
+                                                    justifyContent: "center",
+                                                    alignItems: "center",
+                                                }}
+                                            >
+                                                <h1>Please select a widget to build</h1>
+                                            </Stack>
+                            }
                         </Box>
-
-                        <Button
-                            onClick={handleClick}
-                            aria-describedby={id}
-                            sx={{
-                                background: LIGHT_GREEN,
-                                width: "54px",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                borderRadius: "0px 10px 10px 0px",
-                                color: DARK_GREEN,
-                                flexGrow: 0,
-                                padding: "0px",
-                                "&:hover": {
-                                    background: LIGHT_GREEN,
-                                },
-                            }}
-                        >
-                            <CopyIcon width="25px" height="25px" />
-                        </Button>
-                        <Popover
-                            id={id}
-                            open={open}
-                            anchorEl={anchorEl}
-                            onClose={handleClose}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'center',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'center',
-                            }}
-                            slotProps={{
-                                "paper": {
-                                    sx: {
-                                        padding: "5px"
-                                    }
-                                }
-                            }
-                            }
-                            sx={{
-                                fontFamily: "Josefin Sans",
-                                fontSize: isDesktopWidth ? "14px" : "11px",
-                            }}
-                        >
-
-                            Copied!
-                        </Popover>
+                        {
+                            widget === "pomodoro-timer" &&
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
+                                }}
+                            >
+                                <InfoIcon />
+                                <span>&nbsp;Tip: Click pen/cup icon to switch from work to short break to long break</span>
+                            </Box>
+                        }
                     </Stack>
+
                     <Box
                         sx={{
-                            color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
-                            textAlign: "center",
-                            fontFamily: "Josefin Sans",
-                            fontSize: isDesktopWidth ? "14px" : "11px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "normal",
-                            marginTop: "5px",
-                            marginBottom: isDesktopWidth ? "15px" : "0px",
+                            marginTop: isDesktopWidth ? "auto" : "20px",
+                            width: "100%"
                         }}
                     >
-                        paste this link into your Notion page and click “Embed”
+                        <Stack
+                            direction="row"
+                            sx={{
+                                height: isDesktopWidth ? "55px" : "38px",
+                                width: "100%",
+                                borderRadius: "10px",
+                                border: "1px solid rgb(0, 0, 0)",
+                                background: "#FFF",
+                                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    margin: "auto",
+                                    flexGrow: 1,
+                                    textAlign: "center",
+                                    padding: isDesktopWidth ? "13px" : "0px 13px",
+                                    textOverflow: "ellipsis",
+                                    overflow: "hidden",
+                                    whiteSpace: "nowrap",
+                                    width: "calc(40vh - 54px)",
+                                    fontSize: isDesktopWidth ? "16px" : "14px",
+                                }}
+                            >
+                                {widgetUrl}
+                            </Box>
+
+                            <Button
+                                onClick={handleClick}
+                                aria-describedby={id}
+                                sx={{
+                                    background: LIGHT_GREEN,
+                                    width: "54px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "0px 10px 10px 0px",
+                                    color: DARK_GREEN,
+                                    flexGrow: 0,
+                                    padding: "0px",
+                                    "&:hover": {
+                                        background: LIGHT_GREEN,
+                                    },
+                                }}
+                            >
+                                <CopyIcon width="25px" height="25px" />
+                            </Button>
+                            <Popover
+                                id={id}
+                                open={open}
+                                anchorEl={anchorEl}
+                                onClose={handleClose}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'center',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'center',
+                                }}
+                                slotProps={{
+                                    "paper": {
+                                        sx: {
+                                            padding: "5px"
+                                        }
+                                    }
+                                }
+                                }
+                                sx={{
+                                    fontFamily: "Josefin Sans",
+                                    fontSize: isDesktopWidth ? "14px" : "11px",
+                                }}
+                            >
+
+                                Copied!
+                            </Popover>
+                        </Stack>
+                        <Box
+                            sx={{
+                                color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
+                                textAlign: "center",
+                                fontFamily: "Josefin Sans",
+                                fontSize: isDesktopWidth ? "14px" : "11px",
+                                fontStyle: "normal",
+                                fontWeight: 500,
+                                lineHeight: "normal",
+                                marginTop: "5px",
+                                marginBottom: isDesktopWidth ? "15px" : "0px",
+                            }}
+                        >
+                            paste this link into your Notion page and click “Embed”
+                        </Box>
                     </Box>
                 </Stack>
             </Stack>
