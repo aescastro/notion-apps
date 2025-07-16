@@ -23,10 +23,9 @@ const Home = () => {
     return (
         <Stack
             width="100%"
-            height={isDesktopWidth ? isSmallHeight ? "fit-content" : "100vh" : "1000px"}
+            height={!isDesktopWidth || isSmallHeight? "fit-content" : "100vh"}
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {isDesktopWidth ? <Header/> : <MobileHeader/>}
@@ -34,13 +33,17 @@ const Home = () => {
             <Box
                 sx={{
                     boxSizing: "border-box",
-                    padding: isDesktopWidth ? "35px" : "115px 20px 20px 20px",
+                    position: isDesktopWidth ? "static" : "absolute",
+                    backgroundColor: 'inherit',
+                    top: "88px",
+                    width: "100%",
+                    padding: isDesktopWidth ? "35px" : "20px",
                     marginBottom: isDesktopWidth ? "88px" : "0",
                     flexGrow: 1,
                     gridTemplateRows: isDesktopWidth ? "50% 50%" : "auto auto auto",
                     gridTemplateColumns: isDesktopWidth ? "50% 50%" : "auto",
                     display: "grid",
-                    gap: isDesktopWidth ? "50px" : "0px"
+                    gap: "50px"
                 }}
             >
                 <Box
@@ -78,7 +81,8 @@ const Home = () => {
                         justifySelf: isDesktopWidth ? "flex-end" : "center",
                         alignSelf: isDesktopWidth ? "flex-start" : "center",
                         gridArea: isDesktopWidth ? "2 / 1 / span 1 / span 1" : "3 / 1 / span 1 / span 1",
-                        height: "80%"
+                        height: "80%",
+                        paddingBottom: isDesktopWidth ? "0px" : "20px",
                     }}
                 >              
                     <WidgetPreview href="/builder/reading-tracker" title="Reading Tracker" subtitle="Track progress in your latest read"><ReadingTracker preview/></WidgetPreview>

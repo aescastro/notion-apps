@@ -87,7 +87,6 @@ const Contact = () => {
             height="max-content"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {
@@ -95,9 +94,13 @@ const Contact = () => {
             }
             <Stack
                 sx={{
-                    padding: isDesktopWidth ? "60px 75px" : "148px 50px 60px 50px",
+                    padding: isDesktopWidth ? "60px 75px" : "50px",
                     gap: "15px",
                     flexGrow: 1,
+                    position: isDesktopWidth ? "static" : "absolute",
+                    backgroundColor: 'inherit',
+                    top: "88px",
+                    width: "100%",
                 }}
             >
                 <h1>
