@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import useDimensions from 'react-cool-dimensions';
 import {
     Box,
+    Stack
 } from "@mui/material";
 
 import clickSound from '../../assets/sounds/Click_Sound.wav';
@@ -27,7 +28,8 @@ const timeCss = {
     gridRow: "1 / span 1",
     margin: "0",
     fontWeight: "bold",
-    lineHeight: "normal",
+    lineHeight: "1",
+    display: "inline"
 };
 
 const Grid = styled.div(({containerheight, containerwidth}) => ({
@@ -35,13 +37,12 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     justifyContent: "center",
     alignItems: "center",
     gridTemplateColumns: "auto auto auto auto",
-    gridTemplateRows: "auto auto auto",
+    gridTemplateRows: `min-content min-content min(calc(0.25 * ${containerwidth}px), calc(0.25 * ${containerheight}px))`,
     userSelect: "none",
     position: "relative",
-    marginBottom: "12px",
     borderRadius: "15px",
     padding: "5%",
-    height: "100%",
+    height: "min-content",
     right: `min(calc(0.05 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
 }));
 
@@ -258,21 +259,20 @@ function Timer(props) {
 
     return (
         <Widget {...widgetParams}>
-            <Box
+            <Stack
                 ref={observe}
                 sx={{
                     width: "100%",
                     maxHeight: "100%",
                     maxWidth: "100%",
                     aspectRatio: "1.25 / 1",
+                    justifyContent: "center",
+                    alignItems: "center"
                 }}
             >
                 <Grid
                     containerheight={height}
                     containerwidth={width}
-                    sx={{
-                        gridArea: "1 / 1 / span 1 / span 1"
-                    }}
                 >
                     {
                         state === TimerState.work ?
@@ -325,7 +325,6 @@ function Timer(props) {
                     <Box
                         sx={{
                             position: "relative",
-                            bottom: "5%",
                             gridRow: "2 / span 1",
                             gridColumn: "3 / span 1",
                             fontWeight: "bold",
@@ -333,6 +332,8 @@ function Timer(props) {
                             textAlign: "center",
                             justifySelf: "center",
                             alignSelf: "center",
+                            display: "inline",
+                            lineHeight: "1.25",
                         }}
                     >
                         {sessions}
@@ -362,7 +363,7 @@ function Timer(props) {
                         Cancel
                     </Button>
                 </Grid>
-            </Box>
+            </Stack>
         </Widget>
     );
 }
