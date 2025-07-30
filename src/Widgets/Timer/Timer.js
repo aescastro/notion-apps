@@ -37,7 +37,7 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     justifyContent: "center",
     alignItems: "center",
     gridTemplateColumns: "auto auto auto auto",
-    gridTemplateRows: `min-content min-content min(calc(0.25 * ${containerwidth}px), calc(0.3 * ${containerheight}px))`,
+    gridTemplateRows: `min-content min-content min(calc(0.18 * ${containerwidth}px), calc(0.23 * ${containerheight}px))`,
     userSelect: "none",
     position: "relative",
     borderRadius: "15px",
