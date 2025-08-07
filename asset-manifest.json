@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/notion-apps/static/css/main.2dbd4297.css",
-    "main.js": "/notion-apps/static/js/main.ad932b0b.js",
+    "main.js": "/notion-apps/static/js/main.051fb66e.js",
     "static/js/787.6f1943c0.chunk.js": "/notion-apps/static/js/787.6f1943c0.chunk.js",
     "static/media/Inter-VariableFont_slnt,wght.ttf": "/notion-apps/static/media/Inter-VariableFont_slnt,wght.853e01975d2783d9fa29.ttf",
     "static/media/Notification_Sound.wav": "/notion-apps/static/media/Notification_Sound.b84b0afb77bce206e971.wav",
@@ -18,11 +18,11 @@
     "static/media/x-lg.svg": "/notion-apps/static/media/x-lg.ed3061de2e07bc29707e45c5aebcb4fe.svg",
     "static/media/chevron-left.svg": "/notion-apps/static/media/chevron-left.7781e881e5dfed0f8ae0ac194688286d.svg",
     "main.2dbd4297.css.map": "/notion-apps/static/css/main.2dbd4297.css.map",
-    "main.ad932b0b.js.map": "/notion-apps/static/js/main.ad932b0b.js.map",
+    "main.051fb66e.js.map": "/notion-apps/static/js/main.051fb66e.js.map",
     "787.6f1943c0.chunk.js.map": "/notion-apps/static/js/787.6f1943c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2dbd4297.css",
-    "static/js/main.ad932b0b.js"
+    "static/js/main.051fb66e.js"
   ]
 }
