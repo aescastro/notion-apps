@@ -9,7 +9,7 @@ import {
     Header,
     MobileHeader
 } from "../components";
- 
+
 import { theme, MAIN_BACKGROUND_COLOUR } from "../constants";
 
 const HeaderText = styled.span`
@@ -22,7 +22,7 @@ const BodyText = styled.span`
     font-weight: 300;
 `;
 
-const AboutUs = () => {   
+const AboutUs = () => {
     const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
@@ -31,21 +31,38 @@ const AboutUs = () => {
             height="max-content"
             sx={{
                 backgroundColor: MAIN_BACKGROUND_COLOUR,
-                overflowX: isDesktopWidth ? "visible" : "hidden",
             }}
         >
             {
-                isDesktopWidth ? <Header/> : <MobileHeader/>
+                isDesktopWidth ? <Header /> : <MobileHeader />
             }
             <Stack
                 sx={{
-                    padding: isDesktopWidth ? "60px 75px" : "148px 50px 60px 50px",
-                    gap: "30px",
+                    padding: isDesktopWidth ? "60px 75px" : "50px",
+                    gap: "15px",
                     flexGrow: 1,
+                    position: isDesktopWidth ? "static" : "absolute",
+                    backgroundColor: 'inherit',
+                    top: "88px",
+                    width: "100%",
                 }}
             >
-                
+                <h1>Background</h1>
+                <p>Hi there, I’m Adriana - an avid Notion user and computer engineering graduate. I love using widgets in my Notion pages but when I have used some  from other sources I found myself wanting widgets that were either more minimalist or customizeable. As such, I decided to create my own!  </p>
+                <p>The Notion widgets I created combine all the features that I wanted  from other Notion widget sites. With my widgets, users can create minimalist widgets that can have aspects such as font or background colour customized while also ensuring that it is compatible with their Notion’s light/dark mode setting. I additionally created a reading tracker widget which I was unable to find elsewhere.</p>
 
+                <h1>How to Use</h1>
+                <ol>
+                    <li>Go to the home page and click the widget you would like to add to your Notion</li>
+                    <li>Customize your widget using the fields on the right-hand side of the screen</li>
+                    <li>Copy the embed URL </li>
+                    <li>Go to Notion and embed the widget either by
+                        <ol type="a">
+                            <li>Pasting the link and clicking embed OR</li>
+                            <li>Typing /embed and pasting the link</li>
+                        </ol>
+                    </li>
+                </ol>
             </Stack>
         </Stack>
     );

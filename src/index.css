@@ -16,7 +16,7 @@ body {
   background-color: #E8E8E0;
 }
 
-p {
+p, li {
   font-size: 20px;
   font-weight: 300;
 }
