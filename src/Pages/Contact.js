@@ -37,6 +37,7 @@ const StyledForm = styled(Form)(() => ({
     borderRadius: "10px",
     gap: "26px",
     height: "430px",
+    maxWidth: "1500px"
 }));
 
 const CheckIcon = styled(CIcon)(() => ({
@@ -94,7 +95,7 @@ const Contact = () => {
             }
             <Stack
                 sx={{
-                    padding: isDesktopWidth ? "60px 75px" : "50px",
+                    padding: isDesktopWidth ? "60px 75px" : "40px",
                     gap: "15px",
                     flexGrow: 1,
                     position: isDesktopWidth ? "static" : "absolute",
@@ -140,7 +141,7 @@ const Contact = () => {
                                         >
                                             <CheckIcon/>
                                             <h1>
-                                                Thanks for your feedback!
+                                                Thank you for your feedback!
                                             </h1>
                                         </Stack>
                                         :

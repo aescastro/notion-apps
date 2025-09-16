@@ -10,20 +10,22 @@ import {
     MobileHeader
 } from "../components";
 
-import { theme, MAIN_BACKGROUND_COLOUR } from "../constants";
+import { MAIN_BACKGROUND_COLOUR } from "../constants";
+import demo from "../assets/videos/demo.mp4";
 
-const HeaderText = styled.span`
-    font-size: 45px;
-    font-weight: 400;
-`;
+const Video = styled.video(({isDesktopWidth}) => ({
+    width: isDesktopWidth ? "50%" : "auto",
+    marginRight: isDesktopWidth ? "15px" : "0",
+    maxHeight: isDesktopWidth ? "100%" : "40vh"
 
-const BodyText = styled.span`
-    font-size: 20px;
-    font-weight: 300;
-`;
+}));
+
+const Ol = styled.ol(() => ({
+    padding: "15px"
+}))
 
 const AboutUs = () => {
-    const isDesktopWidth = useMediaQuery(theme.breakpoints.up('md'));
+    const isDesktopWidth = useMediaQuery('(min-width:1500px)');
 
     return (
         <Stack
@@ -38,7 +40,7 @@ const AboutUs = () => {
             }
             <Stack
                 sx={{
-                    padding: isDesktopWidth ? "60px 75px" : "50px",
+                    padding: isDesktopWidth ? "60px 75px" : "40px",
                     gap: "15px",
                     flexGrow: 1,
                     position: isDesktopWidth ? "static" : "absolute",
@@ -52,17 +54,27 @@ const AboutUs = () => {
                 <p>The Notion widgets I created combine all the features that I wanted  from other Notion widget sites. With my widgets, users can create minimalist widgets that can have aspects such as font or background colour customized while also ensuring that it is compatible with their Notion’s light/dark mode setting. I additionally created a reading tracker widget which I was unable to find elsewhere.</p>
 
                 <h1>How to Use</h1>
-                <ol>
-                    <li>Go to the home page and click the widget you would like to add to your Notion</li>
-                    <li>Customize your widget using the fields on the right-hand side of the screen</li>
-                    <li>Copy the embed URL </li>
-                    <li>Go to Notion and embed the widget either by
-                        <ol type="a">
-                            <li>Pasting the link and clicking embed OR</li>
-                            <li>Typing /embed and pasting the link</li>
-                        </ol>
-                    </li>
-                </ol>
+                <Stack
+                    direction={isDesktopWidth ? "row" : "column"}
+                >
+                    <Video
+                        controls
+                        src={demo}
+                        isDesktopWidth={isDesktopWidth}
+                    />
+                    <Ol>
+                        <li>Go to the home page and click the widget you would like to add to your Notion</li>
+                        <li>Customize your widget using the fields on the right-hand side of the screen</li>
+                        <li>Copy the embed URL </li>
+                        <li>Go to Notion and embed the widget either by
+                            <ol type="a">
+                                <li>Pasting the link and clicking embed OR</li>
+                                <li>Typing /embed and pasting the link</li>
+                            </ol>
+                        </li>
+                    </Ol>
+                </Stack>
+
             </Stack>
         </Stack>
     );
