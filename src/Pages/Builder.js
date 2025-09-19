@@ -125,6 +125,7 @@ const Builder = () => {
         } else {
             setWidgetProps(formik.values);
         }
+
     }, [formik.values])
 
     const handleClick = (event) => {
@@ -189,28 +190,36 @@ const Builder = () => {
                         }}>
                         <Box
                             sx={{
-                                aspectRatio: "460/330",
-                                maxHeight: "300px",
-                                borderRadius: "10px",
-                                border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "1px dashed #FFF" : "1px solid #000",
+                                border: (isDarkMode || formik.values.mode === "dark") ? "1px dashed #FFF" : "none",
+                                padding: "5px"
+
                             }}
                         >
-                            {
-                                widget === "clock" ? <Clock preview {...widgetProps} />
-                                    : widget === "pomodoro-timer" ? <Timer preview {...widgetProps} />
-                                        : widget === "reading-tracker" ? <ReadingTracker preview {...widgetProps} />
-                                            : <Stack
-                                                sx={{
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                }}
-                                            >
-                                                <h1>Please select a widget to build</h1>
-                                            </Stack>
-                            }
+                            <Box
+                                sx={{
+                                    aspectRatio: "460/330",
+                                    maxHeight: "300px",
+                                    borderRadius: "10px",
+                                    border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "none" : "1px solid #000",
+                                }}
+                            >
+                                {
+                                    widget === "clock" ? <Clock preview {...widgetProps} />
+                                        : widget === "pomodoro-timer" ? <Timer preview {...widgetProps} />
+                                            : widget === "reading-tracker" ? <ReadingTracker preview {...widgetProps} />
+                                                : <Stack
+                                                    sx={{
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        display: "flex",
+                                                        justifyContent: "center",
+                                                        alignItems: "center",
+                                                    }}
+                                                >
+                                                    <h1>Please select a widget to build</h1>
+                                                </Stack>
+                                }
+                            </Box>
                         </Box>
                         {
                             widget === "pomodoro-timer" &&
@@ -365,7 +374,7 @@ const Builder = () => {
                         formik.values.mode === "system" &&
                         <FormControl>
                             <FormControlLabel
-                                label="Match notion font/background colour as system mode changes?"
+                                label="Match Notion font colour and background colour by system setting"
                                 control={
                                     <Switch
                                         name="reactive"
