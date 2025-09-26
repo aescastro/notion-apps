@@ -36,7 +36,7 @@ const StyledForm = styled(Form)(() => ({
     boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
     borderRadius: "10px",
     gap: "26px",
-    height: "430px",
+    maxHeight: "500px",
     maxWidth: "1500px"
 }));
 
@@ -77,6 +77,7 @@ const Contact = () => {
             })
             .catch(error => {
                 // request related error.
+                setSubmitSuccess(false);
                 setError(error.message ? error.message : error);
             });
     }
@@ -135,7 +136,7 @@ const Contact = () => {
                                             sx={{
                                                 alignItems: "center",
                                                 gap: "20px",
-                                                padding: "50px 40px",
+                                                padding:  "50px 40px",
                                                 textAlign: "center",
                                             }}
                                         >
@@ -146,6 +147,19 @@ const Contact = () => {
                                         </Stack>
                                         :
                                         <>
+                                            { error &&
+                                                <Box
+                                                    sx={{
+                                                        width: "100%",
+                                                        backgroundColor: "#D9544D",
+                                                        color: "white",
+                                                        padding: "5px 5px",
+                                                        borderRadius: "3px",
+                                                    }}
+                                                >
+                                                    {error + ". Please try again."}
+                                                </Box>
+                                            }
                                             <Field
                                                 as={TextField}
                                                 name="name"
