@@ -188,19 +188,14 @@ const Builder = () => {
                             position: "relative",
                             top: isDesktopWidth ? "15vh" : "0px",
                         }}>
-                        <Box
-                            sx={{
-                                border: (isDarkMode || formik.values.mode === "dark") ? "1px dashed #FFF" : "none",
-                                padding: "5px"
-
-                            }}
-                        >
+                        
                             <Box
                                 sx={{
                                     aspectRatio: "460/330",
                                     maxHeight: "300px",
                                     borderRadius: "10px",
-                                    border: (isDarkMode && formik.values.reactive && formik.values.mode === "system") ? "none" : "1px solid #000",
+                                    border: ((isDarkMode && formik.values.mode === "system") || formik.values.mode === "dark") ? "1px dashed #FFF" : "1px dashed #000",
+                                    padding: "5px"
                                 }}
                             >
                                 {
@@ -220,7 +215,7 @@ const Builder = () => {
                                                 </Stack>
                                 }
                             </Box>
-                        </Box>
+                        {/* </Box> */}
                         {
                             widget === "pomodoro-timer" &&
                             <Box
