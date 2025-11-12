@@ -176,7 +176,8 @@ const Builder = () => {
                         height: isDesktopWidth ? "100%" : "auto",
                         margin: isDesktopWidth ? "0px" : "52px 0 22px 0",
                         justifyContent: "center",
-                        maxWidth: isDesktopWidth ? "50vw" : "80vw",
+                        width: isDesktopWidth ? "min(518px, 100%)" : "min(418px, 100%)",
+                        maxWidth: isDesktopWidth ? "auto" : "80vw",
                         padding: isDesktopWidth ? "0 50px" : "0px",
 
                     }}
@@ -194,7 +195,7 @@ const Builder = () => {
                                     aspectRatio: "460/330",
                                     maxHeight: "300px",
                                     borderRadius: "10px",
-                                    border: ((isDarkMode && formik.values.mode === "system") || formik.values.mode === "dark") ? "1px dashed #FFF" : "1px dashed #000",
+                                    border: ((isDarkMode && formik.values.mode === "system") || formik.values.mode === "dark") ? "1.5px dashed #ffffffff" : "1.5px dashed #838383ff",
                                     padding: "5px"
                                 }}
                             >
@@ -217,15 +218,33 @@ const Builder = () => {
                             </Box>
                         {/* </Box> */}
                         {
-                            widget === "pomodoro-timer" &&
+                            widget === "pomodoro-timer" ?
                             <Box
                                 sx={{
+                                    fontSize: "12px",
+                                    marginTop: "5px",
+                                    color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
+                                }}
+                            >
+                                <InfoIcon />
+                                <span>&nbsp;{isDarkMode && formik.values.mode === "system" ? "Tips:" : "Tip: "}</span>
+                                <ul>
+                                    <li>Click pen/cup icon to switch from work to short break to long break</li>
+                                    {formik.values.mode === "system" && formik.values.reactive && <li>Change your system setting to {isDarkMode ? "light" : "dark"} mode to see how the widget responds</li>}
+                                </ul>
+                            </Box>
+                            :
+                            formik.values.mode === "system" && formik.values.reactive && 
+                            <Box
+                                sx={{
+                                    marginTop: "5px",
                                     fontSize: "12px",
                                     color: formik.values.mode === "dark" || (formik.values.mode === "system" && isDarkMode) ? "white" : "rgba(0, 0, 0, 0.64)",
                                 }}
                             >
                                 <InfoIcon />
-                                <span>&nbsp;Tip: Click pen/cup icon to switch from work to short break to long break</span>
+                                <span>&nbsp;Tip: Change your system setting to {isDarkMode ? "light" : "dark"} mode to see how the widget responds</span>
+                                
                             </Box>
                         }
                     </Stack>
@@ -242,7 +261,7 @@ const Builder = () => {
                                 height: isDesktopWidth ? "55px" : "38px",
                                 width: "100%",
                                 borderRadius: "10px",
-                                border: "1px solid rgb(0, 0, 0)",
+                                border: "1px solid rgba(0, 0, 0, 1)",
                                 background: "#FFF",
                                 boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                             }}
