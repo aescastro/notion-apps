@@ -24,6 +24,11 @@ const Ol = styled.ol(() => ({
     padding: "15px"
 }))
 
+const Li = styled.li(() => ({
+  fontSize: "20px",
+  fontWeight: "300"
+}))
+
 const AboutUs = () => {
     const isDesktopWidth = useMediaQuery('(min-width:1500px)');
 
@@ -63,15 +68,15 @@ const AboutUs = () => {
                         isDesktopWidth={isDesktopWidth}
                     />
                     <Ol>
-                        <li>Go to the home page and click the widget you would like to add to your Notion</li>
-                        <li>Customize your widget using the fields on the right-hand side of the screen</li>
-                        <li>Copy the embed URL </li>
-                        <li>Go to Notion and embed the widget either by
+                        <Li>Go to the home page and click the widget you would like to add to your Notion</Li>
+                        <Li>Customize your widget using the fields on the right-hand side of the screen</Li>
+                        <Li>Copy the embed URL </Li>
+                        <Li>Go to Notion and embed the widget either by
                             <ol type="a">
-                                <li>Pasting the link and clicking embed OR</li>
-                                <li>Typing /embed and pasting the link</li>
+                                <Li>Pasting the link and clicking embed OR</Li>
+                                <Li>Typing /embed and pasting the link</Li>
                             </ol>
-                        </li>
+                        </Li>
                     </Ol>
                 </Stack>
 
