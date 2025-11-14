@@ -43,7 +43,7 @@ const Grid = styled.div(({containerheight, containerwidth}) => ({
     borderRadius: "15px",
     padding: "5%",
     height: "min-content",
-    right: `min(calc(0.05 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
+    right: `min(calc(0.09 * ${containerheight}px), calc(0.05 * ${containerwidth}px))`,
 }));
 
 const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColour, color }) => ({
@@ -61,11 +61,11 @@ const Button = styled.button(({ gridCol, containerheight, containerwidth, bgColo
 
 const WorkIcon = styled(WIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.17 * ${containerheight}px), calc(0.15 * ${containerwidth}px))`,
+    height: `min(calc(0.17 * ${containerheight}px), calc(0.17 * ${containerwidth}px))`,
 }));
 const BreakIcon = styled(BIcon)(({containerheight, containerwidth}) => ({
     ...icoCss,
-    height: `min(calc(0.17 * ${containerheight}px), calc(0.15 * ${containerwidth}px))`,
+    height: `min(calc(0.17 * ${containerheight}px), calc(0.17 * ${containerwidth}px))`,
 }));
 
 const TimerState = {
@@ -292,7 +292,7 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.25 * ${width}px), calc(0.30 * ${height}px))`,
+                            fontSize: `min(calc(0.27 * ${width}px), calc(0.27 * ${height}px))`,
                             textAlign: "right",
                             gridColumn: "2 / span 1"
                         }}
@@ -302,7 +302,7 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.25 * ${width}px), calc(0.3 * ${height}px))`,
+                            fontSize: `min(calc(0.27 * ${width}px), calc(0.27 * ${height}px))`,
                             textAlign: "center",
                             position: "relative",
                             bottom: "5%",
@@ -314,7 +314,7 @@ function Timer(props) {
                     <Box
                         sx={{
                             ...timeCss,
-                            fontSize: `min(calc(0.25 * ${width}px), calc(0.3 * ${height}px))`,
+                            fontSize: `min(calc(0.27 * ${width}px), calc(0.27 * ${height}px))`,
                             textAlign: "left",
                             gridColumn: "4 / span 1"
                         }}
@@ -328,7 +328,7 @@ function Timer(props) {
                             gridRow: "2 / span 1",
                             gridColumn: "3 / span 1",
                             fontWeight: "bold",
-                            fontSize: `min(calc(0.10 * ${width}px), calc(0.12 * ${height}px))`,
+                            fontSize: `min(calc(0.10 * ${width}px), calc(0.10 * ${height}px))`,
                             textAlign: "center",
                             justifySelf: "center",
                             alignSelf: "center",
