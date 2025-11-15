@@ -73,8 +73,8 @@ const AboutUs = () => {
                         <Li>Copy the embed URL </Li>
                         <Li>Go to Notion and embed the widget either by
                             <ol type="a">
-                                <Li>Pasting the link and clicking embed OR</Li>
                                 <Li>Typing /embed and pasting the link</Li>
+                                <Li>Pasting the link and clicking embed OR</Li>
                             </ol>
                         </Li>
                     </Ol>
