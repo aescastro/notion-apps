@@ -90,6 +90,9 @@ function Timer(props) {
     const [countDownDate, setCountDownDate] = useState(null);
     
     const runTimer = () => {
+        if (Notification.permission == "default") {
+            Notification.requestPermission();
+        }
         click.current.play();
         setRunning(!running);
     }
@@ -182,17 +185,28 @@ function Timer(props) {
         const timerDone = () => {
             notif.current.play();
 
+            var notifText = "";
+
             if (state === TimerState.work) {
                 var nextSessions = sessions + 1;
 
                 if (nextSessions % 4 === 0) {
+                    notifText = "Nice! Long break time!"
                     setState(TimerState.longBreak);
                 } else {
+                    notifText = "Time for a short break~"
                     setState(TimerState.shortBreak)
                 }
                 setSessions(nextSessions);
             } else {
+                notifText = "Time to work!"
                 setState(TimerState.work);
+            }
+            
+            if (Notification.permission == "granted") {
+                const notification = new Notification("Adri's Notion Apps", {
+                    body: notifText
+                })
             }
 
         }
